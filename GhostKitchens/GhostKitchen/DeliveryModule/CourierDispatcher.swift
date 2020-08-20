@@ -35,6 +35,7 @@ protocol CourierDispatching {
      */
 	func dispatchCouriers(forOrders: [Order])
 
+	/// Some Documentation
 	var courierDispatchDelegate: CourierDispatchDelegate? { get set }
 }
 
