@@ -13,7 +13,7 @@ import Foundation
 protocol OrderDecayMonitoring {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		Begins monitoring for order decay
      */
 	func beginMonitoring()
 	var orderDecayMonitorDataSource: OrderDecayMonitorDataSource? { get set }
@@ -25,11 +25,11 @@ protocol OrderDecayMonitoring {
 protocol OrderDecayMonitorDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets the consumer know when an order has decayed.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - monitor: The monitor that detected the decay
+        - detectedDecayedOrder: The decayed order
      */
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
@@ -40,7 +40,7 @@ protocol OrderDecayMonitorDelegate {
 protocol OrderDecayMonitorDataSource {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     The shelves that the OrderDecayMonitor will monitor for decay.
      */
 	func monitoringShelves() -> [Shelf]
 }
@@ -64,7 +64,6 @@ extension OrderDecayMonitor {
 											 selector: #selector(updateOrdersAges),
 											 userInfo: nil,
 											 repeats: true)
-			
 		RunLoop().add(timer, forMode: .default)
 	}
 }

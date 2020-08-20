@@ -18,6 +18,7 @@ extension Shelf {
 	}
 	
 	func printShelf() {
+		
 		print(name)
 		print("Capacity: " + String(capacity))
 		print("Order Count: " + String(currentOrders.count))

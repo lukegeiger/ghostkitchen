@@ -13,13 +13,13 @@ import Foundation
 protocol DeliveryModuleDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		A delegate callback that lets a consumer know whhen a courier arrived for an order
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
-        - forOrder: The frame size of the bicycle, in centimeters
+        - deliveryModule: The delivery module that performed the action
+        - courier: The courier who arrived
+        - arrivedForOrder: The order arrivng for
+        - onRoute: The route the courier was on
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
@@ -27,23 +27,23 @@ protocol DeliveryModuleDelegate {
 						onRoute:Route)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when an order was delivered
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
+        - deliveryModule: The delivery module that performed the action
+        - courier: The courier who delivered the order
+        - deliveredOrder: The delivered order
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
 						deliveredOrder: Order)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		A callback that lets a consumer know when a courier got routed to an order
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - deliveryModule: The delivery module that performed the action
+        - routed: The courier who got routed
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
 						routed: Courier)

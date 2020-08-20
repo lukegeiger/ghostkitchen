@@ -13,44 +13,45 @@ import Foundation
 protocol KitchenModuleDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		A delegate call back that notifies when the kitchen recieved orders.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - kitchenModule: The instance of a kitchen modile that received the orders.
+        - receivedOrders: The received orders.
      */
 	func kitchenModule(kitchenModule: KitchenModule,
 				 receivedOrders: [Order])
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+	 A delegate call back that notifies when the kitchen cooked orders.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - kitchenModule: The instance of a kitchen modile that cooked the orders.
+        - cooked: The cooked orders.
      */
 	func kitchenModule(kitchenModule: KitchenModule,
 						cooked: [Order])
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+	 A delegate call back that notifies when the kitchen shelved an order.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - kitchenModule: The instance of a kitchen modile that shelved the orders.
+        - shelvedOrder: The shelved order.
+        - onShelf: The shelf the order was placed on.
      */
 	func kitchenModule(kitchenModule: KitchenModule,
 								shelvedOrder: Order,
 								onShelf: Shelf)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+	A delegate call back that notifies when the kitchen removed an order for a reason.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
-        - forOrder: The frame size of the bicycle, in centimeters
+        - kitchenModule: The instance of a kitchen modile that received the orders
+        - removed: The order that was removed
+        - fromShelf: The shelf the order was removed from
+        - reason: The reason why the kitchen removed an order from a shelf
      */
 	func kitchenModule(kitchenModule: KitchenModule,
 								removed: Order,
@@ -70,10 +71,10 @@ final class KitchenModule {
      Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.
 
      - Parameters:
-        - orderCooker: A kitchen module
-        - shelveOrderDistributor: a delivery Module
+        - orderCooker: The order cooker is responsible for managing cooking of an order
+        - shelveOrderDistributor: the shelve order distributor is responsible for shelving an order and tracking the status of its health.
 
-     - Returns: A kitchen ready to make some bomb food!
+     - Returns: A kitchen ready to make some awesome food!
      */
 	init(orderCooker: OrderCooking,
 		 shelveOrderDistributor: ShelveOrderDistributing) {

@@ -12,8 +12,8 @@ import Foundation
 
 struct Order: Decodable {
 	
-	let id: String
-	let name: String
+	let id: String /// Unique ID
+	let name: String /// Name of the order
 	let temp: ShelfTemperature /// Preferred shelf storage temperature
 	let shelfLife: Int /// Shelf wait max duration (seconds)
 	let decayRate: Float /// Value deterioration modifier

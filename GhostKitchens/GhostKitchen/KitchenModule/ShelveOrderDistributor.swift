@@ -8,11 +8,14 @@
 
 import Foundation
 
+/**
+ ShelveOrderDistributorRemovalReason are reasons why an order would be removed from a shelf.
+*/
 enum ShelveOrderDistributorRemovalReason {
 	
-	case courierPickup
-	case overflow
-	case decay
+	case courierPickup // for when a courier picked up an order
+	case overflow // forced overflow
+	case decay // order decayed away
 }
 
 // MARK: ShelveOrderDistributorDelegate
@@ -20,25 +23,25 @@ enum ShelveOrderDistributorRemovalReason {
 protocol ShelveOrderDistributorDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when the shelveOrderDistributor shelved an order.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
+        - shelveOrderDistributor: An instance of the shelveOrderDistributor that performed the shelve
+        - shelvedOrder: The order shelved
+        - onShelf: The shelf the order was placed
      */
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
 								shelvedOrder: Order,
 								onShelf: Shelf)
 		
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when an order was removed from a shelf and why
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
-        - forOrder: The frame size of the bicycle, in centimeters
+        - shelveOrderDistributor: An instance of the shelveOrderDistributor that performed the shelve
+        - removed: The removed order
+        - fromShelf: The shelf the order was removed from
+        - reason: Why the order was removed.
      */
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
 								removed: Order,
@@ -51,49 +54,48 @@ protocol ShelveOrderDistributorDelegate {
 protocol ShelveOrderDistributing {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     Will shelf the order on the best possible shelf for the order.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
+        - orders: Orders to be shelved
      */
 	func shelve(orders: [Order])
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		Will remove orders from the shelves they are on.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - orders: Orders to be removed
+        - reason: Why the orders are removed
      */
 	func remove(orders: [Order],
 				reason: ShelveOrderDistributorRemovalReason)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     Will give you the shelf the order is on if there is one.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
+        - forOrder: Given this order, will give you its shelf.
      */
 	func shelf(forOrder: Order) -> Shelf?
 		
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		Prints the contents of the shelf.
      */
 	func printShelfContents()
 	
     /**
-     Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.
+     Initializes a new ShelveOrderDistributor that will be responsible for shelving and monitoring order health.
 
      - Parameters:
-        - orderCooker: A kitchen module
-        - shelveOrderDistributor: a delivery Module
+        - shelves: The shelves to manage
+        - decayMonitor: A monitor to detect decaying orders
 
-     - Returns: A kitchen ready to make some bomb food!
+     - Returns: A ShelveOrderDistributor
      */
 	init(shelves: [Shelf],
 		 decayMonitor: OrderDecayMonitor)
 	
-	/// Some Documentation
 	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate? { get set }
 }
 
@@ -128,18 +130,26 @@ extension ShelveOrderDistributor {
 	func shelve(orders: [Order]) {
 		
 		orders.forEach { (order) in
+			
 			if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
+				
+				// First choice
 				preferredShelf.currentOrders.append(order)
 				self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
 																			shelvedOrder: order,
 																			onShelf: preferredShelf)
+				
 			} else if let preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
+				
+				// 2nd choice
 				preferredOverflowShelf.currentOrders.append(order)
 				self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
 																			shelvedOrder: order,
 																			onShelf: preferredOverflowShelf)
+				
 			} else if let forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
 				
+				// 3rd and forced choice
 				if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
 					self.remove(orders: [firstOrderOnOverflow],
 								reason: .overflow)

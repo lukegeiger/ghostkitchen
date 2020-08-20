@@ -13,11 +13,11 @@ import Foundation
 protocol OrderCookingDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		A delegate callback to notify when the order cooker finished cooking.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - orderCooker: An instance of the order cooker that cooked the orders
+        - orderCooker: The cooked orders.
      */
 	func orderCooker(orderCooker: OrderCooking,
 					 cookedOrders: [Order])
@@ -28,14 +28,13 @@ protocol OrderCookingDelegate {
 protocol OrderCooking {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		Pass in orders that need to be coked.
 
      - Parameters:
-        - courierRouter: The style of the bicycle
+        - orders: Uncooked orders.
      */
 	func cook(orders: [Order])
 
-	/// Some Documentation
 	var orderCookingDelegate: OrderCookingDelegate? { get set }
 }
 

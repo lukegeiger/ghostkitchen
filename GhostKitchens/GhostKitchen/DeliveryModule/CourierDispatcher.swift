@@ -13,11 +13,11 @@ import Foundation
 protocol CourierDispatchDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when a courier was routed
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
+        - courierDispatcher: The dispatcher that performed the action
+        - routedCourier: The courier who got routed
      */
 	func courierDispatcher(courierDispatcher: CourierDispatching,
 					       routedCourier: Courier)
@@ -28,14 +28,13 @@ protocol CourierDispatchDelegate {
 protocol CourierDispatching {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     Calling this will dispatch couriers to the orders and begin their pickup and dropoff journey
 
      - Parameters:
-        - courierRouter: The style of the bicycle
+        - forOrders: The orders that need to be picked up and delivered
      */
 	func dispatchCouriers(forOrders: [Order])
 
-	/// Some Documentation
 	var courierDispatchDelegate: CourierDispatchDelegate? { get set }
 }
 

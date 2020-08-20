@@ -13,13 +13,13 @@ import Foundation
 protocol CourierRoutingDelegate {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when a courier arrived at a pickup for an order
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
-        - forOrder: The frame size of the bicycle, in centimeters
+        - courierRouter: An instance of the router that performed the action
+        - courierArrivedAtPickup: The courier who arrived
+        - forRoute: The route the courier is on
+        - forOrder: The order the courier is picking up
      */
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
@@ -27,13 +27,13 @@ protocol CourierRoutingDelegate {
 						   forOrder: Order)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     A delegate callback that lets a consumer know when a courier dropped off an order
 
      - Parameters:
-        - courierRouter: The style of the bicycle
-        - courierArrivedAtPickup: The gearing of the bicycle
-        - forRoute: The handlebar of the bicycle
-        - forOrder: The frame size of the bicycle, in centimeters
+        - courierRouter: An instance of the router that performed the action
+        - courierArrivedAtDropoff: The courier who arrived at dropoff
+        - forRoute: The route the courier took
+        - forOrder: The order dropping off
      */
 
 	func courierRouter(courierRouter: CourierRouting,
@@ -47,23 +47,23 @@ protocol CourierRoutingDelegate {
 protocol CourierRouting {
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     Begins the pickup process for a courier
 
      - Parameters:
-        - courier: A courierDispatcher responsible for dispatching a courier to an order
+        - courier: The courier who will begin their pickup route
      */
 	func commencePickupRoute(courier: Courier)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     Begins the dropoff process for a courier
 
      - Parameters:
-        - courier: A courierDispatcher responsible for dispatching a courier to an order
+        - courier: The courier who will begin their dropoff route
      */
 	func commenceDropoffRoute(courier: Courier)
 	
     /**
-     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+		A delegate to recieve routing callbacks
      */
 	var courierRoutingDelegate: CourierRoutingDelegate? { get set }
 }
