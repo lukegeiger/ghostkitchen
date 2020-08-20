@@ -3,12 +3,19 @@
 # Table of Contents
 
 **1. Running the program**
+
 **2. tl;dr architecture overview**
+
 **3. Models Deep Dive**
+
 **4. Kitchen Module Deep Dive**
+
 **5. Delivery Module Deep Dive**
+
 **6. Things that could be improved**
+
 **7. Testing Suite**
+
 **8. FAQ**
 
 
