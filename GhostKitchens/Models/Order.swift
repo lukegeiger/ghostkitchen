@@ -48,7 +48,7 @@ extension Order: Equatable {
 // MARK: CustomStringConvertible
 
 extension Order: CustomStringConvertible {
-	// used for printing
+	
 	var description: String {
 		return "\("Order")(id: \(id) name: \(name), temp: \(temp), shelfLife: \(shelfLife), decayRate: \(decayRate) , decay: \(String(describing: decay))"
 	}	
