@@ -1,5 +1,3 @@
-# ghostkitchen
-
 # GhostKitchen
 
 # Table of Contents
