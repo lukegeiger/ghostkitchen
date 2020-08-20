@@ -19,7 +19,7 @@
 **8. FAQ**
 
 
-### 1. Running the program
+### 1. Running the Program
 
 ### 2. tl;dr Architecture Overview
 
