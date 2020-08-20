@@ -52,7 +52,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 	func kitchenModule(kitchenModule: KitchenModule,
 					   shelvedOrder: Order,
 					   onShelf: Shelf) {
-		print("Shelved: " + shelvedOrder.id + " on shelf " + onShelf.name)
+		print("Shelved: " + shelvedOrder.id + " on " + onShelf.name)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 	}
 	

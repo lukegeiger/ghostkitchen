@@ -14,23 +14,19 @@ extension GhostKitchen {
 		
 		let shelf1 = Shelf(name: "Hot Shelf",
 						   allowedTemperature: .hot,
-						   capacity: 10,
-						   currentOrders: [])
+						   capacity: 10)
 
 		let shelf2 = Shelf(name: "Cold Shelf",
 						   allowedTemperature: .cold,
-						   capacity: 10,
-						   currentOrders: [])
+						   capacity: 10)
 
 		let shelf3 = Shelf(name: "Frozen Shelf",
 						   allowedTemperature: .frozen,
-						   capacity: 10,
-						   currentOrders: [])
+						   capacity: 10)
 
 		let shelf4 = Shelf(name: "Overflow Shelf",
 						   allowedTemperature: .any,
-						   capacity: 15,
-						   currentOrders: [])
+						   capacity: 15)
 				
 		let courierDispatcher = CourierDispatcher()
 		let routeSimulator = CourierRouter()
@@ -41,6 +37,7 @@ extension GhostKitchen {
 		let orderCooker = OrderCooker()
 
 		let decayMonitor = OrderDecayMonitor()
+		
 		let shelveOrderDistributor = ShelveOrderDistributor(shelves: [shelf1,shelf2,shelf3,shelf4],
 															decayMonitor: decayMonitor)
 

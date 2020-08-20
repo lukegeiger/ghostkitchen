@@ -129,37 +129,41 @@ extension ShelveOrderDistributor {
 		
 	func shelve(orders: [Order]) {
 		
-		orders.forEach { (order) in
-			
-			if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
+		let shelveQueue = DispatchQueue(label: "com.gk.shelving")
+		// critical section
+		shelveQueue.sync {
+			orders.forEach { (order) in
 				
-				// First choice
-				preferredShelf.currentOrders.append(order)
-				self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
-																			shelvedOrder: order,
-																			onShelf: preferredShelf)
-				
-			} else if let preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
-				
-				// 2nd choice
-				preferredOverflowShelf.currentOrders.append(order)
-				self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
-																			shelvedOrder: order,
-																			onShelf: preferredOverflowShelf)
-				
-			} else if let forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
-				
-				// 3rd and forced choice
-				if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
-					self.remove(orders: [firstOrderOnOverflow],
-								reason: .overflow)
-				}
+				if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
+					
+					// First choice
+					preferredShelf.currentOrders.append(order)
+					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
+																				shelvedOrder: order,
+																				onShelf: preferredShelf)
+					
+				} else if let preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
+					
+					// 2nd choice
+					preferredOverflowShelf.currentOrders.append(order)
+					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
+																				shelvedOrder: order,
+																				onShelf: preferredOverflowShelf)
+					
+				} else if let forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
+					
+					// 3rd and forced choice
+					if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
+						self.remove(orders: [firstOrderOnOverflow],
+									reason: .overflow)
+					}
 
-				forcedOverflowShelf.currentOrders.append(order)
-				
-				self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
-																			shelvedOrder: order,
-																			onShelf: forcedOverflowShelf)
+					forcedOverflowShelf.currentOrders.append(order)
+					
+					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
+																				shelvedOrder: order,
+																				onShelf: forcedOverflowShelf)
+				}
 			}
 		}
 	}
@@ -167,17 +171,23 @@ extension ShelveOrderDistributor {
 	func remove(orders: [Order],
 				reason:ShelveOrderDistributorRemovalReason) {
 		
-		orders.forEach { (order) in
-			if let shelfForOrder = self.shelf(forOrder: order) {
-				if shelfForOrder.currentOrders.contains(order) {
-					shelfForOrder.currentOrders.removeAll(where: {$0.id	== order.id})
-					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
-																				removed: order,
-																				fromShelf: shelfForOrder,
-																				reason: reason)
+		let removeQueue = DispatchQueue(label: "com.gk.removing")
+		
+		// critical section
+		removeQueue.sync {
+			orders.forEach { (order) in
+				if let shelfForOrder = self.shelf(forOrder: order) {
+					if shelfForOrder.currentOrders.contains(order) {
+						shelfForOrder.currentOrders.removeAll(where: {$0.id	== order.id})
+						self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
+																					removed: order,
+																					fromShelf: shelfForOrder,
+																					reason: reason)
+					}
 				}
 			}
 		}
+
 	}
 	
 	func shelf(forOrder: Order) -> Shelf? {

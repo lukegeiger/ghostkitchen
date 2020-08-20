@@ -32,7 +32,7 @@ final class Shelf {
 	init(name: String,
 		 allowedTemperature: ShelfTemperature,
 		 capacity: Int,
-		 currentOrders: [Order]) {
+		 currentOrders: [Order] = []) {
 		
 		self.name = name
 		self.allowedTemperature = allowedTemperature
