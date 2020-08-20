@@ -27,7 +27,7 @@ protocol DeliveryModuleDelegate {
 
 // MARK: DeliveryModule
 
-class DeliveryModule {
+final class DeliveryModule {
 	
 	var deliveryModuleDelegate: DeliveryModuleDelegate?
 	var courierDispatcher: CourierDispatching
@@ -45,6 +45,7 @@ class DeliveryModule {
 // MARK: CourierDispatchDelegate
 
 extension DeliveryModule: CourierDispatchDelegate {
+	
 	func courierDispatcher(courierDispatcher: CourierDispatching,
 						   routedCourier: Courier) {
 		

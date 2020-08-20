@@ -12,6 +12,7 @@ import XCTest
 class DeliveryModuleTests: XCTestCase {
 	
 	func testDeliveryFlow() throws {
+		
 		let courierDispatcher = CourierDispatcher()
 		let router = CourierRouter()
 		
@@ -49,6 +50,7 @@ class DeliveryModuleTests: XCTestCase {
 	}
 	
 	func testDeliveryModuleDispatchCouriers() {
+		
 		let courierDispatcher = CourierDispatcher()
 		let router = CourierRouter()
 		
@@ -80,6 +82,7 @@ class DeliveryModuleTests: XCTestCase {
 	}
 	
 	func testDeliveryModuleCommencePickupRoute() throws {
+		
 		let courierDispatcher = CourierDispatcher()
 		let router = CourierRouter()
 		

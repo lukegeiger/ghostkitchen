@@ -30,25 +30,9 @@
             filePath = "GhostKitchenTests/GhostKitchen/DeliveryModule/DeliveryModuleTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "deliveryModule(deliveryModule:courier:arrivedForOrder:onRoute:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "ABC515FA-8E02-48BE-AC45-F3A24D2341B2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GhostKitchens/Simulation.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "dispatchNextBatchOfOrders()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

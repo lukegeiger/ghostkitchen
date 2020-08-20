@@ -8,11 +8,23 @@
 
 import Foundation
 
-class GhostKitchen {
+final class GhostKitchen {
 	
+	/// kitchenModule is responsible for all things related to cooking and managing the health & decay of an order.
 	let kitchenModule: KitchenModule
+	
+	/// deliveryModule is responsible for all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
 	let deliveryModule: DeliveryModule
 
+    /**
+     Initializes a new GhostKtichen that can accept and deliver food orders.
+
+     - Parameters:
+        - kitchenModule: A kitchen module
+        - deliveryModule: a delivery Module
+
+     - Returns: An awesome kitchen ready to take over the world
+     */
 	init(kitchenModule: KitchenModule,
 		 deliveryModule: DeliveryModule) {
 		
@@ -25,6 +37,7 @@ class GhostKitchen {
 // MARK: Private
 
 extension GhostKitchen {
+	
 	private func setup() {
 		
 		self.kitchenModule.kitchenModuleDelegate = self
@@ -39,7 +52,6 @@ extension GhostKitchen: KitchenModuleDelegate {
 	func kitchenModule(kitchenModule: KitchenModule,
 					   shelvedOrder: Order,
 					   onShelf: Shelf) {
-		
 		print("Shelved: " + shelvedOrder.id + " on shelf " + onShelf.name)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 	}
@@ -64,6 +76,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 								removed: Order,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
+		
 		switch reason {
 			case .courierPickup:
 				print("Order: " + removed.id + " removed from " + fromShelf.name)
@@ -89,7 +102,6 @@ extension GhostKitchen:DeliveryModuleDelegate {
 						courier: Courier,
 						arrivedForOrder: Order,
 						onRoute: Route) {
-		
 		print("Courier: " + courier.id + " picking up order " + arrivedForOrder.id)
 		self.kitchenModule.shelveOrderDistributor.remove(orders: [arrivedForOrder],
 														 reason: .courierPickup)
@@ -103,7 +115,6 @@ extension GhostKitchen:DeliveryModuleDelegate {
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
 						deliveredOrder: Order) {
-		
 		print("Courier: " + courier.id + " dropped off order " + deliveredOrder.id)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 	}

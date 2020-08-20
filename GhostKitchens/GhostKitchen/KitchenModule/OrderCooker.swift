@@ -26,7 +26,7 @@ protocol OrderCooking {
 
 // MARK: OrderCooking
 
-class OrderCooker: OrderCooking  {
+final class OrderCooker: OrderCooking  {
 	
 	var orderCookingDelegate: OrderCookingDelegate?
 	

@@ -16,6 +16,7 @@ class CourierRouterTests: XCTestCase {
 	let commenceDropoffExpectation:XCTestExpectation = XCTestExpectation(description: "testCommenceDropoff")
 
 	func testCommencePickup() throws {
+		
 		let router = CourierRouter()
 		router.courierRoutingDelegate = self
 
@@ -39,6 +40,7 @@ class CourierRouterTests: XCTestCase {
     }
 	
 	func testCommenceDropoff() throws {
+		
 		let router = CourierRouter()
 		router.courierRoutingDelegate = self
 		let hotOrder = Order(id: "1",
@@ -61,6 +63,7 @@ class CourierRouterTests: XCTestCase {
     }
 	
 	func testCourierRoutingArrivedPickupDelegate() throws {
+		
 		let router = CourierRouter()
 		let spy = CourierRoutingDelegateSpy(expectation: self.commencePickupExpectation)
 		router.courierRoutingDelegate = spy
@@ -89,6 +92,7 @@ class CourierRouterTests: XCTestCase {
 	}
 	
 	func testCourierRoutingArrivedDropoffDelegate() throws {
+		
 		let router = CourierRouter()
 		let spy = CourierRoutingDelegateSpy(expectation: self.commenceDropoffExpectation)
 		router.courierRoutingDelegate = spy
@@ -122,6 +126,7 @@ extension CourierRouterTests: CourierRoutingDelegate {
 						   courierArrivedAtPickup: Courier,
 						   forRoute: Route,
 						   forOrder: Order) {
+		
         commencePickupExpectation.fulfill()
 	}
 	
@@ -129,11 +134,13 @@ extension CourierRouterTests: CourierRoutingDelegate {
 						   courierArrivedAtDropoff: Courier,
 						   forRoute: Route,
 						   forOrder: Order) {
+		
         commenceDropoffExpectation.fulfill()
 	}
 }
 
 class CourierRoutingDelegateSpy:CourierRoutingDelegate {
+	
 	var testingCourier: Courier?
 	var testingRoute: Route?
 	var testingOrder: Order?
@@ -146,6 +153,7 @@ class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 					   courierArrivedAtPickup: Courier,
 					   forRoute: Route,
 					   forOrder: Order) {
+		
 		self.testingOrder = forOrder
 		self.testingRoute = forRoute
 		self.testingCourier = courierArrivedAtPickup
@@ -156,6 +164,7 @@ class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 					   courierArrivedAtDropoff: Courier,
 					   forRoute: Route,
 					   forOrder: Order) {
+		
 		self.testingOrder = forOrder
 		self.testingRoute = forRoute
 		self.testingCourier = courierArrivedAtDropoff

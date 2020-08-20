@@ -19,6 +19,7 @@ protocol CourierDispatchDelegate {
 // MARK: CourierDispatching
 
 protocol CourierDispatching {
+	
 	func dispatchCouriers(forOrders: [Order])
 
 	var courierDispatchDelegate: CourierDispatchDelegate? { get set }
@@ -26,7 +27,8 @@ protocol CourierDispatching {
 
 // MARK: CourierDispatcher
 
-class CourierDispatcher: CourierDispatching {
+final class CourierDispatcher: CourierDispatching {
+	
 	var courierDispatchDelegate: CourierDispatchDelegate?
 	
 	func dispatchCouriers(forOrders: [Order]) {

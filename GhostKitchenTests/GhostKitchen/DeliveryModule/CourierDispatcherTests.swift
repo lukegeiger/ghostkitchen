@@ -12,6 +12,7 @@ import XCTest
 class CourierDispatcherTests: XCTestCase {
 		
 	func testDispatchCouriers() {
+		
 		let dispatcher = CourierDispatcher()
 		
 		let hotOrder = Order(id: "2",
@@ -41,17 +42,20 @@ class CourierDispatcherTests: XCTestCase {
 }
 
 class CourierDispatchDelegateSpy: CourierDispatchDelegate {
+	
 	var testingCourier: Courier
 	var expectation: XCTestExpectation
 	
 	init(testingCourier: Courier,
 		 expectation: XCTestExpectation) {
+		
 		self.testingCourier = testingCourier
 		self.expectation = expectation
 	}
 	
 	func courierDispatcher(courierDispatcher: CourierDispatching,
 						   routedCourier: Courier) {
+		
 		self.testingCourier = routedCourier
 		self.expectation.fulfill()
 	}

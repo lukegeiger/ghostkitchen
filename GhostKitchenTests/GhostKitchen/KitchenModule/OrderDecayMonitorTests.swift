@@ -14,10 +14,12 @@ class OrderDecayMonitorTests: XCTestCase {
 	var shelves:[Shelf] = []
 	
     override func setUpWithError() throws {
+		
 		self.shelves = self.testingShelves()
     }
 
     override func tearDownWithError() throws {
+		
 		self.shelves.removeAll()
    }
 	
@@ -45,6 +47,7 @@ class OrderDecayMonitorTests: XCTestCase {
 	}
 
 	func testingShelves() -> [Shelf] {
+		
 		let hotOrder = Order(id: "1",
 							 name: "Hot Burger",
 							 temp: .hot,

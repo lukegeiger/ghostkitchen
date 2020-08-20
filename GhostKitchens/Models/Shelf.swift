@@ -10,7 +10,8 @@ import Foundation
 
 // MARK: ShelfTemperature
 
-enum ShelfTemperature: String,Decodable{
+enum ShelfTemperature: String,Decodable {
+	
 	case any
 	case hot
 	case cold
@@ -19,14 +20,15 @@ enum ShelfTemperature: String,Decodable{
 
 // MARK: Shelf
 
-class Shelf {
+final class Shelf {
 	
 	let name: String
 	let allowedTemperature: ShelfTemperature
 	let capacity: Int
-	var currentOrders:[Order]
 	let shelfDecayModifier: Int
 	
+	var currentOrders:[Order]
+
 	init(name: String,
 		 allowedTemperature: ShelfTemperature,
 		 capacity: Int,

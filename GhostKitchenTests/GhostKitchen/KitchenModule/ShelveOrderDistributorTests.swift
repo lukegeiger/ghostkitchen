@@ -169,6 +169,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 	}
 	
 	func testAutoRemoveOverflow() throws {
+		
 		let hotShelf = Shelf(name: "Hot Shelf",
 							 allowedTemperature: .hot,
 							 capacity: 2,
@@ -201,6 +202,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 	}
 	
 	func testSimpleShelve() throws {
+		
 		let hotShelf = Shelf(name: "Hot Shelf",
 							 allowedTemperature: .hot,
 							 capacity: 3,
@@ -259,6 +261,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 	}
 	
 	func testShelveOrderDistributorShelvedRemovedDelegate() throws {
+		
 		let hotShelf = Shelf(name: "Hot Shelf",
 							 allowedTemperature: .hot,
 							 capacity: 1,
@@ -304,6 +307,7 @@ class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
 		 removedForPickupExpectation: XCTestExpectation? = nil,
 		 removedForOverflowExpectation: XCTestExpectation? = nil,
 		 removedForDecayExpectaion: XCTestExpectation? = nil) {
+		
 		self.testingOrder = testingOrder
 		self.testingShelf = testingShelf
 		self.shelvedExpectation = shelvedExpectation
@@ -315,6 +319,7 @@ class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
 	func shelveOrderDistributor(shelveOrderDistributor:ShelveOrderDistributor,
 								shelvedOrder:Order,
 								onShelf:Shelf) {
+		
 		self.testingOrder = shelvedOrder
 		self.testingShelf = onShelf
 		
@@ -327,6 +332,7 @@ class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
 								removed: Order,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
+		
 		self.testingOrder = removed
 		self.testingShelf = fromShelf
 		

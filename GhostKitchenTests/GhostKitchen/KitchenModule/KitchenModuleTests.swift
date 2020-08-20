@@ -81,6 +81,7 @@ class KitchenModuleTests: XCTestCase {
 	}
 	
 	func testKitchenFlowRemove() throws {
+		
 		let orderCooker = OrderCooker()
 		
 		let hotShelf = Shelf(name: "Hot Shelf",

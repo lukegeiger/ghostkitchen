@@ -11,6 +11,7 @@ import Foundation
 // MARK: Courier Helpers
 
 extension Courier{
+	
 	static func createCourierForOrder(order: Order) -> Courier {
 		
 		let route = Route(order: order,

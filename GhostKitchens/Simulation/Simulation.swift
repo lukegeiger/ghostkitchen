@@ -8,21 +8,23 @@
 
 import Foundation
 
-class Simulation {
+final class Simulation {
 	
+	private let ingestionRate: Int
+	private let ghostKitchen: GhostKitchen
 	private var remainingOrdersInSimulation: [Order]
-	private var ingestionRate: Int
-	private var ghostKitchen: GhostKitchen
 
 	init(orders: [Order],
 		 ghostKitchen: GhostKitchen,
 		 ingestionRate: Int) {
+		
 		self.remainingOrdersInSimulation = orders
 		self.ingestionRate = ingestionRate
 		self.ghostKitchen = ghostKitchen
 	}
 	
 	func begin() {
+		
 		let timer = Timer.scheduledTimer(timeInterval: 1,
 											 target: self,
 											 selector: #selector(dispatchNextBatchOfOrders),
@@ -33,6 +35,7 @@ class Simulation {
 	}
 	
 	@objc private func dispatchNextBatchOfOrders() {
+		
 		if self.remainingOrdersInSimulation.count > 0 {
 			let ordersToBeDispatched = Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate))
 			self.ghostKitchen.kitchenModule.receive(orders: ordersToBeDispatched)

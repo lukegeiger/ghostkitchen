@@ -12,6 +12,7 @@ import XCTest
 class OrderCookerTests: XCTestCase {
 		
 	func testCookOrdersDelegate() {
+		
 		let orderCooker = OrderCooker()
 		
 		let cookedExpectation:XCTestExpectation = XCTestExpectation(description: "cookedExpectation")
@@ -42,15 +43,18 @@ class OrderCookerTests: XCTestCase {
 }
 
 class OrderCookingDelegateSpy: OrderCookingDelegate {
+	
 	var cookedOrders:[Order] = []
 	var cookedExpectation:XCTestExpectation
 	
 	init(cookedExpectation:XCTestExpectation) {
+		
 		self.cookedExpectation = cookedExpectation
 	}
 	
 	func orderCooker(orderCooker: OrderCooking,
 					 cookedOrders: [Order]) {
+		
 		self.cookedOrders = cookedOrders
 		self.cookedExpectation.fulfill()
 	}

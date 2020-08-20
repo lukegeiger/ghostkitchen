@@ -58,6 +58,9 @@
 		DFD9115424EC0AEA0065F2C2 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC024EB0E61009F3A7C /* Courier.swift */; };
 		DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
 		DFD9115624EC0AEE0065F2C2 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC224EB11C0009F3A7C /* Route.swift */; };
+		DFE9015E24EE14BA0090011D /* GhostKitchen+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */; };
+		DFE9016024EE18BC0090011D /* GhostKitchen+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */; };
+		DFE9016424EE18F10090011D /* GhostKitchen+DebugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9016324EE18F10090011D /* GhostKitchen+DebugTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +134,8 @@
 		DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquations.swift"; sourceTree = "<group>"; };
 		DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquationsTests.swift"; sourceTree = "<group>"; };
 		DFD9115024EC0A480065F2C2 /* ShelveOrderDistributorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributorTests.swift; sourceTree = "<group>"; };
+		DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostKitchen+Debug.swift"; sourceTree = "<group>"; };
+		DFE9016324EE18F10090011D /* GhostKitchen+DebugTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GhostKitchen+DebugTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +168,8 @@
 			children = (
 				DF00446624EC639600512837 /* KitchenModule.swift */,
 				DF593ABA24EAE685009F3A7C /* OrderCooker.swift */,
-				DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */,
 				DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */,
+				DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */,
 			);
 			path = KitchenModule;
 			sourceTree = "<group>";
@@ -193,7 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				DF593AA124EADCEF009F3A7C /* GhostKitchenTests.swift */,
-				DFBFEB2D24EE0B7200C3CCED /* GenericHelpers */,
 				DF2DCA1B24ED733700897233 /* Models */,
 				DF2DCA1A24ED732E00897233 /* DeliveryModule */,
 				DF2DCA1924ED732800897233 /* KitchenModule */,
@@ -246,6 +250,7 @@
 			children = (
 				DF593AA324EADCEF009F3A7C /* Info.plist */,
 				DF2DCA1824ED732200897233 /* GhostKitchen */,
+				DFBFEB2D24EE0B7200C3CCED /* GenericHelpers */,
 			);
 			path = GhostKitchenTests;
 			sourceTree = "<group>";
@@ -273,8 +278,8 @@
 		DF6DE21924E86FDD00EDBF74 /* GhostKitchens */ = {
 			isa = PBXGroup;
 			children = (
-				DF6DE21A24E86FDD00EDBF74 /* main.swift */,
-				DF2DCA1224EC743E00897233 /* Simulation.swift */,
+				DFE9016624EE25690090011D /* Driver */,
+				DFE9016524EE254B0090011D /* Simulation */,
 				DF00447424EC691100512837 /* GhostKitchen */,
 				DFBFEB2624EDC6E800C3CCED /* GenricHelpers */,
 				DF9D8D2424EACC62001C0B4F /* Models */,
@@ -308,6 +313,7 @@
 		DFBFEB2624EDC6E800C3CCED /* GenricHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */,
 				DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */,
 			);
 			path = GenricHelpers;
@@ -317,8 +323,25 @@
 			isa = PBXGroup;
 			children = (
 				DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */,
+				DFE9016324EE18F10090011D /* GhostKitchen+DebugTests.swift */,
 			);
 			path = GenericHelpers;
+			sourceTree = "<group>";
+		};
+		DFE9016524EE254B0090011D /* Simulation */ = {
+			isa = PBXGroup;
+			children = (
+				DF2DCA1224EC743E00897233 /* Simulation.swift */,
+			);
+			path = Simulation;
+			sourceTree = "<group>";
+		};
+		DFE9016624EE25690090011D /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				DF6DE21A24E86FDD00EDBF74 /* main.swift */,
+			);
+			path = Driver;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,6 +490,7 @@
 				DF00446F24EC680B00512837 /* OrderCooker.swift in Sources */,
 				DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */,
 				DF00446024EC5F7800512837 /* CourierDispatcherTests.swift in Sources */,
+				DFE9016024EE18BC0090011D /* GhostKitchen+Debug.swift in Sources */,
 				DF54C2F824EDA0FF00D4ECC6 /* Simulation.swift in Sources */,
 				DF00445E24EC5F5B00512837 /* CourierDispatcher.swift in Sources */,
 				DF00446224EC615000512837 /* CourierRouterTests.swift in Sources */,
@@ -491,6 +515,7 @@
 				DF54C2F724EDA0FC00D4ECC6 /* GhostKitchen.swift in Sources */,
 				DF00446B24EC655200512837 /* DeliveryModule.swift in Sources */,
 				DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */,
+				DFE9016424EE18F10090011D /* GhostKitchen+DebugTests.swift in Sources */,
 				DFD9115224EC0A4C0065F2C2 /* ShelveOrderDistributor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,6 +531,7 @@
 				DF2DCA1324EC743E00897233 /* Simulation.swift in Sources */,
 				DF54C30324EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift in Sources */,
 				DF593AC124EB0E61009F3A7C /* Courier.swift in Sources */,
+				DFE9015E24EE14BA0090011D /* GhostKitchen+Debug.swift in Sources */,
 				DF593AB724EAE10C009F3A7C /* CourierDispatcher.swift in Sources */,
 				DF593AC724EB15C6009F3A7C /* CourierRouter.swift in Sources */,
 				DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */,

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: KitchenModuleDelegate
 
 protocol KitchenModuleDelegate {
@@ -31,12 +30,21 @@ protocol KitchenModuleDelegate {
 
 // MARK: KitchenModule
 
-class KitchenModule {
+final class KitchenModule {
 	
 	var orderCooker: OrderCooking
 	var shelveOrderDistributor: ShelveOrderDistributing
 	var kitchenModuleDelegate: KitchenModuleDelegate?
 
+    /**
+     Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.
+
+     - Parameters:
+        - orderCooker: A kitchen module
+        - shelveOrderDistributor: a delivery Module
+
+     - Returns: A kitchen ready to make some bomb food!
+     */
 	init(orderCooker: OrderCooking,
 		 shelveOrderDistributor: ShelveOrderDistributing) {
 		

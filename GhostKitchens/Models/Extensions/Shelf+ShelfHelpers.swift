@@ -8,22 +8,27 @@
 
 import Foundation
 
-// MARK: Shelf Helpers
+// MARK: Shelf Instance Helpers
 
 extension Shelf {
+	
 	func isFull() -> Bool {
 		
 		return self.currentOrders.count >= self.capacity
 	}
 	
 	func printShelf() {
-		
 		print(name)
 		print("Capacity: " + String(capacity))
 		print("Order Count: " + String(currentOrders.count))
 		print("Shelf Decay Modifier: " + String(self.shelfDecayModifier))
 		print("Orders: ", currentOrders)
 	}
+}
+
+// MARK: Shelf Class Helpers
+
+extension Shelf {
 	
 	static func orders(fromShelves:[Shelf]) -> [Order] {
 		
@@ -34,3 +39,4 @@ extension Shelf {
 		return orders
 	}
 }
+

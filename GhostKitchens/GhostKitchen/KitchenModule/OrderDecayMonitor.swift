@@ -21,8 +21,8 @@ protocol OrderDecayMonitoring {
 
 protocol OrderDecayMonitorDelegate {
 	
-	func orderDecayMonitor(monitor:OrderDecayMonitor,
-						   detectedDecayedOrder:Order)
+	func orderDecayMonitor(monitor: OrderDecayMonitor,
+						   detectedDecayedOrder: Order)
 }
 
 // MARK: OrderDecayMonitorDataSource
@@ -34,7 +34,7 @@ protocol OrderDecayMonitorDataSource {
 
 // MARK: OrderDecayMonitor
 
-class OrderDecayMonitor:OrderDecayMonitoring {
+final class OrderDecayMonitor: OrderDecayMonitoring {
 	
 	var orderDecayMonitorDataSource: OrderDecayMonitorDataSource?
 	var orderDecayMonitorDelegate: OrderDecayMonitorDelegate?

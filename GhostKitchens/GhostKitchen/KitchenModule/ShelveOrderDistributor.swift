@@ -9,6 +9,7 @@
 import Foundation
 
 enum ShelveOrderDistributorRemovalReason {
+	
 	case courierPickup
 	case overflow
 	case decay
@@ -39,12 +40,12 @@ protocol ShelveOrderDistributing {
 	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate? { get set }
 	func printShelfContents()
 	init(shelves: [Shelf],
-		 decayMonitor:OrderDecayMonitor)
+		 decayMonitor: OrderDecayMonitor)
 }
 
 // MARK: ShelveOrderDistributor
 
-class ShelveOrderDistributor:ShelveOrderDistributing {
+final class ShelveOrderDistributor:ShelveOrderDistributing {
 
 	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate?
 	
@@ -59,6 +60,7 @@ class ShelveOrderDistributor:ShelveOrderDistributing {
 	}
 
 	private func setup() {
+		
 		self.orderDecayMonitor.orderDecayMonitorDelegate = self
 		self.orderDecayMonitor.orderDecayMonitorDataSource = self
 		self.orderDecayMonitor.beginMonitoring()
@@ -115,6 +117,7 @@ extension ShelveOrderDistributor {
 	}
 	
 	func shelf(forOrder: Order) -> Shelf? {
+		
 		return self.shelves.first(where: {$0.currentOrders.contains(forOrder)})
 	}
 	

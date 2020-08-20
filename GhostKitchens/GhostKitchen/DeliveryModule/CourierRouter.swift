@@ -11,6 +11,7 @@ import Foundation
 // MARK: CourierRoutingDelegate
 
 protocol CourierRoutingDelegate {
+	
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
 						   forRoute: Route,
@@ -25,6 +26,7 @@ protocol CourierRoutingDelegate {
 // MARK: CourierRouting
 
 protocol CourierRouting {
+	
 	func commencePickupRoute(courier: Courier)
 	func commenceDropoffRoute(courier: Courier)
 	var courierRoutingDelegate: CourierRoutingDelegate? { get set }
@@ -32,7 +34,7 @@ protocol CourierRouting {
 
 // MARK: CourierRouter
 
-class CourierRouter: CourierRouting {
+final class CourierRouter: CourierRouting {
 	
 	var courierRoutingDelegate: CourierRoutingDelegate?
 
