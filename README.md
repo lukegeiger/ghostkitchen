@@ -8,9 +8,9 @@ This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using
 
 ### 2. tl;dr Architecture Overview
 
-The program is split into two main Modules the first is called KitchenModule and the 2nd is called DeliveryModule. KitchenModule is responsible for all things related to cooking, shelving, and monitoring decay  of orders. DeliveryModule is responsible for all things related to dispatching couriers, routing them, and deliverying orders. 
+The program is split into two main Modules the first is called **KitchenModule** and the 2nd is called  **DeliveryModule**.  **KitchenModule** is responsible for all things related to cooking, shelving, and monitoring decay  of orders.  **DeliveryModule** is responsible for all things related to dispatching couriers, routing them, and deliverying orders. 
 
-The two modules are composed on what is called a GhostKitchen. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A DeliveryModule needs to know when to dispatch a courier, and a KitchenModule needs to know when a order is going to be picked. The GhostKitchen handles these converstions between the modules by acting as a listener for significant events in the KitchenModule and DeliveryModule.
+The two modules are composed on what is called a  **GhostKitchen**. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A DeliveryModule needs to know when to dispatch a courier, and a KitchenModule needs to know when a order is going to be picked. The GhostKitchen handles these converstions between the modules by acting as a listener for significant events in the KitchenModule and DeliveryModule.
 
 Here is an example of how that works
 
@@ -46,7 +46,7 @@ The DeliveryModule is composed of a CourierRouter and a CourierDispatcher. A Cou
 
 ### 6. Order Decay Extra Credit
 
-Order Decay Logic is encapsulated inside the OrderDecayMonitor. The OrderDecayMonitors job is to essentially just monitor its datasources shelves(which contain orders) for decayed orders, then notifying its delegate when it finds one. It does not perform any removals of the orders itself. It simply is just a monitor and tells whoever its delegate is that an order decayed and does not care what its delegate does when that happens. I composed the OrderDecayMonitor into the ShelveOrderDistributor.
+Order Decay Logic is encapsulated inside the OrderDecayMonitor. The OrderDecayMonitors job is to essentially monitor its datasources shelves(which contain orders) for decayed orders, then notifying its delegate when it finds one. It does not perform any removals of the orders itself. It simply is just a monitor and tells whoever its delegate is that an order decayed and does not care what its delegate does when that happens. I composed the OrderDecayMonitor on the ShelveOrderDistributor.
 
 Here is a look at the decay monitors datasource and delegate.
 
@@ -66,7 +66,7 @@ protocol OrderDecayMonitorDelegate {
 						   detectedDecayedOrder: Order)
 	
     /**
-     A delegate callback that lets the consumer know  when the decay for an order has been updated
+     A delegate callback that lets the consumer know when the decay for an order has been updated
 
      - Parameters:
         - monitor: The monitor that detected the decay
@@ -90,6 +90,7 @@ protocol OrderDecayMonitorDataSource {
 ```
 
 ### 7. Testing Suite
+
 Tests can be found under GhostKitchenTests.
 
 ### 8. FAQ
@@ -100,119 +101,3 @@ Tests can be found under GhostKitchenTests.
 - How can I change the simulation orders json?
       You can modify the json by simply opening the orders.json file in the project and modifying it to however you please.
       
-
-
-
-### Sample Output 
-
-```
-Order: Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd Received
-
-Hot Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Cold Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Frozen Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Overflow Shelf
-Capacity: 15
-Order Count: 0
-Shelf Decay Modifier: 2
-Orders:  []
-________________________________
-
-Shelved: Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd on Frozen Shelf
-
-Hot Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Cold Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Frozen Shelf
-Capacity: 10
-Order Count: 1
-Shelf Decay Modifier: 1
-Orders:  [GhostKitchens.Order(id: "a8cfcb76-7f24-4420-a5ba-d46dd77bdffd", name: "Banana Split", temp: GhostKitchens.ShelfTemperature.frozen, shelfLife: 20, decayRate: 0.63)]
-________________________________
-Overflow Shelf
-Capacity: 15
-Order Count: 0
-Shelf Decay Modifier: 2
-Orders:  []
-________________________________
-
-Courier: 0BF5FAE2-CF9C-4D85-B2D9-49885EF5331B picking up order Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd
-Order: a8cfcb76-7f24-4420-a5ba-d46dd77bdffd removed from Frozen Shelf
-
-Hot Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Cold Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Frozen Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Overflow Shelf
-Capacity: 15
-Order Count: 0
-Shelf Decay Modifier: 2
-Orders:  []
-________________________________
-
-Courier: 0BF5FAE2-CF9C-4D85-B2D9-49885EF5331B dropped off order Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd
-
-Hot Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Cold Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Frozen Shelf
-Capacity: 10
-Order Count: 0
-Shelf Decay Modifier: 1
-Orders:  []
-________________________________
-Overflow Shelf
-Capacity: 15
-Order Count: 0
-Shelf Decay Modifier: 2
-Orders:  []
-________________________________
-
-```
