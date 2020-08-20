@@ -187,7 +187,6 @@ extension ShelveOrderDistributor {
 				}
 			}
 		}
-
 	}
 	
 	func shelf(forOrder: Order) -> Shelf? {
@@ -196,12 +195,12 @@ extension ShelveOrderDistributor {
 	}
 	
 	func printShelfContents() {
-		
+		print("")
 		self.shelves.forEach { (shelf) in
-			print("______________________")
 			shelf.printShelf()
-			print("______________________")
+			print("________________________________")
 		}
+		print("")
 	}
 }
 

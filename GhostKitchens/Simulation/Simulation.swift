@@ -8,12 +8,24 @@
 
 import Foundation
 
+/**
+ Represents a GhostKitchen Simulation
+ */
 final class Simulation {
 	
 	private let ingestionRate: Int
 	private let ghostKitchen: GhostKitchen
 	private var remainingOrdersInSimulation: [Order]
+	private var simulationTimer: Timer?
+	
+    /**
+     Initializes a new simulation
 
+     - Parameters:
+        - orders: The orders to be simulated into the kitchen
+        - ghostKitchen: The kitchen to be in the simulation
+		- ingestionRate: how many order per second are ingested into the kitchen
+     */
 	init(orders: [Order],
 		 ghostKitchen: GhostKitchen,
 		 ingestionRate: Int) {
@@ -23,23 +35,38 @@ final class Simulation {
 		self.ghostKitchen = ghostKitchen
 	}
 	
+    /**
+		Begins the simulation
+     */
 	func begin() {
-		
-		let timer = Timer.scheduledTimer(timeInterval: 1,
+	
+		self.simulationTimer = Timer.scheduledTimer(timeInterval: 1,
 											 target: self,
 											 selector: #selector(dispatchNextBatchOfOrders),
 											 userInfo: nil,
-											 repeats: true)			
-		RunLoop().add(timer, forMode: .default)
-		RunLoop.current.run()
+											 repeats: true)
+		if let simulationTimer = simulationTimer {
+			RunLoop().add(simulationTimer,
+						  forMode: .default)
+			RunLoop.current.run()
+		}
+	}
+	
+    /**
+		Stops the timer from firing
+     */
+	func end() {
+		self.simulationTimer?.invalidate()
+		self.simulationTimer = nil
 	}
 	
 	@objc private func dispatchNextBatchOfOrders() {
-		
+
 		if self.remainingOrdersInSimulation.count > 0 {
-			let ordersToBeDispatched = Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate))
-			self.ghostKitchen.kitchenModule.receive(orders: ordersToBeDispatched)
+			self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
 			self.remainingOrdersInSimulation = Array(remainingOrdersInSimulation.dropFirst(self.ingestionRate))
+		} else {
+			self.end()
 		}
 	}
 }
