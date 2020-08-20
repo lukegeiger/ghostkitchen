@@ -1,0 +1,41 @@
+//
+//  Shelf.swift
+//  GhostKitchens
+//
+//  Created by Luke Geiger on 8/17/20.
+//  Copyright © 2020 Luke Geiger. All rights reserved.
+//
+
+import Foundation
+
+// MARK: ShelfTemperature
+
+enum ShelfTemperature: String,Decodable{
+	case any
+	case hot
+	case cold
+	case frozen
+}
+
+// MARK: Shelf
+
+class Shelf {
+	
+	let name: String
+	let allowedTemperature: ShelfTemperature
+	let capacity: Int
+	var currentOrders:[Order]
+	let shelfDecayModifier: Int
+	
+	init(name: String,
+		 allowedTemperature: ShelfTemperature,
+		 capacity: Int,
+		 currentOrders: [Order]) {
+		
+		self.name = name
+		self.allowedTemperature = allowedTemperature
+		self.capacity = capacity
+		self.currentOrders = currentOrders
+		self.shelfDecayModifier = (allowedTemperature == .any) ? 2:1
+	}
+}

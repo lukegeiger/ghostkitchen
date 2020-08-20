@@ -1,0 +1,786 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF00445E24EC5F5B00512837 /* CourierDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */; };
+		DF00446024EC5F7800512837 /* CourierDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00445F24EC5F7800512837 /* CourierDispatcherTests.swift */; };
+		DF00446224EC615000512837 /* CourierRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446124EC615000512837 /* CourierRouterTests.swift */; };
+		DF00446324EC617B00512837 /* CourierRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC624EB15C5009F3A7C /* CourierRouter.swift */; };
+		DF00446524EC638B00512837 /* GhostKitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446424EC638B00512837 /* GhostKitchen.swift */; };
+		DF00446724EC639600512837 /* KitchenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446624EC639600512837 /* KitchenModule.swift */; };
+		DF00446924EC639E00512837 /* DeliveryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446824EC639E00512837 /* DeliveryModule.swift */; };
+		DF00446B24EC655200512837 /* DeliveryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446824EC639E00512837 /* DeliveryModule.swift */; };
+		DF00446C24EC655400512837 /* KitchenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446624EC639600512837 /* KitchenModule.swift */; };
+		DF00446F24EC680B00512837 /* OrderCooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ABA24EAE685009F3A7C /* OrderCooker.swift */; };
+		DF2DCA1324EC743E00897233 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
+		DF2DCA1524ED4BF400897233 /* orders.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
+		DF2DCA1724ED4E9700897233 /* malformed-orders.json in Resources */ = {isa = PBXBuildFile; fileRef = DF2DCA1624ED4E9700897233 /* malformed-orders.json */; };
+		DF2DCA1D24ED73E500897233 /* OrderCookerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1C24ED73E500897233 /* OrderCookerTests.swift */; };
+		DF2DCA1F24ED76DA00897233 /* KitchenModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1E24ED76DA00897233 /* KitchenModuleTests.swift */; };
+		DF2DCA2124ED76E900897233 /* DeliveryModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA2024ED76E900897233 /* DeliveryModuleTests.swift */; };
+		DF54C2F724EDA0FC00D4ECC6 /* GhostKitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446424EC638B00512837 /* GhostKitchen.swift */; };
+		DF54C2F824EDA0FF00D4ECC6 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
+		DF54C2FB24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */; };
+		DF54C2FF24EDA4FD00D4ECC6 /* Courier+OrderHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */; };
+		DF54C30124EDA56C00D4ECC6 /* ShelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30024EDA56C00D4ECC6 /* ShelfTests.swift */; };
+		DF54C30324EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30224EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift */; };
+		DF54C30424EDA9B600D4ECC6 /* Shelf+ShelfHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30224EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift */; };
+		DF54C30624EDA9C800D4ECC6 /* CourierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30524EDA9C800D4ECC6 /* CourierTests.swift */; };
+		DF54C30824EDB18400D4ECC6 /* OrderDecayMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */; };
+		DF593AA224EADCEF009F3A7C /* GhostKitchenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AA124EADCEF009F3A7C /* GhostKitchenTests.swift */; };
+		DF593AAA24EADE76009F3A7C /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D8D2524EACC6A001C0B4F /* Order.swift */; };
+		DF593AAC24EADEB5009F3A7C /* OrderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AAB24EADEB5009F3A7C /* OrderTests.swift */; };
+		DF593AB124EADF97009F3A7C /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB024EADF97009F3A7C /* Shelf.swift */; };
+		DF593AB724EAE10C009F3A7C /* CourierDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */; };
+		DF593ABB24EAE685009F3A7C /* OrderCooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ABA24EAE685009F3A7C /* OrderCooker.swift */; };
+		DF593AC124EB0E61009F3A7C /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC024EB0E61009F3A7C /* Courier.swift */; };
+		DF593AC324EB11C0009F3A7C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC224EB11C0009F3A7C /* Route.swift */; };
+		DF593AC724EB15C6009F3A7C /* CourierRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC624EB15C5009F3A7C /* CourierRouter.swift */; };
+		DF593ACB24EB19F6009F3A7C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
+		DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */; };
+		DF6DE21B24E86FDD00EDBF74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6DE21A24E86FDD00EDBF74 /* main.swift */; };
+		DF9D8D2224EACC0A001C0B4F /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
+		DF9D8D2324EACC10001C0B4F /* orders.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
+		DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D8D2524EACC6A001C0B4F /* Order.swift */; };
+		DFBFEB2524EDC52200C3CCED /* OrderDecayMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */; };
+		DFBFEB2824EDC70A00C3CCED /* Float+GhostKitchenEquations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */; };
+		DFBFEB2924EDD3D400C3CCED /* OrderDecayMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */; };
+		DFBFEB2A24EDD4D800C3CCED /* Float+GhostKitchenEquations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */; };
+		DFBFEB2F24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */; };
+		DFD9115124EC0A480065F2C2 /* ShelveOrderDistributorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD9115024EC0A480065F2C2 /* ShelveOrderDistributorTests.swift */; };
+		DFD9115224EC0A4C0065F2C2 /* ShelveOrderDistributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */; };
+		DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB024EADF97009F3A7C /* Shelf.swift */; };
+		DFD9115424EC0AEA0065F2C2 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC024EB0E61009F3A7C /* Courier.swift */; };
+		DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
+		DFD9115624EC0AEE0065F2C2 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC224EB11C0009F3A7C /* Route.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DF593AA724EADD1B009F3A7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF6DE20F24E86FDD00EDBF74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF6DE21624E86FDD00EDBF74;
+			remoteInfo = GhostKitchens;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DF2DCA1424ED4BED00897233 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				DF2DCA1524ED4BF400897233 /* orders.json in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE21524E86FDD00EDBF74 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				DF9D8D2324EACC10001C0B4F /* orders.json in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DF00445F24EC5F7800512837 /* CourierDispatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierDispatcherTests.swift; sourceTree = "<group>"; };
+		DF00446124EC615000512837 /* CourierRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierRouterTests.swift; sourceTree = "<group>"; };
+		DF00446424EC638B00512837 /* GhostKitchen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostKitchen.swift; sourceTree = "<group>"; };
+		DF00446624EC639600512837 /* KitchenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenModule.swift; sourceTree = "<group>"; };
+		DF00446824EC639E00512837 /* DeliveryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryModule.swift; sourceTree = "<group>"; };
+		DF2DCA1224EC743E00897233 /* Simulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulation.swift; sourceTree = "<group>"; };
+		DF2DCA1624ED4E9700897233 /* malformed-orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "malformed-orders.json"; sourceTree = "<group>"; };
+		DF2DCA1C24ED73E500897233 /* OrderCookerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCookerTests.swift; sourceTree = "<group>"; };
+		DF2DCA1E24ED76DA00897233 /* KitchenModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenModuleTests.swift; sourceTree = "<group>"; };
+		DF2DCA2024ED76E900897233 /* DeliveryModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryModuleTests.swift; sourceTree = "<group>"; };
+		DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Courier+OrderHelpers.swift"; sourceTree = "<group>"; };
+		DF54C30024EDA56C00D4ECC6 /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
+		DF54C30224EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shelf+ShelfHelpers.swift"; sourceTree = "<group>"; };
+		DF54C30524EDA9C800D4ECC6 /* CourierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierTests.swift; sourceTree = "<group>"; };
+		DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDecayMonitor.swift; sourceTree = "<group>"; };
+		DF593A9F24EADCEF009F3A7C /* GhostKitchenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GhostKitchenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF593AA124EADCEF009F3A7C /* GhostKitchenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostKitchenTests.swift; sourceTree = "<group>"; };
+		DF593AA324EADCEF009F3A7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF593AAB24EADEB5009F3A7C /* OrderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTests.swift; sourceTree = "<group>"; };
+		DF593AB024EADF97009F3A7C /* Shelf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelf.swift; sourceTree = "<group>"; };
+		DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierDispatcher.swift; sourceTree = "<group>"; };
+		DF593ABA24EAE685009F3A7C /* OrderCooker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCooker.swift; sourceTree = "<group>"; };
+		DF593AC024EB0E61009F3A7C /* Courier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Courier.swift; sourceTree = "<group>"; };
+		DF593AC224EB11C0009F3A7C /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		DF593AC624EB15C5009F3A7C /* CourierRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierRouter.swift; sourceTree = "<group>"; };
+		DF593ACA24EB19F6009F3A7C /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributor.swift; sourceTree = "<group>"; };
+		DF6DE21724E86FDD00EDBF74 /* GhostKitchens */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GhostKitchens; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF6DE21A24E86FDD00EDBF74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF6DE24C24E87BCD00EDBF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF9D8D2124EACC0A001C0B4F /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
+		DF9D8D2524EACC6A001C0B4F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDecayMonitorTests.swift; sourceTree = "<group>"; };
+		DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquations.swift"; sourceTree = "<group>"; };
+		DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquationsTests.swift"; sourceTree = "<group>"; };
+		DFD9115024EC0A480065F2C2 /* ShelveOrderDistributorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributorTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DF593A9C24EADCEF009F3A7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE21424E86FDD00EDBF74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE24724E87BCD00EDBF74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF00446D24EC680000512837 /* KitchenModule */ = {
+			isa = PBXGroup;
+			children = (
+				DF00446624EC639600512837 /* KitchenModule.swift */,
+				DF593ABA24EAE685009F3A7C /* OrderCooker.swift */,
+				DF54C30724EDB18400D4ECC6 /* OrderDecayMonitor.swift */,
+				DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */,
+			);
+			path = KitchenModule;
+			sourceTree = "<group>";
+		};
+		DF00447024EC681600512837 /* DeliveryModule */ = {
+			isa = PBXGroup;
+			children = (
+				DF00446824EC639E00512837 /* DeliveryModule.swift */,
+				DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */,
+				DF593AC624EB15C5009F3A7C /* CourierRouter.swift */,
+			);
+			path = DeliveryModule;
+			sourceTree = "<group>";
+		};
+		DF00447424EC691100512837 /* GhostKitchen */ = {
+			isa = PBXGroup;
+			children = (
+				DF00446424EC638B00512837 /* GhostKitchen.swift */,
+				DF00446D24EC680000512837 /* KitchenModule */,
+				DF00447024EC681600512837 /* DeliveryModule */,
+			);
+			path = GhostKitchen;
+			sourceTree = "<group>";
+		};
+		DF2DCA1824ED732200897233 /* GhostKitchen */ = {
+			isa = PBXGroup;
+			children = (
+				DF593AA124EADCEF009F3A7C /* GhostKitchenTests.swift */,
+				DFBFEB2D24EE0B7200C3CCED /* GenericHelpers */,
+				DF2DCA1B24ED733700897233 /* Models */,
+				DF2DCA1A24ED732E00897233 /* DeliveryModule */,
+				DF2DCA1924ED732800897233 /* KitchenModule */,
+			);
+			path = GhostKitchen;
+			sourceTree = "<group>";
+		};
+		DF2DCA1924ED732800897233 /* KitchenModule */ = {
+			isa = PBXGroup;
+			children = (
+				DF2DCA1E24ED76DA00897233 /* KitchenModuleTests.swift */,
+				DFD9115024EC0A480065F2C2 /* ShelveOrderDistributorTests.swift */,
+				DF2DCA1C24ED73E500897233 /* OrderCookerTests.swift */,
+				DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */,
+			);
+			path = KitchenModule;
+			sourceTree = "<group>";
+		};
+		DF2DCA1A24ED732E00897233 /* DeliveryModule */ = {
+			isa = PBXGroup;
+			children = (
+				DF2DCA2024ED76E900897233 /* DeliveryModuleTests.swift */,
+				DF00445F24EC5F7800512837 /* CourierDispatcherTests.swift */,
+				DF00446124EC615000512837 /* CourierRouterTests.swift */,
+			);
+			path = DeliveryModule;
+			sourceTree = "<group>";
+		};
+		DF2DCA1B24ED733700897233 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DF593AAB24EADEB5009F3A7C /* OrderTests.swift */,
+				DF54C30024EDA56C00D4ECC6 /* ShelfTests.swift */,
+				DF54C30524EDA9C800D4ECC6 /* CourierTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DF54C2F924EDA44700D4ECC6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */,
+				DF54C30224EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF593AA024EADCEF009F3A7C /* GhostKitchenTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF593AA324EADCEF009F3A7C /* Info.plist */,
+				DF2DCA1824ED732200897233 /* GhostKitchen */,
+			);
+			path = GhostKitchenTests;
+			sourceTree = "<group>";
+		};
+		DF6DE20E24E86FDD00EDBF74 = {
+			isa = PBXGroup;
+			children = (
+				DF6DE21924E86FDD00EDBF74 /* GhostKitchens */,
+				DF6DE24B24E87BCD00EDBF74 /* AppResources */,
+				DF593AA024EADCEF009F3A7C /* GhostKitchenTests */,
+				DF6DE21824E86FDD00EDBF74 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DF6DE21824E86FDD00EDBF74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF6DE21724E86FDD00EDBF74 /* GhostKitchens */,
+				DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */,
+				DF593A9F24EADCEF009F3A7C /* GhostKitchenTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF6DE21924E86FDD00EDBF74 /* GhostKitchens */ = {
+			isa = PBXGroup;
+			children = (
+				DF6DE21A24E86FDD00EDBF74 /* main.swift */,
+				DF2DCA1224EC743E00897233 /* Simulation.swift */,
+				DF00447424EC691100512837 /* GhostKitchen */,
+				DFBFEB2624EDC6E800C3CCED /* GenricHelpers */,
+				DF9D8D2424EACC62001C0B4F /* Models */,
+			);
+			path = GhostKitchens;
+			sourceTree = "<group>";
+		};
+		DF6DE24B24E87BCD00EDBF74 /* AppResources */ = {
+			isa = PBXGroup;
+			children = (
+				DF2DCA1624ED4E9700897233 /* malformed-orders.json */,
+				DF9D8D2124EACC0A001C0B4F /* orders.json */,
+				DF6DE24C24E87BCD00EDBF74 /* Info.plist */,
+			);
+			path = AppResources;
+			sourceTree = "<group>";
+		};
+		DF9D8D2424EACC62001C0B4F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DF9D8D2524EACC6A001C0B4F /* Order.swift */,
+				DF593AC024EB0E61009F3A7C /* Courier.swift */,
+				DF593ACA24EB19F6009F3A7C /* Schedule.swift */,
+				DF593AC224EB11C0009F3A7C /* Route.swift */,
+				DF593AB024EADF97009F3A7C /* Shelf.swift */,
+				DF54C2F924EDA44700D4ECC6 /* Extensions */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DFBFEB2624EDC6E800C3CCED /* GenricHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */,
+			);
+			path = GenricHelpers;
+			sourceTree = "<group>";
+		};
+		DFBFEB2D24EE0B7200C3CCED /* GenericHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */,
+			);
+			path = GenericHelpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DF593A9E24EADCEF009F3A7C /* GhostKitchenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF593AA424EADCEF009F3A7C /* Build configuration list for PBXNativeTarget "GhostKitchenTests" */;
+			buildPhases = (
+				DF593A9B24EADCEF009F3A7C /* Sources */,
+				DF593A9C24EADCEF009F3A7C /* Frameworks */,
+				DF593A9D24EADCEF009F3A7C /* Resources */,
+				DF2DCA1424ED4BED00897233 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF593AA824EADD1B009F3A7C /* PBXTargetDependency */,
+			);
+			name = GhostKitchenTests;
+			productName = GhostKitchenTests;
+			productReference = DF593A9F24EADCEF009F3A7C /* GhostKitchenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DF6DE21624E86FDD00EDBF74 /* GhostKitchens */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF6DE21E24E86FDD00EDBF74 /* Build configuration list for PBXNativeTarget "GhostKitchens" */;
+			buildPhases = (
+				DF6DE21324E86FDD00EDBF74 /* Sources */,
+				DF6DE21424E86FDD00EDBF74 /* Frameworks */,
+				DF6DE21524E86FDD00EDBF74 /* CopyFiles */,
+				DF9D8D1E24EAC0BF001C0B4F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GhostKitchens;
+			productName = GhostKitchens;
+			productReference = DF6DE21724E86FDD00EDBF74 /* GhostKitchens */;
+			productType = "com.apple.product-type.tool";
+		};
+		DF6DE24924E87BCD00EDBF74 /* AppResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF6DE24D24E87BCD00EDBF74 /* Build configuration list for PBXNativeTarget "AppResources" */;
+			buildPhases = (
+				DF6DE24624E87BCD00EDBF74 /* Sources */,
+				DF6DE24724E87BCD00EDBF74 /* Frameworks */,
+				DF6DE24824E87BCD00EDBF74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppResources;
+			productName = AppResources;
+			productReference = DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DF6DE20F24E86FDD00EDBF74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = "Luke Geiger";
+				TargetAttributes = {
+					DF593A9E24EADCEF009F3A7C = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					DF6DE21624E86FDD00EDBF74 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					DF6DE24924E87BCD00EDBF74 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+				};
+			};
+			buildConfigurationList = DF6DE21224E86FDD00EDBF74 /* Build configuration list for PBXProject "GhostKitchens" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DF6DE20E24E86FDD00EDBF74;
+			productRefGroup = DF6DE21824E86FDD00EDBF74 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DF6DE21624E86FDD00EDBF74 /* GhostKitchens */,
+				DF6DE24924E87BCD00EDBF74 /* AppResources */,
+				DF593A9E24EADCEF009F3A7C /* GhostKitchenTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DF593A9D24EADCEF009F3A7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE24824E87BCD00EDBF74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF2DCA1724ED4E9700897233 /* malformed-orders.json in Resources */,
+				DF9D8D2224EACC0A001C0B4F /* orders.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DF9D8D1E24EAC0BF001C0B4F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ${BUILT_PRODUCTS_DIR}/GhostKitchens ${PROJECT_DIR}/bin\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DF593A9B24EADCEF009F3A7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFD9115624EC0AEE0065F2C2 /* Route.swift in Sources */,
+				DF00446F24EC680B00512837 /* OrderCooker.swift in Sources */,
+				DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */,
+				DF00446024EC5F7800512837 /* CourierDispatcherTests.swift in Sources */,
+				DF54C2F824EDA0FF00D4ECC6 /* Simulation.swift in Sources */,
+				DF00445E24EC5F5B00512837 /* CourierDispatcher.swift in Sources */,
+				DF00446224EC615000512837 /* CourierRouterTests.swift in Sources */,
+				DF2DCA2124ED76E900897233 /* DeliveryModuleTests.swift in Sources */,
+				DF593AAC24EADEB5009F3A7C /* OrderTests.swift in Sources */,
+				DF593AAA24EADE76009F3A7C /* Order.swift in Sources */,
+				DF54C30624EDA9C800D4ECC6 /* CourierTests.swift in Sources */,
+				DF2DCA1F24ED76DA00897233 /* KitchenModuleTests.swift in Sources */,
+				DF54C2FF24EDA4FD00D4ECC6 /* Courier+OrderHelpers.swift in Sources */,
+				DF00446324EC617B00512837 /* CourierRouter.swift in Sources */,
+				DF2DCA1D24ED73E500897233 /* OrderCookerTests.swift in Sources */,
+				DFD9115124EC0A480065F2C2 /* ShelveOrderDistributorTests.swift in Sources */,
+				DF54C30124EDA56C00D4ECC6 /* ShelfTests.swift in Sources */,
+				DF00446C24EC655400512837 /* KitchenModule.swift in Sources */,
+				DFD9115424EC0AEA0065F2C2 /* Courier.swift in Sources */,
+				DF54C30424EDA9B600D4ECC6 /* Shelf+ShelfHelpers.swift in Sources */,
+				DFBFEB2F24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift in Sources */,
+				DFBFEB2524EDC52200C3CCED /* OrderDecayMonitorTests.swift in Sources */,
+				DFBFEB2924EDD3D400C3CCED /* OrderDecayMonitor.swift in Sources */,
+				DF593AA224EADCEF009F3A7C /* GhostKitchenTests.swift in Sources */,
+				DFBFEB2A24EDD4D800C3CCED /* Float+GhostKitchenEquations.swift in Sources */,
+				DF54C2F724EDA0FC00D4ECC6 /* GhostKitchen.swift in Sources */,
+				DF00446B24EC655200512837 /* DeliveryModule.swift in Sources */,
+				DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */,
+				DFD9115224EC0A4C0065F2C2 /* ShelveOrderDistributor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE21324E86FDD00EDBF74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF593AB124EADF97009F3A7C /* Shelf.swift in Sources */,
+				DF593AC324EB11C0009F3A7C /* Route.swift in Sources */,
+				DF00446524EC638B00512837 /* GhostKitchen.swift in Sources */,
+				DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */,
+				DF2DCA1324EC743E00897233 /* Simulation.swift in Sources */,
+				DF54C30324EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift in Sources */,
+				DF593AC124EB0E61009F3A7C /* Courier.swift in Sources */,
+				DF593AB724EAE10C009F3A7C /* CourierDispatcher.swift in Sources */,
+				DF593AC724EB15C6009F3A7C /* CourierRouter.swift in Sources */,
+				DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */,
+				DF00446924EC639E00512837 /* DeliveryModule.swift in Sources */,
+				DF593ABB24EAE685009F3A7C /* OrderCooker.swift in Sources */,
+				DF6DE21B24E86FDD00EDBF74 /* main.swift in Sources */,
+				DF00446724EC639600512837 /* KitchenModule.swift in Sources */,
+				DF54C30824EDB18400D4ECC6 /* OrderDecayMonitor.swift in Sources */,
+				DF54C2FB24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift in Sources */,
+				DF593ACB24EB19F6009F3A7C /* Schedule.swift in Sources */,
+				DFBFEB2824EDC70A00C3CCED /* Float+GhostKitchenEquations.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF6DE24624E87BCD00EDBF74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DF593AA824EADD1B009F3A7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF6DE21624E86FDD00EDBF74 /* GhostKitchens */;
+			targetProxy = DF593AA724EADD1B009F3A7C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DF593AA524EADCEF009F3A7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				INFOPLIST_FILE = GhostKitchenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.geiger.GhostKitchenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DF593AA624EADCEF009F3A7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				INFOPLIST_FILE = GhostKitchenTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.geiger.GhostKitchenTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DF6DE21C24E86FDD00EDBF74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DF6DE21D24E86FDD00EDBF74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		DF6DE21F24E86FDD00EDBF74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DF6DE22024E86FDD00EDBF74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DF6DE24E24E87BCD00EDBF74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				INFOPLIST_FILE = AppResources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geiger.AppResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		DF6DE24F24E87BCD00EDBF74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2K5VZY2Y8Q;
+				INFOPLIST_FILE = AppResources/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.geiger.AppResources;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DF593AA424EADCEF009F3A7C /* Build configuration list for PBXNativeTarget "GhostKitchenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF593AA524EADCEF009F3A7C /* Debug */,
+				DF593AA624EADCEF009F3A7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF6DE21224E86FDD00EDBF74 /* Build configuration list for PBXProject "GhostKitchens" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF6DE21C24E86FDD00EDBF74 /* Debug */,
+				DF6DE21D24E86FDD00EDBF74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF6DE21E24E86FDD00EDBF74 /* Build configuration list for PBXNativeTarget "GhostKitchens" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF6DE21F24E86FDD00EDBF74 /* Debug */,
+				DF6DE22024E86FDD00EDBF74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF6DE24D24E87BCD00EDBF74 /* Build configuration list for PBXNativeTarget "AppResources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF6DE24E24E87BCD00EDBF74 /* Debug */,
+				DF6DE24F24E87BCD00EDBF74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DF6DE20F24E86FDD00EDBF74 /* Project object */;
+}
