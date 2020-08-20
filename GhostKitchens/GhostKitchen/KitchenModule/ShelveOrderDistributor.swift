@@ -94,7 +94,7 @@ protocol ShelveOrderDistributing {
      - Returns: A ShelveOrderDistributor
      */
 	init(shelves: [Shelf],
-		 decayMonitor: OrderDecayMonitor)
+		 decayMonitor: OrderDecayMonitoring)
 	
 	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate? { get set }
 }
@@ -106,10 +106,10 @@ final class ShelveOrderDistributor:ShelveOrderDistributing {
 	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate?
 	
 	let shelves: [Shelf]
-	let orderDecayMonitor: OrderDecayMonitor
+	var orderDecayMonitor: OrderDecayMonitoring
 
 	required init(shelves: [Shelf],
-				  decayMonitor: OrderDecayMonitor) {
+				  decayMonitor: OrderDecayMonitoring) {
 		self.shelves = shelves
 		self.orderDecayMonitor = decayMonitor
 		self.setup()

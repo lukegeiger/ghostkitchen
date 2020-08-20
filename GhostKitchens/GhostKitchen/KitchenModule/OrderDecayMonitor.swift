@@ -99,13 +99,11 @@ extension OrderDecayMonitor {
 					self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																	  updatedDecay: decay,
 																	  forOrder: order)
-					
 					if decay <= 0 {
 						orderAgeDictionary[order.id] = nil
 						self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																		  detectedDecayedOrder: order)
 					}
-
 				} else {
 					orderAgeDictionary[order.id] = 1.0
 				}
@@ -118,9 +116,9 @@ extension OrderDecayMonitor {
 		
 		if let shelf = self.orderDecayMonitorDataSource?.monitoringShelves().first(where: {$0.currentOrders.contains(order)}) {
 			return Float.calculateOrderDecay(shelfLife: Float(order.shelfLife),
-					 orderAge: ageOfOrder,
-					decayRate: order.decayRate,
-			shelfDecayModifier: Float(shelf.shelfDecayModifier))
+											 orderAge: ageOfOrder,
+											 decayRate: order.decayRate,
+											 shelfDecayModifier: Float(shelf.shelfDecayModifier))
 		}
 		return 0.0
 	}

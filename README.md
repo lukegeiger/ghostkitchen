@@ -93,7 +93,7 @@ An orders decay will be nil until set the order decay gets updated by the callba
 
 ### 7. Testing Suite
 
-Tests can be found under GhostKitchenTests.
+Tests can be found under GhostKitchenTests. 
 
 ### 8. FAQ
 
