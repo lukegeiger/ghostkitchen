@@ -6,7 +6,7 @@
 
 This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using Xcode version 11.6 in Swift. You can run the program two ways. The first way is  by opening the .xcworkspace file in the directory and click the play button in the upper left hand corner of Xcode. To see the output of the program open up the debugger of Xcode... The 2nd way is to navigate to the /bin directory and run the executable.
 
-The **Simulation** class is responsible for containing the information needed to run the kitchen simulation Orders from orders.json are parsed and placed into the simulation instance along with a configurable orders per second ingestion rate, and a GhostKitchen instance which I explain in the sections below.
+The **Simulation** class is responsible for containing the information needed to run the kitchen simulation. Orders from orders.json are parsed and placed into the simulation instance along with a configurable orders per second ingestion rate, and a GhostKitchen instance, which is explained in the sections below.
 
 ### 2. tl;dr Architecture Overview
 
