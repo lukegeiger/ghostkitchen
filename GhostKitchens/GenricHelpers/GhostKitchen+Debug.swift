@@ -10,6 +10,9 @@ import Foundation
 
 extension GhostKitchen {
 	
+    /**
+	 Creates a full GhostKitchen instance.
+     */
 	static func sampleKitchen() -> GhostKitchen {
 		
 		let shelf1 = Shelf(name: "Hot Shelf",

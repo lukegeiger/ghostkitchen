@@ -10,6 +10,15 @@ import Foundation
 
 extension Float {
 	
+    /**
+	 Calculates Order Decay
+
+     - Parameters:
+        - shelfLife: How long an order can last on a shelf
+        - orderAge: Age of order in seconds
+        - decayRate: Rate of decay
+		- shelfDecayModifier: 2 for overflow shelves 1 for anything else
+     */
 	static func calculateOrderDecay(shelfLife: Float,
 									orderAge: Float,
 									decayRate: Float,

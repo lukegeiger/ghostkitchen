@@ -4,7 +4,9 @@
 
 ### 1. Running the Program
 
-This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using Xcode version 11.6 in Swift. You can run the program by  opening the .xcworkspace file in the directory and click the play button in the upper left hand corner of Xcode. To see the output of the program open up the debugger of Xcode.
+This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using Xcode version 11.6 in Swift. You can run the program two ways. The first way is  by opening the .xcworkspace file in the directory and click the play button in the upper left hand corner of Xcode. To see the output of the program open up the debugger of Xcode... The 2nd way is to navigate to the /bin directory and run the executable.
+
+The **Simulation** class is responsible for containing the information needed to run the kitchen simulation Orders from orders.json are parsed and placed into the simulation instance along with a configurable orders per second ingestion rate, and a GhostKitchen instance which I explain in the sections below.
 
 ### 2. tl;dr Architecture Overview
 
@@ -101,5 +103,5 @@ Tests can be found under GhostKitchenTests.
       You can change the ingestion rate by going into main.swift and change the ingestion parameter on the simulation.
       
 - How can I change the simulation orders json?
-      You can modify the json by simply opening the orders.json file in the project and modifying it to however you please.
+	If you are running the program from Xcode You can modify the json by simply opening the orders.json file in the project and modifying it to however you please.. If you are running from the command line, modify the orders.json file in the /bin
       
