@@ -27,6 +27,6 @@ extension Float {
 		if shelfDecayModifier <= 0.0 {
 			return 0.0
 		}
-		return (shelfLife - orderAge - decayRate * orderAge * shelfDecayModifier) / shelfLife
+		return max(0,(shelfLife - orderAge - decayRate * orderAge * shelfDecayModifier) / shelfLife)
 	}
 }

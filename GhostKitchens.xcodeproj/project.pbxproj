@@ -24,7 +24,6 @@
 		DF2DCA1F24ED76DA00897233 /* KitchenModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1E24ED76DA00897233 /* KitchenModuleTests.swift */; };
 		DF2DCA2124ED76E900897233 /* DeliveryModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA2024ED76E900897233 /* DeliveryModuleTests.swift */; };
 		DF54C2F724EDA0FC00D4ECC6 /* GhostKitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00446424EC638B00512837 /* GhostKitchen.swift */; };
-		DF54C2F824EDA0FF00D4ECC6 /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
 		DF54C2FB24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */; };
 		DF54C2FF24EDA4FD00D4ECC6 /* Courier+OrderHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */; };
 		DF54C30124EDA56C00D4ECC6 /* ShelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54C30024EDA56C00D4ECC6 /* ShelfTests.swift */; };
@@ -280,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				DFE9016624EE25690090011D /* Driver */,
-				DFE9016524EE254B0090011D /* Simulation */,
 				DF00447424EC691100512837 /* GhostKitchen */,
 				DFBFEB2624EDC6E800C3CCED /* GenricHelpers */,
 				DF9D8D2424EACC62001C0B4F /* Models */,
@@ -329,19 +327,12 @@
 			path = GenericHelpers;
 			sourceTree = "<group>";
 		};
-		DFE9016524EE254B0090011D /* Simulation */ = {
-			isa = PBXGroup;
-			children = (
-				DF2DCA1224EC743E00897233 /* Simulation.swift */,
-			);
-			path = Simulation;
-			sourceTree = "<group>";
-		};
 		DFE9016624EE25690090011D /* Driver */ = {
 			isa = PBXGroup;
 			children = (
-				DF6DE21A24E86FDD00EDBF74 /* main.swift */,
 				DF5FE47724EF386E0002A3ED /* README.md */,
+				DF6DE21A24E86FDD00EDBF74 /* main.swift */,
+				DF2DCA1224EC743E00897233 /* Simulation.swift */,
 			);
 			path = Driver;
 			sourceTree = "<group>";
@@ -493,7 +484,6 @@
 				DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */,
 				DF00446024EC5F7800512837 /* CourierDispatcherTests.swift in Sources */,
 				DFE9016024EE18BC0090011D /* GhostKitchen+Debug.swift in Sources */,
-				DF54C2F824EDA0FF00D4ECC6 /* Simulation.swift in Sources */,
 				DF00445E24EC5F5B00512837 /* CourierDispatcher.swift in Sources */,
 				DF00446224EC615000512837 /* CourierRouterTests.swift in Sources */,
 				DF2DCA2124ED76E900897233 /* DeliveryModuleTests.swift in Sources */,
