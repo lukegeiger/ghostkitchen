@@ -100,3 +100,119 @@ Tests can be found under GhostKitchenTests.
 - How can I change the simulation orders json?
       You can modify the json by simply opening the orders.json file in the project and modifying it to however you please.
       
+
+
+
+### Sample Output 
+
+```
+Order: Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd Received
+
+Hot Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Cold Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Frozen Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Overflow Shelf
+Capacity: 15
+Order Count: 0
+Shelf Decay Modifier: 2
+Orders:  []
+________________________________
+
+Shelved: Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd on Frozen Shelf
+
+Hot Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Cold Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Frozen Shelf
+Capacity: 10
+Order Count: 1
+Shelf Decay Modifier: 1
+Orders:  [GhostKitchens.Order(id: "a8cfcb76-7f24-4420-a5ba-d46dd77bdffd", name: "Banana Split", temp: GhostKitchens.ShelfTemperature.frozen, shelfLife: 20, decayRate: 0.63)]
+________________________________
+Overflow Shelf
+Capacity: 15
+Order Count: 0
+Shelf Decay Modifier: 2
+Orders:  []
+________________________________
+
+Courier: 0BF5FAE2-CF9C-4D85-B2D9-49885EF5331B picking up order Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd
+Order: a8cfcb76-7f24-4420-a5ba-d46dd77bdffd removed from Frozen Shelf
+
+Hot Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Cold Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Frozen Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Overflow Shelf
+Capacity: 15
+Order Count: 0
+Shelf Decay Modifier: 2
+Orders:  []
+________________________________
+
+Courier: 0BF5FAE2-CF9C-4D85-B2D9-49885EF5331B dropped off order Banana Split a8cfcb76-7f24-4420-a5ba-d46dd77bdffd
+
+Hot Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Cold Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Frozen Shelf
+Capacity: 10
+Order Count: 0
+Shelf Decay Modifier: 1
+Orders:  []
+________________________________
+Overflow Shelf
+Capacity: 15
+Order Count: 0
+Shelf Decay Modifier: 2
+Orders:  []
+________________________________
+
+```
