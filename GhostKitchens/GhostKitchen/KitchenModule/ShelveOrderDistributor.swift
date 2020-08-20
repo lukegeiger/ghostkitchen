@@ -207,6 +207,12 @@ extension ShelveOrderDistributor {
 extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
+						   updatedDecay: Float,
+						   forOrder: Order) {
+		forOrder.decay = updatedDecay
+	}
+	
+	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order) {
 		self.remove(orders: [detectedDecayedOrder],
 					reason: .decay)

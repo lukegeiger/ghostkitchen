@@ -59,7 +59,9 @@ extension GhostKitchen: KitchenModuleDelegate {
 	
 	func kitchenModule(kitchenModule: KitchenModule,
 					   cooked: [Order]) {
-		// No op
+		cooked.forEach { (order) in
+			print("Order: " + order.name + " " + order.id + " cooked" )
+		}
 	}
 	
 	func kitchenModule(kitchenModule: KitchenModule,
@@ -95,7 +97,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 
 // MARK: DeliveryModuleDelegate
 
-extension GhostKitchen:DeliveryModuleDelegate {
+extension GhostKitchen: DeliveryModuleDelegate {
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
@@ -107,10 +109,11 @@ extension GhostKitchen:DeliveryModuleDelegate {
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
-						routed: Courier) {
-		// no op
+						routed: Courier,
+						forOrder: Order) {
+		print("Courier: " + routed.id + " routed for order " + forOrder.name + " " + forOrder.id)
 	}
-		
+	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
 						deliveredOrder: Order) {

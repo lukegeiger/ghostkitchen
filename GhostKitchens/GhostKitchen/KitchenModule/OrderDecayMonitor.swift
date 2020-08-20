@@ -33,6 +33,18 @@ protocol OrderDecayMonitorDelegate {
      */
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
+	
+    /**
+     A delegate callback that lets the consumer know  when the decay for an order has been updated
+
+     - Parameters:
+        - monitor: The monitor that detected the decay
+		- updatedDecay: The decay amount
+        - forOrder: The decaying order
+     */
+	func orderDecayMonitor(monitor: OrderDecayMonitor,
+						   updatedDecay: Float,
+						   forOrder: Order)
 }
 
 // MARK: OrderDecayMonitorDataSource
@@ -83,11 +95,17 @@ extension OrderDecayMonitor {
 					orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0
 					let decay = self.decayOf(order: order,
 											 ageOfOrder: currentAgeOfOrder + 1)
+					
+					self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
+																	  updatedDecay: decay,
+																	  forOrder: order)
+					
 					if decay <= 0 {
 						orderAgeDictionary[order.id] = nil
 						self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																		  detectedDecayedOrder: order)
 					}
+
 				} else {
 					orderAgeDictionary[order.id] = 1.0
 				}
@@ -95,15 +113,15 @@ extension OrderDecayMonitor {
 		}
 	}
 
-	private func decayOf(order:Order,
-				  ageOfOrder:Float) -> Float {
+	private func decayOf(order: Order,
+				  ageOfOrder: Float) -> Float {
 		
 		if let shelf = self.orderDecayMonitorDataSource?.monitoringShelves().first(where: {$0.currentOrders.contains(order)}) {
 			return Float.calculateOrderDecay(shelfLife: Float(order.shelfLife),
-											   orderAge: ageOfOrder,
-									          decayRate: order.decayRate,
-									  shelfDecayModifier: Float(shelf.shelfDecayModifier))
+					 orderAge: ageOfOrder,
+					decayRate: order.decayRate,
+			shelfDecayModifier: Float(shelf.shelfDecayModifier))
 		}
-		return -1
+		return 0.0
 	}
 }

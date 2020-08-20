@@ -171,6 +171,14 @@ class DeliveryModuleDelegateSpy:DeliveryModuleDelegate {
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
+						routed: Courier,
+						forOrder: Order) {
+		self.testingCourier = routed
+		if let routedExpectation = self.routedExpectation {
+			routedExpectation.fulfill()
+		}
+	}
+	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
 						deliveredOrder: Order) {
 		self.testingOrder = deliveredOrder
@@ -180,15 +188,7 @@ class DeliveryModuleDelegateSpy:DeliveryModuleDelegate {
 			deliveredExpectation.fulfill()
 		}
 	}
-	
-	func deliveryModule(deliveryModule: DeliveryModule,
-						routed: Courier) {
 
-		self.testingCourier = routed
-		if let routedExpectation = self.routedExpectation {
-			routedExpectation.fulfill()
-		}
-	}
 }
 
 

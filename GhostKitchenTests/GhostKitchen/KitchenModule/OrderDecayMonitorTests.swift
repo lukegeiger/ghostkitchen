@@ -35,7 +35,11 @@ class OrderDecayMonitorTests: XCTestCase {
 		
 		let orderDecay = OrderDecayMonitor()
 		let decayExpectation = XCTestExpectation(description: "decayExpectation")
-		let delegateSpy = OrderDecayMonitorDelegateSpy(decayExpectation: decayExpectation)
+		let decayUpdatedExpectation = XCTestExpectation(description: "decayUpdatedExpectation")
+		
+		let delegateSpy = OrderDecayMonitorDelegateSpy(decayExpectation: decayExpectation,
+													   decayUpdatedExpectation:decayUpdatedExpectation)
+		
 		let datasourceSpy = OrderDecayMonitorDataSourceSpy()
 		
 		orderDecay.orderDecayMonitorDelegate = delegateSpy
@@ -43,7 +47,7 @@ class OrderDecayMonitorTests: XCTestCase {
 		
 		orderDecay.beginMonitoring()
 				
-		wait(for: [decayExpectation], timeout: 5.0)
+		wait(for: [decayUpdatedExpectation,decayExpectation], timeout: 5.0,enforceOrder: true)
 	}
 
 	func testingShelves() -> [Shelf] {
@@ -63,14 +67,23 @@ class OrderDecayMonitorTests: XCTestCase {
 }
 
 struct OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
-	
+
 	var decayExpectation:XCTestExpectation?
-	
+	var decayUpdatedExpectation:XCTestExpectation?
+
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order) {
 	
 		if let decayExpectation = decayExpectation {
 			decayExpectation.fulfill()
+		}
+	}
+	
+	func orderDecayMonitor(monitor: OrderDecayMonitor,
+						   updatedDecay: Float,
+						   forOrder: Order) {
+		if let decayUpdatedExpectation = decayUpdatedExpectation {
+			decayUpdatedExpectation.fulfill()
 		}
 	}
 }

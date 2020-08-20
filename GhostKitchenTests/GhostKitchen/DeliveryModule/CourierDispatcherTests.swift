@@ -42,7 +42,7 @@ class CourierDispatcherTests: XCTestCase {
 }
 
 class CourierDispatchDelegateSpy: CourierDispatchDelegate {
-	
+
 	var testingCourier: Courier
 	var expectation: XCTestExpectation
 	
@@ -54,8 +54,8 @@ class CourierDispatchDelegateSpy: CourierDispatchDelegate {
 	}
 	
 	func courierDispatcher(courierDispatcher: CourierDispatching,
-						   routedCourier: Courier) {
-		
+						   routedCourier: Courier,
+						   forOrder: Order) {
 		self.testingCourier = routedCourier
 		self.expectation.fulfill()
 	}

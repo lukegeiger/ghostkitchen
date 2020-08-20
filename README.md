@@ -4,13 +4,27 @@
 
 ### 1. Running the Program
 
-This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using Xcode version 11.6 in Swift. You can run the program by simply opening the .xcworkspace file in the directory and click the play button in the upper left hand corner of Xcode. To see the output of the program open up the debugger of Xcode.
+This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using Xcode version 11.6 in Swift. You can run the program by  opening the .xcworkspace file in the directory and click the play button in the upper left hand corner of Xcode. To see the output of the program open up the debugger of Xcode.
 
 ### 2. tl;dr Architecture Overview
 
-The program is split into two main Modules the first is called KitchenModule and the 2nd is called DeliveryModule. KitchenModule is responsible for all things related to cooking, shelving, and monitoring decay health of orders. DeliveryModule is responsible for all things related to dispatching couriers to pickup orders, routing them, and deliverying them. 
+The program is split into two main Modules the first is called KitchenModule and the 2nd is called DeliveryModule. KitchenModule is responsible for all things related to cooking, shelving, and monitoring decay  of orders. DeliveryModule is responsible for all things related to dispatching couriers, routing them, and deliverying orders. 
 
-The two modules are composed on what I called a GhostKitchen. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A DeliveryModule needs to know when to dispatch a courier, and a KitchenModule needs to know when a order is going to be picked. The GhostKitchen handles these converstions between the modules by  acting as a listener for significant events in the KitchenModule and DeliveryModule.
+The two modules are composed on what is called a GhostKitchen. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A DeliveryModule needs to know when to dispatch a courier, and a KitchenModule needs to know when a order is going to be picked. The GhostKitchen handles these converstions between the modules by acting as a listener for significant events in the KitchenModule and DeliveryModule.
+
+Here is an example of how that works
+
+```
+extension GhostKitchen: KitchenModuleDelegate {
+	func kitchenModule(kitchenModule: KitchenModule,
+				receivedOrders: [Order]) {
+		self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
+	}
+}
+
+```
+
+Here, the GhostKitchen has a call back from the KitchenModule when it received orders. Once it receives orders, the GhostKitchen immeditaly tells the delivery modules dispatcher  to dispatch couriers to the order.
 
 ### 3. Models Deep Dive
 
@@ -37,16 +51,6 @@ Order Decay Logic is encapsulated inside the OrderDecayMonitor. The OrderDecayMo
 Here is a look at the decay monitors datasource and delegate.
 
 ```
-// MARK: OrderDecayMonitorDataSource
-
-protocol OrderDecayMonitorDataSource {
-	
-    /**
-     The shelves that the OrderDecayMonitor will monitor for decay.
-     */
-	func monitoringShelves() -> [Shelf]
-}
-
 // MARK: OrderDecayMonitorDelegate
 
 protocol OrderDecayMonitorDelegate {
@@ -60,8 +64,29 @@ protocol OrderDecayMonitorDelegate {
      */
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
+	
+    /**
+     A delegate callback that lets the consumer know  when the decay for an order has been updated
+
+     - Parameters:
+        - monitor: The monitor that detected the decay
+		- updatedDecay: The decay amount
+        - forOrder: The decaying order
+     */
+	func orderDecayMonitor(monitor: OrderDecayMonitor,
+						   updatedDecay: Float,
+						   forOrder: Order)
 }
 
+// MARK: OrderDecayMonitorDataSource
+
+protocol OrderDecayMonitorDataSource {
+	
+    /**
+     The shelves that the OrderDecayMonitor will monitor for decay.
+     */
+	func monitoringShelves() -> [Shelf]
+}
 ```
 
 ### 7. Testing Suite

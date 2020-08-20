@@ -44,9 +44,11 @@ protocol DeliveryModuleDelegate {
      - Parameters:
         - deliveryModule: The delivery module that performed the action
         - routed: The courier who got routed
+		- forOrder: The order routed
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
-						routed: Courier)
+						routed: Courier,
+						forOrder: Order)
 }
 
 // MARK: DeliveryModule
@@ -81,11 +83,12 @@ final class DeliveryModule {
 extension DeliveryModule: CourierDispatchDelegate {
 	
 	func courierDispatcher(courierDispatcher: CourierDispatching,
-						   routedCourier: Courier) {
-		
+						   routedCourier: Courier,
+						   forOrder: Order) {
 		self.courierRouter.commencePickupRoute(courier: routedCourier)
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
-													routed: routedCourier)
+													routed: routedCourier,
+													forOrder: forOrder)
 	}
 }
 

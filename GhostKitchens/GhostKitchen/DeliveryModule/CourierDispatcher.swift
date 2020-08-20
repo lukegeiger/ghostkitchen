@@ -18,9 +18,11 @@ protocol CourierDispatchDelegate {
      - Parameters:
         - courierDispatcher: The dispatcher that performed the action
         - routedCourier: The courier who got routed
+		- order: The courier who got routed
      */
 	func courierDispatcher(courierDispatcher: CourierDispatching,
-					       routedCourier: Courier)
+					       routedCourier: Courier,
+						   forOrder: Order)
 }
 
 // MARK: CourierDispatching
@@ -47,7 +49,8 @@ final class CourierDispatcher: CourierDispatching {
 	func dispatchCouriers(forOrders: [Order]) {
 		forOrders.forEach { (order) in
 			self.courierDispatchDelegate?.courierDispatcher(courierDispatcher: self,
-															routedCourier: Courier.createCourierForOrder(order: order))
+															routedCourier: Courier.createCourierForOrder(order: order),
+															forOrder: order)
 		}
 	}
 }
