@@ -9,6 +9,7 @@
 import Foundation
 
 extension GhostKitchen {
+	
 	static func sampleKitchen() -> GhostKitchen {
 		
 		let shelf1 = Shelf(name: "Hot Shelf",

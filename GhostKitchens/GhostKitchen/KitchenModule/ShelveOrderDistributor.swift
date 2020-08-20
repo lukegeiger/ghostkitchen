@@ -19,10 +19,27 @@ enum ShelveOrderDistributorRemovalReason {
 
 protocol ShelveOrderDistributorDelegate {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+        - forRoute: The handlebar of the bicycle
+     */
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
 								shelvedOrder: Order,
 								onShelf: Shelf)
 		
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+        - forRoute: The handlebar of the bicycle
+        - forOrder: The frame size of the bicycle, in centimeters
+     */
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
 								removed: Order,
 								fromShelf: Shelf,
@@ -33,14 +50,51 @@ protocol ShelveOrderDistributorDelegate {
 
 protocol ShelveOrderDistributing {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+     */
 	func shelve(orders: [Order])
+	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+     */
 	func remove(orders: [Order],
 				reason: ShelveOrderDistributorRemovalReason)
+	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+     */
 	func shelf(forOrder: Order) -> Shelf?
-	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate? { get set }
+		
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     */
 	func printShelfContents()
+	
+    /**
+     Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.
+
+     - Parameters:
+        - orderCooker: A kitchen module
+        - shelveOrderDistributor: a delivery Module
+
+     - Returns: A kitchen ready to make some bomb food!
+     */
 	init(shelves: [Shelf],
 		 decayMonitor: OrderDecayMonitor)
+	
+	/// Some Documentation
+	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate? { get set }
 }
 
 // MARK: ShelveOrderDistributor

@@ -12,6 +12,9 @@ import Foundation
 
 protocol OrderDecayMonitoring {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     */
 	func beginMonitoring()
 	var orderDecayMonitorDataSource: OrderDecayMonitorDataSource? { get set }
 	var orderDecayMonitorDelegate: OrderDecayMonitorDelegate? { get set }
@@ -21,6 +24,13 @@ protocol OrderDecayMonitoring {
 
 protocol OrderDecayMonitorDelegate {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+     */
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
 }
@@ -29,6 +39,9 @@ protocol OrderDecayMonitorDelegate {
 
 protocol OrderDecayMonitorDataSource {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     */
 	func monitoringShelves() -> [Shelf]
 }
 

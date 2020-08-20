@@ -12,11 +12,30 @@ import Foundation
 
 protocol CourierRoutingDelegate {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+        - forRoute: The handlebar of the bicycle
+        - forOrder: The frame size of the bicycle, in centimeters
+     */
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
 						   forRoute: Route,
 						   forOrder: Order)
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+        - forRoute: The handlebar of the bicycle
+        - forOrder: The frame size of the bicycle, in centimeters
+     */
+
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtDropoff: Courier,
 						   forRoute: Route,
@@ -27,8 +46,25 @@ protocol CourierRoutingDelegate {
 
 protocol CourierRouting {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courier: A courierDispatcher responsible for dispatching a courier to an order
+     */
 	func commencePickupRoute(courier: Courier)
+	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courier: A courierDispatcher responsible for dispatching a courier to an order
+     */
 	func commenceDropoffRoute(courier: Courier)
+	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+     */
 	var courierRoutingDelegate: CourierRoutingDelegate? { get set }
 }
 

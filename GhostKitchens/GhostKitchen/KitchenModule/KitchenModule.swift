@@ -12,16 +12,46 @@ import Foundation
 
 protocol KitchenModuleDelegate {
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+     */
 	func kitchenModule(kitchenModule: KitchenModule,
 				 receivedOrders: [Order])
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+     */
 	func kitchenModule(kitchenModule: KitchenModule,
 						cooked: [Order])
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+     */
 	func kitchenModule(kitchenModule: KitchenModule,
 								shelvedOrder: Order,
 								onShelf: Shelf)
 	
+    /**
+     Initializes a new DeliveryModule that is responsible for  all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
+
+     - Parameters:
+        - courierRouter: The style of the bicycle
+        - courierArrivedAtPickup: The gearing of the bicycle
+        - forRoute: The handlebar of the bicycle
+        - forOrder: The frame size of the bicycle, in centimeters
+     */
 	func kitchenModule(kitchenModule: KitchenModule,
 								removed: Order,
 								fromShelf: Shelf,
