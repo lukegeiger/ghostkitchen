@@ -74,23 +74,24 @@ protocol DeliveryModuleDelegate {
 
 The program has 5 model objects. Order, Courier, Schedule, Route, and Shelf. Order and Shelf were provided in the directions, so I will explain the 3 I created.
 
-Courier, Schedule, and Route were created to model the delivery flow. A Courier gets dispatch to an Order. When a courier gets dispatched, a Schedule is created for them. A Schedule contains an array of Routes and each Route has an order attached to it. Each Route has a pick up time and drop off time. This modeling structure opens the door for an add on later where couriers can do batched pickups and dropoffs. 
+Courier, Schedule, and Route were created to model the delivery flow. A Courier gets dispatch to an Order. When a courier gets dispatched, a Schedule is created for them. A Schedule contains an array of Routes and each Route has an order attached to it. Each Route has a pick up time and drop off time. This modeling structure opens the door for an add on later where couriers can do batched pickups and dropoffs.
 
 ### 4. KitchenModule Deep Dive
 
-The KitchenModule is composed of an OrderCooker and a ShelveOrderDistributor. An order cooker is responsible for taking in orders to cook, and notifying the consumer when they are finished. A ShelveOrderDistributor is responsible for shelving orders in the best possible place, removing them when a courier picks up them, or when there is overflow, or when an order decays. 
+The KitchenModule is composed of an OrderCooker and a ShelveOrderDistributor. An OrderCooker is responsible for taking in orders to cook, and notifying the consumer when they are finished. A ShelveOrderDistributor is responsible for shelving orders in the best possible place, removing them when a courier picks up them, remove them when there is overflow, or remove them when an order decays. 
 
-The ShelveOrderDistributor is composed of a OrderDecayMonitor that simply monitors the orders on its shelves and notifies the ShelveOrderDistributor when an order has gone bad. See Order Decay Extra Credit for more information.
+The ShelveOrderDistributor is composed of an OrderDecayMonitor that monitors the orders on its parents shelves and notifies the parent (in this case the ShelveOrderDistributor) when an order has gone bad. See Order Decay Extra Credit for more information.
 
-These two modules communicate with each other by being composed on the KitchenModule which listens to significant events from the Distributor and the Cooker.
+These two modules communicate with each other by being composed on the KitchenModule which listens to significant events from the ShelveOrderDistributor and the OrderCooker.
 
 ### 5. DeliveryModule Deep Dive
 
-The DeliveryModule is composed of a CourierRouter and a CourierDispatcher. A CourierDispatcher is responsible for dispatching a courier to pick up an Order. It does this by creating a Schedule for them to follow. Please see Models Deep Dive for how a schedule works. A Courier Router is responsible for routing a courier to a pickup and dropoff. These two modules communicate with each other by being composed on the DeliveryModule which listens to significant events from the Dispatcher and the Router.
+The DeliveryModule is composed of a CourierRouter and a CourierDispatcher. A CourierDispatcher is responsible for dispatching a courier to pick up an Order. It does this by creating a Schedule for them to follow. 
+Please see Models Deep Dive for how a Schedule works. A Courier Router is responsible for routing a courier to a pickup and dropoff. These two modules communicate with each other by being composed on the DeliveryModule which listens to significant events from the Dispatcher and the Router.
 
 ### 6. Order Decay Extra Credit
 
-Order Decay Logic is encapsulated inside the OrderDecayMonitor. The OrderDecayMonitors job is to essentially monitor its datasources shelves(which contain orders) for decayed orders, then notifying its delegate when it finds one. It does not perform any removals of the orders itself. It simply is just a monitor and tells whoever its delegate is that an order decayed and does not care what its delegate does when that happens. I composed the OrderDecayMonitor on the ShelveOrderDistributor.
+Order Decay Logic is encapsulated inside the OrderDecayMonitor. The OrderDecayMonitors job is to essentially monitor its parents shelves(which contain orders) for decayed orders. If it detects a decayed order, it notifiys its delegate. It does not perform any removals of the orders itself. It is just a monitor and tells whoever its delegate is that an order decayed and does not care what its delegate does when that happens. I composed the OrderDecayMonitor on the ShelveOrderDistributor.
 
 Here is a look at the decay monitors datasource and delegate.
 
@@ -132,6 +133,7 @@ protocol OrderDecayMonitorDataSource {
 	func monitoringShelves() -> [Shelf]
 }
 ```
+As you can see from the OrderDecayMonitorDataSource it monitors its datasources shelves, so whenever its datasource removes an object from its shelves, the monitor will automatically be updated.
 
 An orders decay will be nil until set the order decay gets updated by the callback from OrderDecayMonitor in the ShelveOrderDistributor.
 

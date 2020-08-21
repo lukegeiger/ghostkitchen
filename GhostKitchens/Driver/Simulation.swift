@@ -34,7 +34,10 @@ final class Simulation {
 		self.ingestionRate = ingestionRate
 		self.ghostKitchen = ghostKitchen
 	}
-	
+}
+
+// MARK: Public API
+extension Simulation {
     /**
 		Begins the simulation
      */
@@ -45,6 +48,7 @@ final class Simulation {
 											 selector: #selector(dispatchNextBatchOfOrders),
 											 userInfo: nil,
 											 repeats: true)
+		
 		if let simulationTimer = simulationTimer {
 			RunLoop().add(simulationTimer,
 						  forMode: .default)
@@ -56,9 +60,15 @@ final class Simulation {
 		Stops the timer from firing
      */
 	func end() {
+		
 		self.simulationTimer?.invalidate()
 		self.simulationTimer = nil
 	}
+}
+
+// MARK: Private API
+
+extension Simulation {
 	
 	@objc private func dispatchNextBatchOfOrders() {
 

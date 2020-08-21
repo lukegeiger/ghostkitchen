@@ -112,11 +112,6 @@ final class ShelveOrderDistributor:ShelveOrderDistributing {
 				  decayMonitor: OrderDecayMonitoring) {
 		self.shelves = shelves
 		self.orderDecayMonitor = decayMonitor
-		self.setup()
-	}
-
-	private func setup() {
-		
 		self.orderDecayMonitor.orderDecayMonitorDelegate = self
 		self.orderDecayMonitor.orderDecayMonitorDataSource = self
 		self.orderDecayMonitor.beginMonitoring()
@@ -209,6 +204,7 @@ extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   updatedDecay: Float,
 						   forOrder: Order) {
+		
 		forOrder.decay = updatedDecay
 		self.printShelfContents()
 	}
@@ -223,6 +219,7 @@ extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 extension ShelveOrderDistributor: OrderDecayMonitorDataSource {
 	
 	func monitoringShelves() -> [Shelf] {
+		
 		self.shelves
 	}
 }

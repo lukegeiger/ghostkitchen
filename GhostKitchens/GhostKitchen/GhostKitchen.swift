@@ -29,20 +29,10 @@ final class GhostKitchen {
 		 deliveryModule: DeliveryModule) {
 		
 		self.kitchenModule = kitchenModule
-		self.deliveryModule = deliveryModule
-		self.setup()
-	}	
-}
-
-// MARK: Private
-
-extension GhostKitchen {
-	
-	private func setup() {
-		
+		self.deliveryModule = deliveryModule		
 		self.kitchenModule.kitchenModuleDelegate = self
 		self.deliveryModule.deliveryModuleDelegate = self
-	}
+	}	
 }
 
 // MARK: KitchenModuleDelegate

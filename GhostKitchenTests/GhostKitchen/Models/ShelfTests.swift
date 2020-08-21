@@ -57,6 +57,5 @@ class ShelfTests: XCTestCase {
 						  currentOrders: [order3,order4,order5])
 		
 		XCTAssertTrue(shelf3.isFull())
-
     }
 }

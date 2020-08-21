@@ -28,7 +28,7 @@ class FloatGhostKitchenEquationsTests: XCTestCase {
 								  decayRate: 0.63,
 								  shelfDecayModifier: 1.0)
 		
-		XCTAssertTrue(decay == -0.7115)
+		XCTAssertTrue(decay == 0.0)
     }
 
     func testCalculateOrderDecayAllZeros() throws {

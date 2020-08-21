@@ -43,6 +43,9 @@
 		DF593ACB24EB19F6009F3A7C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
 		DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */; };
 		DF6DE21B24E86FDD00EDBF74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF6DE21A24E86FDD00EDBF74 /* main.swift */; };
+		DF92F84824EFFD23008243FE /* Simulation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */; };
+		DF92F84B24EFFF23008243FE /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
+		DF92F84C24EFFF31008243FE /* Simulation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */; };
 		DF9D8D2224EACC0A001C0B4F /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2324EACC10001C0B4F /* orders.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D8D2524EACC6A001C0B4F /* Order.swift */; };
@@ -128,6 +131,7 @@
 		DF6DE21A24E86FDD00EDBF74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6DE24C24E87BCD00EDBF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulation+Helpers.swift"; sourceTree = "<group>"; };
 		DF9D8D2124EACC0A001C0B4F /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
 		DF9D8D2524EACC6A001C0B4F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDecayMonitorTests.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 			children = (
 				DF54C2FA24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift */,
 				DF54C30224EDA99D00D4ECC6 /* Shelf+ShelfHelpers.swift */,
+				DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -492,9 +497,11 @@
 				DF54C30624EDA9C800D4ECC6 /* CourierTests.swift in Sources */,
 				DF2DCA1F24ED76DA00897233 /* KitchenModuleTests.swift in Sources */,
 				DF54C2FF24EDA4FD00D4ECC6 /* Courier+OrderHelpers.swift in Sources */,
+				DF92F84C24EFFF31008243FE /* Simulation+Helpers.swift in Sources */,
 				DF00446324EC617B00512837 /* CourierRouter.swift in Sources */,
 				DF2DCA1D24ED73E500897233 /* OrderCookerTests.swift in Sources */,
 				DFD9115124EC0A480065F2C2 /* ShelveOrderDistributorTests.swift in Sources */,
+				DF92F84B24EFFF23008243FE /* Simulation.swift in Sources */,
 				DF54C30124EDA56C00D4ECC6 /* ShelfTests.swift in Sources */,
 				DF00446C24EC655400512837 /* KitchenModule.swift in Sources */,
 				DFD9115424EC0AEA0065F2C2 /* Courier.swift in Sources */,
@@ -526,6 +533,7 @@
 				DFE9015E24EE14BA0090011D /* GhostKitchen+Debug.swift in Sources */,
 				DF593AB724EAE10C009F3A7C /* CourierDispatcher.swift in Sources */,
 				DF593AC724EB15C6009F3A7C /* CourierRouter.swift in Sources */,
+				DF92F84824EFFD23008243FE /* Simulation+Helpers.swift in Sources */,
 				DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */,
 				DF00446924EC639E00512837 /* DeliveryModule.swift in Sources */,
 				DF593ABB24EAE685009F3A7C /* OrderCooker.swift in Sources */,

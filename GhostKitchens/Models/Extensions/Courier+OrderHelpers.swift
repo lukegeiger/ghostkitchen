@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: Courier Helpers
 
-extension Courier{
+extension Courier {
 	
 	static func createCourierForOrder(order: Order) -> Courier {
 		

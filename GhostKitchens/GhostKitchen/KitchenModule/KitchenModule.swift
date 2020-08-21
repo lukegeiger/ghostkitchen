@@ -114,7 +114,6 @@ extension KitchenModule: OrderCookingDelegate {
 
 extension KitchenModule: ShelveOrderDistributorDelegate {
 	
-	
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
 								shelvedOrder: Order,
 								onShelf: Shelf) {
