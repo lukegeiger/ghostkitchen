@@ -8,6 +8,8 @@ This a CLI program created on Mac running Mac OS Catalina Version 10.15.5, using
 
 The **Simulation** class is responsible for containing the information needed to run the kitchen simulation. Orders from orders.json are parsed and placed into the simulation instance along with a configurable orders per second ingestion rate, and a GhostKitchen instance, which is explained in the sections below.
 
+Please note if you are running from the CLI, you need to rebuild the program in Xcode whenever you make any changes.
+
 ### 2. Architecture Overview
 
 The program is split into two main Modules the first is called **KitchenModule** and the 2nd is called  **DeliveryModule**.  **KitchenModule** is responsible for all things related to cooking, shelving, and monitoring decay  of orders.  **DeliveryModule** is responsible for all things related to dispatching couriers, routing them, and delivering orders. 
