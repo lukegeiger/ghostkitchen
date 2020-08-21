@@ -55,9 +55,9 @@ protocol DeliveryModuleDelegate {
 
 final class DeliveryModule {
 	
-	private var courierRouter: CourierRouting
-
 	var deliveryModuleDelegate: DeliveryModuleDelegate?
+	
+	var courierRouter: CourierRouting
 	var courierDispatcher: CourierDispatching
 		
     /**

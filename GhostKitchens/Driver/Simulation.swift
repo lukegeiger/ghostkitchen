@@ -16,7 +16,7 @@ final class Simulation {
 	private let ingestionRate: Int
 	private let ghostKitchen: GhostKitchen
 	private var remainingOrdersInSimulation: [Order]
-	private var simulationTimer: Timer?
+	var simulationTimer: Timer?
 	
     /**
      Initializes a new simulation
@@ -38,10 +38,14 @@ final class Simulation {
 
 // MARK: Public API
 extension Simulation {
+	
     /**
-		Begins the simulation
+     Begins the simulation with the specified parameters taken in the init
+
+     - Parameters:
+        - addToRunLoop: Used for testing. Default is YES.
      */
-	func begin() {
+	func begin(addToRunLoop:Bool = true) {
 	
 		self.simulationTimer = Timer.scheduledTimer(timeInterval: 1,
 											 target: self,
@@ -50,9 +54,11 @@ extension Simulation {
 											 repeats: true)
 		
 		if let simulationTimer = simulationTimer {
-			RunLoop().add(simulationTimer,
-						  forMode: .default)
-			RunLoop.current.run()
+			if addToRunLoop {
+				RunLoop().add(simulationTimer,
+							  forMode: .default)
+				RunLoop.current.run()
+			}
 		}
 	}
 	

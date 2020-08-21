@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "69B0BB3C-3756-4DE2-ACFF-6C68B189DF90"
+            uuid = "C6A7E31E-4520-4B5D-8835-A008C0339EAD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GhostKitchenTests/GenericHelpers/Simulation+HelpersTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "testParseSimulationOrders()"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "testParseOrdersToSimulate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

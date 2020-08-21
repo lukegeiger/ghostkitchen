@@ -46,6 +46,7 @@
 		DF92F84824EFFD23008243FE /* Simulation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */; };
 		DF92F84B24EFFF23008243FE /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
 		DF92F84C24EFFF31008243FE /* Simulation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */; };
+		DF92F85424F01220008243FE /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F85324F01220008243FE /* SimulationTests.swift */; };
 		DF9D8D2224EACC0A001C0B4F /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2324EACC10001C0B4F /* orders.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D8D2524EACC6A001C0B4F /* Order.swift */; };
@@ -132,6 +133,7 @@
 		DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6DE24C24E87BCD00EDBF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulation+Helpers.swift"; sourceTree = "<group>"; };
+		DF92F85324F01220008243FE /* SimulationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
 		DF9D8D2124EACC0A001C0B4F /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
 		DF9D8D2524EACC6A001C0B4F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDecayMonitorTests.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			children = (
 				DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */,
 				DFE9016324EE18F10090011D /* GhostKitchen+DebugTests.swift */,
+				DF92F85324F01220008243FE /* SimulationTests.swift */,
 			);
 			path = GenericHelpers;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				DFBFEB2A24EDD4D800C3CCED /* Float+GhostKitchenEquations.swift in Sources */,
 				DF54C2F724EDA0FC00D4ECC6 /* GhostKitchen.swift in Sources */,
 				DF00446B24EC655200512837 /* DeliveryModule.swift in Sources */,
+				DF92F85424F01220008243FE /* SimulationTests.swift in Sources */,
 				DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */,
 				DFE9016424EE18F10090011D /* GhostKitchen+DebugTests.swift in Sources */,
 				DFD9115224EC0A4C0065F2C2 /* ShelveOrderDistributor.swift in Sources */,

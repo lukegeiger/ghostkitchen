@@ -12,6 +12,6 @@ import Foundation
 
 struct Courier {
 	
-	let id: String
+	let id: String /// Unique ID
 	let schedule: Schedule
 }

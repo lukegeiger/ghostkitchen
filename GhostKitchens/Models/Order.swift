@@ -47,6 +47,19 @@ extension Order: Equatable {
 
 // MARK: CustomStringConvertible
 
+/**
+	This is implemented so when orders get printed in the debugger it will print its properties and appear as something like this
+
+	Order(id: a2b13869-6b7e-4e35-8e11-fa9889d24073
+	name: Vanilla Ice Cream,
+	temp: frozen,
+	shelfLife: 310,
+	decayRate: 0.35 ,
+	decay: Optional(0.98258066)
+
+	Instead of GhostKitchen.Order
+ */
+
 extension Order: CustomStringConvertible {
 	
 	var description: String {
