@@ -10,9 +10,9 @@ The **Simulation** class is responsible for containing the information needed to
 
 ### 2. tl;dr Architecture Overview
 
-The program is split into two main Modules the first is called **KitchenModule** and the 2nd is called  **DeliveryModule**.  **KitchenModule** is responsible for all things related to cooking, shelving, and monitoring decay  of orders.  **DeliveryModule** is responsible for all things related to dispatching couriers, routing them, and deliverying orders. 
+The program is split into two main Modules the first is called **KitchenModule** and the 2nd is called  **DeliveryModule**.  **KitchenModule** is responsible for all things related to cooking, shelving, and monitoring decay  of orders.  **DeliveryModule** is responsible for all things related to dispatching couriers, routing them, and delivering orders. 
 
-The two modules are composed on what is called a  **GhostKitchen**. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A **DeliveryModule** needs to know when to dispatch a courier, and a  **KitchenModule** needs to know when a order is going to be picked up. The **GhostKitchen** handles these converstions between the modules by acting as a listener for significant events in the **KitchenModule** and **DeliveryModule**.
+The two modules are composed on what is called a  **GhostKitchen**. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A **DeliveryModule** needs to know when to dispatch a courier, and a  **KitchenModule** needs to know when an order is going to be picked up. The **GhostKitchen** handles these conversations between the modules by acting as a listener for significant events in the **KitchenModule** and **DeliveryModule**.
 
 Here is an example of how that works
 
@@ -26,7 +26,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 
 ```
 
-Here, the **GhostKitchen** has a call back from the **KitchenModule** when it received orders. Once it receives orders, the **GhostKitchen** immeditaly tells the delivery modules dispatcher  to dispatch couriers to the order.
+Here, the **GhostKitchen** has a callback from the **KitchenModule** when it received orders. Once it receives orders, the **GhostKitchen** immediately tells the delivery modules dispatcher to dispatch couriers to the order.
 
 ### 3. Models Deep Dive
 
@@ -38,7 +38,7 @@ Courier, Schedule, and Route were created to model the delivery flow. A Courier 
 
 The KitchenModule is composed of an OrderCooker and a ShelveOrderDistributor. An order cooker is responsible for taking in orders to cook, and notifying the consumer when they are finished. A ShelveOrderDistributor is responsible for shelving orders in the best possible place, removing them when a courier picks up them, or when there is overflow, or when an order decays. 
 
-The ShelveOrderDistributor is composed of a OrderDecayMonitor that simply monitors the orders on its shelves and notifies the ShelveOrderDistributor when a order has gone bad. See Order Decay Extra Credit for more information.
+The ShelveOrderDistributor is composed of a OrderDecayMonitor that simply monitors the orders on its shelves and notifies the ShelveOrderDistributor when an order has gone bad. See Order Decay Extra Credit for more information.
 
 These two modules communicate with each other by being composed on the KitchenModule which listens to significant events from the Distributor and the Cooker.
 
