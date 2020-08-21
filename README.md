@@ -72,7 +72,7 @@ Shelve contents are printed when an order is _received_, _shelved_, _removed (fo
 
 ### 3. Models Deep Dive
 
-The program has 5 model objects. **Order**, **Courier**, **Schedule, **Route**, and **Shelf**. **Order** and **Shelf** were provided in the directions, so I will explain the 3 I created.
+The program has 5 model objects. **Order**, **Courier**, **Schedule**, **Route**, and **Shelf**. **Order** and **Shelf** were provided in the directions, so I will explain the 3 I created.
 
 **Courier**, **Schedule**, and **Route** were created to model the delivery flow. A **Courier** gets dispatch to an **Order**. When a **Courier** gets dispatched, a **Schedule** is created for them. A **Schedule** contains an array of **Routes** and each **Route** has an **Order** attached to it. Each **Route** has a pick up time and drop off time. This modeling structure opens the door for an add on later where couriers can do batched pickups and dropoffs.
 
