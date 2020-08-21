@@ -10,6 +10,11 @@ import Foundation
 
 extension Simulation {
 	
+    /**
+		Pulls in orders from orders.json Note this does not work in unit tests and will return an empty array.
+
+     - Returns: An array of parsed orders
+     */
 	static func parseOrdersToSimulate() -> [Order] {
 
 	if let path = Bundle.main.path(forResource: "orders", ofType: "json") {

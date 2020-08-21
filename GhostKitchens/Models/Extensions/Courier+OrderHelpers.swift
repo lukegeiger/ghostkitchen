@@ -12,6 +12,14 @@ import Foundation
 
 extension Courier {
 	
+    /**
+     Creates a Courier model to deliver the passed in order.
+
+     - Parameters:
+        - order: The order that needs to be delivered
+
+     - Returns: The courier to deliver the order
+     */
 	static func createCourierForOrder(order: Order) -> Courier {
 		
 		let route = Route(order: order,

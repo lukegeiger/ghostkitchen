@@ -12,11 +12,19 @@ import Foundation
 
 extension Shelf {
 	
+    /**
+		Lets you know if the shelfs orders are at or above capacity.
+
+     - Returns: A bool If the shelf is full or not.
+     */
 	func isFull() -> Bool {
 		
 		return self.currentOrders.count >= self.capacity
 	}
 	
+    /**
+		Prints the shelf contents
+     */
 	func printShelf() {
 		
 		print(name)
@@ -31,6 +39,14 @@ extension Shelf {
 
 extension Shelf {
 	
+    /**
+     Lets you know all the orders that are on the passed in shelves.
+
+     - Parameters:
+        - fromShelves: All the shelves in which you wish to know the orders they contain
+
+     - Returns: An array of all the orders currently on the shelves
+     */
 	static func orders(fromShelves:[Shelf]) -> [Order] {
 		
 		var orders:[Order] = []
