@@ -206,7 +206,6 @@ extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 						   forOrder: Order) {
 		
 		forOrder.decay = updatedDecay
-		self.printShelfContents()
 	}
 	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
