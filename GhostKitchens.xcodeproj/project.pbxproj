@@ -127,7 +127,6 @@
 		DF593AC624EB15C5009F3A7C /* CourierRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierRouter.swift; sourceTree = "<group>"; };
 		DF593ACA24EB19F6009F3A7C /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributor.swift; sourceTree = "<group>"; };
-		DF5FE47724EF386E0002A3ED /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = GhostKitchens/README.md; sourceTree = SOURCE_ROOT; };
 		DF6DE21724E86FDD00EDBF74 /* GhostKitchens */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GhostKitchens; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6DE21A24E86FDD00EDBF74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +135,7 @@
 		DF92F85324F01220008243FE /* SimulationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
 		DF9D8D2124EACC0A001C0B4F /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
 		DF9D8D2524EACC6A001C0B4F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		DFA4577724F02092003D23CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		DFBFEB2424EDC52200C3CCED /* OrderDecayMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDecayMonitorTests.swift; sourceTree = "<group>"; };
 		DFBFEB2724EDC70A00C3CCED /* Float+GhostKitchenEquations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquations.swift"; sourceTree = "<group>"; };
 		DFBFEB2E24EE0B9F00C3CCED /* Float+GhostKitchenEquationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+GhostKitchenEquationsTests.swift"; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 		DF6DE21924E86FDD00EDBF74 /* GhostKitchens */ = {
 			isa = PBXGroup;
 			children = (
-				DF5FE47724EF386E0002A3ED /* README.md */,
+				DFA4577724F02092003D23CC /* README.md */,
 				DFE9016624EE25690090011D /* Driver */,
 				DF00447424EC691100512837 /* GhostKitchen */,
 				DFBFEB2624EDC6E800C3CCED /* GenricHelpers */,
