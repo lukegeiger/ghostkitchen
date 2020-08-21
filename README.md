@@ -49,9 +49,6 @@ protocol KitchenModuleDelegate {
 And The Delivery Module has these callbacks
 
 ```
-
-// MARK: DeliveryModuleDelegate
-
 protocol DeliveryModuleDelegate {
 	
 
@@ -69,6 +66,10 @@ protocol DeliveryModuleDelegate {
 						forOrder: Order)
 }
 ```
+
+Logging takes place when an order is received, cooked, shelved, courier routed, order removed (for either pickup, overflow, or decay), courier arrived, and courier dropoff.
+
+Shelve contents are printed when an order is received, shelved, removed (for any reason), and when an order is delivered. I chose not to print shelve contents on courier routed, and courier arrived, due to the verbosity of printing since when a courier is routed the order is cooked at the same time which prints the shelves, then when a courier arrived the contents get printed when an order is removed which is instant for the sake of this simualation.
 
 ### 3. Models Deep Dive
 
