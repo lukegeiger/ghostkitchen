@@ -78,7 +78,7 @@ The program has 5 model objects. **Order**, **Courier**, **Schedule**, **Route**
 
 ### 4. KitchenModule Deep Dive
 
-The **KitchenModule** is composed of an **OrderCooker** and a **ShelveOrderDistributor**. An **OrderCooker** is responsible for taking in orders to cook, and notifying the consumer when they are finished. A **ShelveOrderDistributor** is responsible for shelving orders in the best possible place, removing them when a courier picks up them, remove them when there is overflow, or remove them when an order decays. 
+The **KitchenModule** is composed of an **OrderCooker** and a **ShelveOrderDistributor**. An **OrderCooker** is responsible for taking in orders to cook, and notifying the consumer when they are finished. A **ShelveOrderDistributor** is responsible for shelving orders in the best possible place, removing them when a courier picks up them, removing them when there is overflow, or removing them when an order decays. 
 
 The **ShelveOrderDistributor** is composed of an **OrderDecayMonitor** that monitors the orders on its parents shelves and notifies the parent (in this case the **ShelveOrderDistributor**) when an order has gone bad. See Order Decay Extra Credit for more information.
 
