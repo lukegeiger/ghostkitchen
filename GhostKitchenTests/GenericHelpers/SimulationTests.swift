@@ -22,4 +22,10 @@ class SimulationTests: XCTestCase {
 		simulation.end()
 		XCTAssertTrue(simulation.simulationTimer == nil)
     }
+	
+    func testSimulationNoOrder() throws {
+		
+		let emptyOrders = Simulation.parseOrdersToSimulate()
+		XCTAssertTrue(emptyOrders.count == 0)
+    }
 }
