@@ -12,7 +12,7 @@ The **Simulation** class is responsible for containing the information needed to
 
 The program is split into two main Modules the first is called **KitchenModule** and the 2nd is called  **DeliveryModule**.  **KitchenModule** is responsible for all things related to cooking, shelving, and monitoring decay  of orders.  **DeliveryModule** is responsible for all things related to dispatching couriers, routing them, and deliverying orders. 
 
-The two modules are composed on what is called a  **GhostKitchen**. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A **DeliveryModule** needs to know when to dispatch a courier, and a  **KitchenModule** needs to know when a order is going to be picked. The **GhostKitchen** handles these converstions between the modules by acting as a listener for significant events in the **KitchenModule** and **DeliveryModule**.
+The two modules are composed on what is called a  **GhostKitchen**. The idea behind this was that cooking, shelving, and monitoring order health, should really have no idea/care about creating delivery schedules, tracking order status, and delivering orders, and vice versa. Having said that, A **DeliveryModule** needs to know when to dispatch a courier, and a  **KitchenModule** needs to know when a order is going to be picked up. The **GhostKitchen** handles these converstions between the modules by acting as a listener for significant events in the **KitchenModule** and **DeliveryModule**.
 
 Here is an example of how that works
 
