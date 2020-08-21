@@ -290,6 +290,27 @@ class ShelveOrderDistributorTests: XCTestCase {
 		XCTAssertTrue(spy.testingOrder?.id == "1")
 		wait(for: [removedExpectation], timeout: 1.0)
 	}
+	
+	func testDetectedDecayedOrder() throws {
+		
+		let hotOrder = Order(id: "1",
+							 name: "Nemo Burger",
+							 temp: .hot,
+							 shelfLife: 10,
+							 decayRate: 0.0)
+		
+		let hotShelf = Shelf(name: "Hot Shelf",
+							 allowedTemperature: .hot,
+							 capacity: 1,
+							 currentOrders: [hotOrder])
+		
+		let decayer = OrderDecayMonitor()
+		let shelf = ShelveOrderDistributor(shelves: [hotShelf], decayMonitor: decayer)
+		
+		shelf.orderDecayMonitor.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: decayer, detectedDecayedOrder: hotOrder)
+		
+		XCTAssertTrue(hotShelf.currentOrders.count == 0)
+	}
 }
 
 class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {

@@ -50,6 +50,44 @@ class OrderDecayMonitorTests: XCTestCase {
 		wait(for: [decayUpdatedExpectation,decayExpectation], timeout: 5.0,enforceOrder: true)
 	}
 
+	func testDecayOfOrder0() throws {
+		
+		let orderDecay = OrderDecayMonitor()
+		
+		let hotOrder = Order(id: "1",
+							name: "Nemo Burger",
+							temp: .hot,
+							shelfLife: 10,
+							decayRate: 0.0)
+		
+		let decay = orderDecay.decayOf(order: hotOrder, ageOfOrder: 0)
+		
+		XCTAssertTrue(decay == 0.0)
+	}
+	
+	func testDecayOfOrderNonZero() throws {
+		
+		let orderDecay = OrderDecayMonitor()
+		
+		let hotOrder = Order(id: "1",
+							name: "Nemo Burger",
+							temp: .hot,
+							shelfLife: 10,
+							decayRate: 0.7)
+		
+		let hotShelf = Shelf(name: "Hot Shelf",
+							 allowedTemperature: .hot,
+							 capacity: 1,
+							 currentOrders: [hotOrder])
+		
+		let shelf = ShelveOrderDistributor(shelves: [hotShelf],
+										   decayMonitor: orderDecay)
+		
+		let decay = orderDecay.decayOf(order: hotOrder, ageOfOrder: 3)
+		
+		XCTAssertTrue(decay == 0.49)
+	}
+
 	func testingShelves() -> [Shelf] {
 		
 		let hotOrder = Order(id: "1",

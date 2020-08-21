@@ -111,7 +111,14 @@ extension OrderDecayMonitor {
 		}
 	}
 
-	private func decayOf(order: Order,
+    /**
+	 Calculates the decay of the order
+
+     - Parameters:
+        - order: The order to measure decay.
+        - ageOfOrder: The tracked age of the order
+     */
+	func decayOf(order: Order,
 				  ageOfOrder: Float) -> Float {
 		
 		if let shelf = self.orderDecayMonitorDataSource?.monitoringShelves().first(where: {$0.currentOrders.contains(order)}) {
