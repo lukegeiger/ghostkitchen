@@ -13,4 +13,3 @@ let simulation = Simulation(orders: Simulation.parseOrdersToSimulate(),
 							ingestionRate: 2)
 
 simulation.begin()
-
