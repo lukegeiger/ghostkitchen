@@ -138,7 +138,7 @@ protocol OrderDecayMonitorDataSource {
 ```
 As you can see from the OrderDecayMonitorDataSource it monitors its datasources shelves, so whenever its datasource removes an object from its shelves, the monitor will automatically be updated.
 
-An orders decay will be nil until set the order decay gets updated by the callback from OrderDecayMonitor in the ShelveOrderDistributor.
+An orders decay will be nil until set the order decay gets updated by the callback from OrderDecayMonitor in the ShelveOrderDistributor. Decaying starts happening a second after an item is placed on a shelf, so note that while looking at logs.
 
 ### 7. Testing Suite
 
