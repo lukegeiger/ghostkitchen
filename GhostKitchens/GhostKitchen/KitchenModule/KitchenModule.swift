@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: KitchenModuleDelegate
 
-protocol KitchenModuleDelegate {
+protocol KitchenModuleDelegate: class {
 	
     /**
 		A delegate call back that notifies when the kitchen recieved orders.
@@ -65,7 +65,7 @@ final class KitchenModule {
 	
 	var orderCooker: OrderCooking
 	var shelveOrderDistributor: ShelveOrderDistributing
-	var kitchenModuleDelegate: KitchenModuleDelegate?
+	weak var kitchenModuleDelegate: KitchenModuleDelegate?
 
     /**
      Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.

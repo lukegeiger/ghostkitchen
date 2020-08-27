@@ -57,9 +57,9 @@ extension GhostKitchen: KitchenModuleDelegate {
 	func kitchenModule(kitchenModule: KitchenModule,
 				 receivedOrders: [Order]) {
 		
-		receivedOrders.forEach { (order) in
+		receivedOrders.forEach { [weak self] (order) in
 			print("Order: " + order.name + " " + order.id + " Received")
-			self.kitchenModule.shelveOrderDistributor.printShelfContents()
+			self?.kitchenModule.shelveOrderDistributor.printShelfContents()
 		}
 		
 		self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)

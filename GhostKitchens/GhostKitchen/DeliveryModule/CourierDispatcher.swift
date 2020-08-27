@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: CourierDispatchDelegate
 
-protocol CourierDispatchDelegate {
+protocol CourierDispatchDelegate: class {
 	
     /**
      A delegate callback that lets a consumer know when a courier was routed
@@ -27,7 +27,7 @@ protocol CourierDispatchDelegate {
 
 // MARK: CourierDispatching
 
-protocol CourierDispatching {
+protocol CourierDispatching: class {
 	
     /**
      Calling this will dispatch couriers to the orders and begin their pickup and dropoff journey
@@ -44,10 +44,10 @@ protocol CourierDispatching {
 
 final class CourierDispatcher: CourierDispatching {
 	
-	var courierDispatchDelegate: CourierDispatchDelegate?
+	weak var courierDispatchDelegate: CourierDispatchDelegate?
 	
 	func dispatchCouriers(forOrders: [Order]) {
-		forOrders.forEach { (order) in
+		forOrders.forEach { [unowned self] (order) in
 			self.courierDispatchDelegate?.courierDispatcher(courierDispatcher: self,
 															routedCourier: Courier.createCourierForOrder(order: order),
 															forOrder: order)

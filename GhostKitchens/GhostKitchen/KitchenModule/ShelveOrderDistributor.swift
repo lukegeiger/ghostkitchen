@@ -20,7 +20,7 @@ enum ShelveOrderDistributorRemovalReason {
 
 // MARK: ShelveOrderDistributorDelegate
 
-protocol ShelveOrderDistributorDelegate {
+protocol ShelveOrderDistributorDelegate: class {
 	
     /**
      A delegate callback that lets a consumer know when the shelveOrderDistributor shelved an order.
@@ -51,7 +51,7 @@ protocol ShelveOrderDistributorDelegate {
 
 // MARK: ShelveOrderDistributing
 
-protocol ShelveOrderDistributing {
+protocol ShelveOrderDistributing: class {
 	
     /**
      Will shelf the order on the best possible shelf for the order.
@@ -101,9 +101,9 @@ protocol ShelveOrderDistributing {
 
 // MARK: ShelveOrderDistributor
 
-final class ShelveOrderDistributor:ShelveOrderDistributing {
+final class ShelveOrderDistributor: ShelveOrderDistributing {
 
-	var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate?
+	weak var shelveOrderDistributorDelegate: ShelveOrderDistributorDelegate?
 	
 	let shelves: [Shelf]
 	var orderDecayMonitor: OrderDecayMonitoring
@@ -127,7 +127,7 @@ extension ShelveOrderDistributor {
 		let shelveQueue = DispatchQueue(label: "com.gk.shelving")
 		// critical section
 		shelveQueue.sync {
-			orders.forEach { (order) in
+			orders.forEach { [unowned self] (order) in
 				
 				if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
 					
@@ -170,7 +170,7 @@ extension ShelveOrderDistributor {
 		
 		// critical section
 		removeQueue.sync {
-			orders.forEach { (order) in
+			orders.forEach { [unowned self] (order) in
 				if let shelfForOrder = self.shelf(forOrder: order) {
 					if shelfForOrder.currentOrders.contains(order) {
 						shelfForOrder.currentOrders.removeAll(where: {$0.id	== order.id})
@@ -218,7 +218,7 @@ extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 extension ShelveOrderDistributor: OrderDecayMonitorDataSource {
 	
 	func monitoringShelves() -> [Shelf] {
-		
+
 		self.shelves
 	}
 }

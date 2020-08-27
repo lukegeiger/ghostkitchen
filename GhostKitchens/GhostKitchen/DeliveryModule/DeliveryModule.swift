@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: DeliveryModuleDelegate
 
-protocol DeliveryModuleDelegate {
+protocol DeliveryModuleDelegate: class {
 	
     /**
 		A delegate callback that lets a consumer know whhen a courier arrived for an order
@@ -55,7 +55,7 @@ protocol DeliveryModuleDelegate {
 
 final class DeliveryModule {
 	
-	var deliveryModuleDelegate: DeliveryModuleDelegate?
+	weak var deliveryModuleDelegate: DeliveryModuleDelegate?
 	
 	var courierRouter: CourierRouting
 	var courierDispatcher: CourierDispatching

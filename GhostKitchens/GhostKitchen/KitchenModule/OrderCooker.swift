@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: OrderCookingDelegate
 
-protocol OrderCookingDelegate {
+protocol OrderCookingDelegate: class {
 	
     /**
 		A delegate callback to notify when the order cooker finished cooking.
@@ -25,7 +25,7 @@ protocol OrderCookingDelegate {
 
 // MARK: OrderCooking
 
-protocol OrderCooking {
+protocol OrderCooking: class {
 	
     /**
 		Pass in orders that need to be coked.
@@ -42,7 +42,7 @@ protocol OrderCooking {
 
 final class OrderCooker: OrderCooking  {
 	
-	var orderCookingDelegate: OrderCookingDelegate?
+	weak var orderCookingDelegate: OrderCookingDelegate?
 	
 	func cook(orders: [Order]) {
 		self.orderCookingDelegate?.orderCooker(orderCooker: self,

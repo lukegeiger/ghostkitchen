@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: OrderDecayMonitoring
 
-protocol OrderDecayMonitoring {
+protocol OrderDecayMonitoring: class {
 	
     /**
 		Begins monitoring for order decay
@@ -22,7 +22,7 @@ protocol OrderDecayMonitoring {
 
 // MARK: OrderDecayMonitorDelegate
 
-protocol OrderDecayMonitorDelegate {
+protocol OrderDecayMonitorDelegate: class {
 	
     /**
      A delegate callback that lets the consumer know when an order has decayed.
@@ -49,7 +49,7 @@ protocol OrderDecayMonitorDelegate {
 
 // MARK: OrderDecayMonitorDataSource
 
-protocol OrderDecayMonitorDataSource {
+protocol OrderDecayMonitorDataSource: class {
 	
     /**
      The shelves that the OrderDecayMonitor will monitor for decay.
@@ -61,9 +61,9 @@ protocol OrderDecayMonitorDataSource {
 
 final class OrderDecayMonitor: OrderDecayMonitoring {
 	
-	var orderDecayMonitorDataSource: OrderDecayMonitorDataSource?
-	var orderDecayMonitorDelegate: OrderDecayMonitorDelegate?
-	private var orderAgeDictionary:[String:Float] = [:]
+	weak var orderDecayMonitorDataSource: OrderDecayMonitorDataSource?
+	weak var orderDecayMonitorDelegate: OrderDecayMonitorDelegate?
+	private var orderAgeDictionary: [String:Float] = [:]
 }
 
 // MARK: OrderDecayMonitoring Implementation
@@ -76,7 +76,8 @@ extension OrderDecayMonitor {
 											 selector: #selector(updateOrdersAges),
 											 userInfo: nil,
 											 repeats: true)
-		RunLoop().add(timer, forMode: .default)
+		RunLoop().add(timer,
+					  forMode: .default)
 	}
 }
 
@@ -89,7 +90,7 @@ extension OrderDecayMonitor {
 		if let dataSource = self.orderDecayMonitorDataSource {
 			let monitoringOrders = Shelf.orders(fromShelves: dataSource.monitoringShelves())
 	
-			monitoringOrders.forEach({ (order) in
+			monitoringOrders.forEach({[unowned self] (order) in
 				
 				if let currentAgeOfOrder = orderAgeDictionary[order.id] {
 					orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0

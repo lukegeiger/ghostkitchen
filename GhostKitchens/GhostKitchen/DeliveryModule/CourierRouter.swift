@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: CourierRoutingDelegate
 
-protocol CourierRoutingDelegate {
+protocol CourierRoutingDelegate: class {
 	
     /**
      A delegate callback that lets a consumer know when a courier arrived at a pickup for an order
@@ -44,7 +44,7 @@ protocol CourierRoutingDelegate {
 
 // MARK: CourierRouting
 
-protocol CourierRouting {
+protocol CourierRouting: class {
 	
     /**
      Begins the pickup process for a courier
@@ -72,11 +72,11 @@ protocol CourierRouting {
 
 final class CourierRouter: CourierRouting {
 	
-	var courierRoutingDelegate: CourierRoutingDelegate?
+	weak var courierRoutingDelegate: CourierRoutingDelegate?
 
 	func commencePickupRoute(courier: Courier) {
 		
-		courier.schedule.routes.forEach { (route) in
+		courier.schedule.routes.forEach {[unowned self] (route) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(route.timeToPickup), execute: {
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 																   courierArrivedAtPickup: courier,
@@ -88,7 +88,7 @@ final class CourierRouter: CourierRouting {
 	
 	func commenceDropoffRoute(courier: Courier) {
 		
-		courier.schedule.routes.forEach { (route) in
+		courier.schedule.routes.forEach {[unowned self] (route) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(route.timeToDropoff), execute: {
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 														   courierArrivedAtDropoff: courier,
