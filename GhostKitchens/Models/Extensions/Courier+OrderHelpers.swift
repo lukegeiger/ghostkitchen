@@ -29,7 +29,8 @@ extension Courier {
 		let schedule = Schedule(scheduleId: UUID().uuidString,
 								routes: [route])
 
-		let courier = Courier(id: UUID().uuidString, schedule: schedule)
+		let courier = Courier(id: UUID().uuidString,
+							  schedule: schedule)
 		
 		return courier
 	}
