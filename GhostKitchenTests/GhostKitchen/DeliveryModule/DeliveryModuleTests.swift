@@ -71,9 +71,9 @@ class DeliveryModuleTests: XCTestCase {
 		
 		module.courierDispatcher.dispatchCouriers(forOrders: [hotOrder])
 		
-		XCTAssertTrue(spy.testingCourier?.schedule.routes.count == 1)
+		XCTAssertTrue(spy.testingCourier?.schedule.tasks.count == 1)
 		
-		if let firstRoute = spy.testingCourier?.schedule.routes.first {
+		if let firstRoute = spy.testingCourier?.schedule.tasks.first {
 			XCTAssertTrue(firstRoute.orderId == "1")
 		}
 		

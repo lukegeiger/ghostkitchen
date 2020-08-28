@@ -26,12 +26,11 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(orderId: hotOrder.id,
-						  timeToPickup: 1,
-						  timeToDropoff: 0)
-		
+		let pickupTask = Task(type: .pickup, duration: 1, orderId: hotOrder.id)
+		let dropoffTask = Task(type: .dropoff, duration: 0, orderId: hotOrder.id)
+
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								routes: [route])
+								tasks: [pickupTask,dropoffTask])
 
 		let courier = Courier(id: UUID().uuidString, schedule: schedule)
 		
@@ -49,12 +48,12 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(orderId: hotOrder.id,
-						  timeToPickup: 1,
-						  timeToDropoff: 0)
-		
+		let pickupTask = Task(type: .pickup, duration: 1, orderId: hotOrder.id)
+		let dropoffTask = Task(type: .dropoff, duration: 0, orderId: hotOrder.id)
+
+
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								routes: [route])
+								tasks: [pickupTask,dropoffTask])
 
 		let courier = Courier(id: UUID().uuidString, schedule: schedule)
 		
@@ -73,13 +72,13 @@ class CourierRouterTests: XCTestCase {
 							 temp: .hot,
 							 shelfLife: 10,
 							 decayRate: 0.0)
+
 		
-		let route = Route(orderId: hotOrder.id,
-						  timeToPickup: 1,
-						  timeToDropoff: 0)
-		
+		let pickupTask = Task(type: .pickup, duration: 1, orderId: hotOrder.id)
+		let dropoffTask = Task(type: .dropoff, duration: 0, orderId: hotOrder.id)
+
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								routes: [route])
+								tasks: [pickupTask,dropoffTask])
 
 		let courier = Courier(id: UUID().uuidString, schedule: schedule)
 		
@@ -87,7 +86,7 @@ class CourierRouterTests: XCTestCase {
 		wait(for: [commencePickupExpectation], timeout: 7.0)
 
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
-		XCTAssertTrue(spy.testingRoute?.orderId == hotOrder.id)
+		XCTAssertTrue(spy.testingTask?.orderId == hotOrder.id)
 		XCTAssertTrue(spy.testingOrderId == hotOrder.id)
 	}
 	
@@ -103,12 +102,10 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(orderId: hotOrder.id,
-						  timeToPickup: 1,
-						  timeToDropoff: 0)
-		
+		let pickupTask = Task(type: .pickup, duration: 0, orderId: "1")
+
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								routes: [route])
+								tasks: [pickupTask])
 
 		let courier = Courier(id: UUID().uuidString, schedule: schedule)
 		
@@ -116,7 +113,7 @@ class CourierRouterTests: XCTestCase {
 		wait(for: [commenceDropoffExpectation], timeout: 7.0)
 
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
-		XCTAssertTrue(spy.testingRoute?.orderId == hotOrder.id)
+		XCTAssertTrue(spy.testingTask?.orderId == hotOrder.id)
 		XCTAssertTrue(spy.testingOrderId == hotOrder.id)
 	}
 }
@@ -124,7 +121,7 @@ class CourierRouterTests: XCTestCase {
 extension CourierRouterTests: CourierRoutingDelegate {
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
-						   forRoute: Route,
+						   forTask: Task,
 						   forOrderId: String) {
 		
         commencePickupExpectation.fulfill()
@@ -132,7 +129,7 @@ extension CourierRouterTests: CourierRoutingDelegate {
 	
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtDropoff: Courier,
-						   forRoute: Route,
+						   forTask: Task,
 						   forOrderId: String) {
 		
         commenceDropoffExpectation.fulfill()
@@ -142,7 +139,7 @@ extension CourierRouterTests: CourierRoutingDelegate {
 class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 	
 	var testingCourier: Courier?
-	var testingRoute: Route?
+	var testingTask: Task?
 	var testingOrderId: String?
 	let expectation: XCTestExpectation
 	
@@ -152,22 +149,22 @@ class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtPickup: Courier,
-					   forRoute: Route,
+					   forTask: Task,
 					   forOrderId: String) {
 		
 		self.testingOrderId = forOrderId
-		self.testingRoute = forRoute
+		self.testingTask = forTask
 		self.testingCourier = courierArrivedAtPickup
 		self.expectation.fulfill()
 	}
 	
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtDropoff: Courier,
-					   forRoute: Route,
+					   forTask: Task,
 					   forOrderId: String) {
 		
 		self.testingOrderId = forOrderId
-		self.testingRoute = forRoute
+		self.testingTask = forTask
 		self.testingCourier = courierArrivedAtDropoff
 		self.expectation.fulfill()
 	}

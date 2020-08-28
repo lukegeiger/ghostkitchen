@@ -20,7 +20,7 @@ enum ShelfTemperature: String,Decodable {
 
 // MARK: Shelf
 
-final class Shelf {
+struct Shelf {
 	
 	let name: String
 	let allowedTemperature: ShelfTemperature
@@ -38,6 +38,6 @@ final class Shelf {
 		self.allowedTemperature = allowedTemperature
 		self.capacity = capacity
 		self.currentOrders = currentOrders
-		self.shelfDecayModifier = (allowedTemperature == .any) ? 2:1
+		self.shelfDecayModifier = (allowedTemperature == .any) ? 2 : 1
 	}
 }

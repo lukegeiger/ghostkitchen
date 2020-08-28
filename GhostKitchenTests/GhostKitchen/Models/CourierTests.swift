@@ -24,9 +24,9 @@ class CourierTests: XCTestCase {
 		
 		let courier = Courier.createCourierForOrder(order: hotOrder)
 		
-		XCTAssertTrue(courier.schedule.routes.count == 1)
+		XCTAssertTrue(courier.schedule.tasks.count == 2)
 		
-		let firstRoute = courier.schedule.routes.first
+		let firstRoute = courier.schedule.tasks.first
 		XCTAssertNotNil(firstRoute)
 		XCTAssertTrue(firstRoute?.orderId == "2")
     }
@@ -41,12 +41,12 @@ class CourierTests: XCTestCase {
 		
 		let courier = Courier.createCourierForOrder(order: hotOrder)
 		
-		XCTAssertTrue(courier.schedule.routes.count == 1)
+		XCTAssertTrue(courier.schedule.tasks.count == 2)
 		
-		let firstRoute = courier.schedule.routes.first
+		let firstRoute = courier.schedule.tasks.first
 		
 		if let firstRoute = firstRoute {
-			XCTAssertTrue(firstRoute.timeToPickup >= 2 && firstRoute.timeToPickup <= 6 )
+			XCTAssertTrue(firstRoute.duration >= 2 && firstRoute.duration <= 6 )
 		} else {
 			XCTAssertTrue(false)
 		}
@@ -62,10 +62,10 @@ class CourierTests: XCTestCase {
 		
 		let courier = Courier.createCourierForOrder(order: hotOrder)
 		
-		XCTAssertTrue(courier.schedule.routes.count == 1)
+		XCTAssertTrue(courier.schedule.tasks.count == 2)
+
+		let firstRoute = courier.schedule.tasks.last
 		
-		let firstRoute = courier.schedule.routes.first
-		
-		XCTAssertTrue(firstRoute?.timeToDropoff == 0)
+		XCTAssertTrue(firstRoute?.duration == 0)
     }
 }

@@ -21,13 +21,17 @@ extension Courier {
      - Returns: The courier to deliver the order
      */
 	static func createCourierForOrder(order: Order) -> Courier {
+
+		let pickupTask = Task(type: .pickup,
+							  duration: Int.random(in: 2...6),
+							  orderId: order.id)
 		
-		let route = Route(orderId: order.id,
-						  timeToPickup: Int.random(in: 2...6),
-						  timeToDropoff: 0)
-		
+		let dropoffTask = Task(type: .dropoff,
+							   duration: 0,
+							   orderId: order.id)
+
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								routes: [route])
+								tasks: [pickupTask,dropoffTask])
 
 		let courier = Courier(id: UUID().uuidString,
 							  schedule: schedule)

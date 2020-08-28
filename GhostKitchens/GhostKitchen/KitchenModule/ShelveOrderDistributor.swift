@@ -120,6 +120,20 @@ final class ShelveOrderDistributor: ShelveOrderDistributing {
 
 // MARK: ShelveOrderDistributing Implementation
 
+extension Array {
+    mutating func modifyForEach(_ body: (_ index: Index, _ element: inout Element) -> ()) {
+        for index in indices {
+            modifyElement(atIndex: index) { body(index, &$0) }
+        }
+    }
+
+    mutating func modifyElement(atIndex index: Index, _ modifyElement: (_ element: inout Element) -> ()) {
+        var element = self[index]
+        modifyElement(&element)
+        self[index] = element
+    }
+}
+
 extension ShelveOrderDistributor {
 		
 	func shelve(orders: [Order]) {
@@ -127,9 +141,10 @@ extension ShelveOrderDistributor {
 		let shelveQueue = DispatchQueue(label: "com.gk.shelving")
 		// critical section
 		shelveQueue.sync {
+		
 			orders.forEach { [unowned self] (order) in
 				
-				if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
+				if var preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
 					
 					// First choice
 					preferredShelf.currentOrders.append(order)
@@ -137,7 +152,7 @@ extension ShelveOrderDistributor {
 																				shelvedOrder: order,
 																				onShelf: preferredShelf)
 					
-				} else if let preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
+				} else if var preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
 					
 					// 2nd choice
 					preferredOverflowShelf.currentOrders.append(order)
@@ -145,7 +160,7 @@ extension ShelveOrderDistributor {
 																				shelvedOrder: order,
 																				onShelf: preferredOverflowShelf)
 					
-				} else if let forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
+				} else if var forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
 					
 					// 3rd and forced choice
 					if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
@@ -171,7 +186,7 @@ extension ShelveOrderDistributor {
 		// critical section
 		removeQueue.sync {
 			orderIds.forEach { [unowned self] (orderId) in
-				if let shelfForOrder = self.shelf(forOrderId: orderId) {
+				if var shelfForOrder = self.shelf(forOrderId: orderId) {
 					shelfForOrder.currentOrders.removeAll(where: {$0.id	== orderId})
 					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
 																				removedOrderId: orderId,
@@ -199,14 +214,7 @@ extension ShelveOrderDistributor {
 }
 
 extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
-	
-	func orderDecayMonitor(monitor: OrderDecayMonitor,
-						   updatedDecay: Float,
-						   forOrder: Order) {
 		
-//		forOrder.decay = updatedDecay
-	}
-	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order) {
 		

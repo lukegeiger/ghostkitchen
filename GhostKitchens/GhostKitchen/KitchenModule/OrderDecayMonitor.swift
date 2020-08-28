@@ -34,18 +34,6 @@ protocol OrderDecayMonitorDelegate: class {
      */
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
-	
-    /**
-     A delegate callback that lets the consumer know  when the decay for an order has been updated
-
-     - Parameters:
-        - monitor: The monitor that detected the decay
-		- updatedDecay: The decay amount
-        - forOrder: The decaying order
-     */
-	func orderDecayMonitor(monitor: OrderDecayMonitor,
-						   updatedDecay: Float,
-						   forOrder: Order)
 }
 
 // MARK: OrderDecayMonitorDataSource
@@ -102,9 +90,6 @@ extension OrderDecayMonitor {
 					
 					orderDecayDictionary[order.id] = decay
 
-					self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
-																	  updatedDecay: decay,
-																	  forOrder: order)
 					if decay <= 0 {
 						orderAgeDictionary[order.id] = nil
 						orderDecayDictionary[order.id] = nil
@@ -113,6 +98,7 @@ extension OrderDecayMonitor {
 					}
 				} else {
 					orderAgeDictionary[order.id] = 1.0
+					orderDecayDictionary[order.id] = 1.0
 				}
 			})
 		}

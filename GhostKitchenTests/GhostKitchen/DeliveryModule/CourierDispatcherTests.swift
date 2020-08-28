@@ -31,9 +31,9 @@ class CourierDispatcherTests: XCTestCase {
 		
 		dispatcher.dispatchCouriers(forOrders: [hotOrder])
 				
-		XCTAssertTrue(spy.testingCourier.schedule.routes.count == 1)
+		XCTAssertTrue(spy.testingCourier.schedule.tasks.count == 2)
 		
-		if let firstRoute = spy.testingCourier.schedule.routes.first {
+		if let firstRoute = spy.testingCourier.schedule.tasks.first {
 			XCTAssertTrue(firstRoute.orderId == "2")
 		}
 		

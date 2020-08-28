@@ -86,7 +86,6 @@ class OrderTests: XCTestCase {
 						   temp: .hot,
 						   shelfLife: 1,
 						   decayRate: 0)
-		order1.decay = 0.6
 		
 		let order1Description = order1.description
 		XCTAssertTrue(order1Description == "Order(id: 1 name: Nemo Burger, temp: hot, shelfLife: 1, decayRate: 0.0 , decay: Optional(0.6)")

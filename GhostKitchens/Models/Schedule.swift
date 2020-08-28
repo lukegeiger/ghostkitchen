@@ -13,5 +13,5 @@ import Foundation
 struct Schedule {
 	
 	let scheduleId: String
-	let routes: [Route]
+	let tasks: [Task]
 }

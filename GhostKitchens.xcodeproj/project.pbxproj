@@ -38,7 +38,6 @@
 		DF593AB724EAE10C009F3A7C /* CourierDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */; };
 		DF593ABB24EAE685009F3A7C /* OrderCooker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ABA24EAE685009F3A7C /* OrderCooker.swift */; };
 		DF593AC124EB0E61009F3A7C /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC024EB0E61009F3A7C /* Courier.swift */; };
-		DF593AC324EB11C0009F3A7C /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC224EB11C0009F3A7C /* Route.swift */; };
 		DF593AC724EB15C6009F3A7C /* CourierRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC624EB15C5009F3A7C /* CourierRouter.swift */; };
 		DF593ACB24EB19F6009F3A7C /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
 		DF593ACD24EB1F57009F3A7C /* ShelveOrderDistributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */; };
@@ -47,6 +46,8 @@
 		DF92F84B24EFFF23008243FE /* Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2DCA1224EC743E00897233 /* Simulation.swift */; };
 		DF92F84C24EFFF31008243FE /* Simulation+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */; };
 		DF92F85424F01220008243FE /* SimulationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF92F85324F01220008243FE /* SimulationTests.swift */; };
+		DF9A89D624F8B7AF004C5830 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A89D524F8B7AF004C5830 /* Task.swift */; };
+		DF9A89D724F8BD37004C5830 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9A89D524F8B7AF004C5830 /* Task.swift */; };
 		DF9D8D2224EACC0A001C0B4F /* orders.json in Resources */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2324EACC10001C0B4F /* orders.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF9D8D2124EACC0A001C0B4F /* orders.json */; };
 		DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9D8D2524EACC6A001C0B4F /* Order.swift */; };
@@ -60,7 +61,6 @@
 		DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AB024EADF97009F3A7C /* Shelf.swift */; };
 		DFD9115424EC0AEA0065F2C2 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC024EB0E61009F3A7C /* Courier.swift */; };
 		DFD9115524EC0AEC0065F2C2 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593ACA24EB19F6009F3A7C /* Schedule.swift */; };
-		DFD9115624EC0AEE0065F2C2 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF593AC224EB11C0009F3A7C /* Route.swift */; };
 		DFE9015E24EE14BA0090011D /* GhostKitchen+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */; };
 		DFE9016024EE18BC0090011D /* GhostKitchen+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9015D24EE14BA0090011D /* GhostKitchen+Debug.swift */; };
 		DFE9016424EE18F10090011D /* GhostKitchen+DebugTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE9016324EE18F10090011D /* GhostKitchen+DebugTests.swift */; };
@@ -123,7 +123,6 @@
 		DF593AB624EAE10C009F3A7C /* CourierDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierDispatcher.swift; sourceTree = "<group>"; };
 		DF593ABA24EAE685009F3A7C /* OrderCooker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCooker.swift; sourceTree = "<group>"; };
 		DF593AC024EB0E61009F3A7C /* Courier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Courier.swift; sourceTree = "<group>"; };
-		DF593AC224EB11C0009F3A7C /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		DF593AC624EB15C5009F3A7C /* CourierRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierRouter.swift; sourceTree = "<group>"; };
 		DF593ACA24EB19F6009F3A7C /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributor.swift; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		DF6DE24C24E87BCD00EDBF74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF92F84724EFFD23008243FE /* Simulation+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulation+Helpers.swift"; sourceTree = "<group>"; };
 		DF92F85324F01220008243FE /* SimulationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTests.swift; sourceTree = "<group>"; };
+		DF9A89D524F8B7AF004C5830 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		DF9D8D2124EACC0A001C0B4F /* orders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = orders.json; sourceTree = "<group>"; };
 		DF9D8D2524EACC6A001C0B4F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		DFA4577724F02092003D23CC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -310,7 +310,7 @@
 				DF9D8D2524EACC6A001C0B4F /* Order.swift */,
 				DF593AC024EB0E61009F3A7C /* Courier.swift */,
 				DF593ACA24EB19F6009F3A7C /* Schedule.swift */,
-				DF593AC224EB11C0009F3A7C /* Route.swift */,
+				DF9A89D524F8B7AF004C5830 /* Task.swift */,
 				DF593AB024EADF97009F3A7C /* Shelf.swift */,
 				DF54C2F924EDA44700D4ECC6 /* Extensions */,
 			);
@@ -487,11 +487,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFD9115624EC0AEE0065F2C2 /* Route.swift in Sources */,
 				DF00446F24EC680B00512837 /* OrderCooker.swift in Sources */,
 				DFD9115324EC0AE60065F2C2 /* Shelf.swift in Sources */,
 				DF00446024EC5F7800512837 /* CourierDispatcherTests.swift in Sources */,
 				DFE9016024EE18BC0090011D /* GhostKitchen+Debug.swift in Sources */,
+				DF9A89D724F8BD37004C5830 /* Task.swift in Sources */,
 				DF00445E24EC5F5B00512837 /* CourierDispatcher.swift in Sources */,
 				DF00446224EC615000512837 /* CourierRouterTests.swift in Sources */,
 				DF2DCA2124ED76E900897233 /* DeliveryModuleTests.swift in Sources */,
@@ -528,7 +528,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF593AB124EADF97009F3A7C /* Shelf.swift in Sources */,
-				DF593AC324EB11C0009F3A7C /* Route.swift in Sources */,
 				DF00446524EC638B00512837 /* GhostKitchen.swift in Sources */,
 				DF9D8D2624EACC6A001C0B4F /* Order.swift in Sources */,
 				DF2DCA1324EC743E00897233 /* Simulation.swift in Sources */,
@@ -546,6 +545,7 @@
 				DF54C30824EDB18400D4ECC6 /* OrderDecayMonitor.swift in Sources */,
 				DF54C2FB24EDA45F00D4ECC6 /* Courier+OrderHelpers.swift in Sources */,
 				DF593ACB24EB19F6009F3A7C /* Schedule.swift in Sources */,
+				DF9A89D624F8B7AF004C5830 /* Task.swift in Sources */,
 				DFBFEB2824EDC70A00C3CCED /* Float+GhostKitchenEquations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

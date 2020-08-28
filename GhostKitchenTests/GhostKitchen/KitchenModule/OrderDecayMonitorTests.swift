@@ -110,12 +110,10 @@ class OrderDecayMonitorTests: XCTestCase {
 class OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
 
 	var decayExpectation:XCTestExpectation?
-	var decayUpdatedExpectation:XCTestExpectation?
 
 	init (decayExpectation: XCTestExpectation?,
 		   decayUpdatedExpectation: XCTestExpectation?) {
 		self.decayExpectation = decayExpectation
-		self.decayUpdatedExpectation = decayUpdatedExpectation
 	}
 	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
@@ -126,13 +124,6 @@ class OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
 		}
 	}
 	
-	func orderDecayMonitor(monitor: OrderDecayMonitor,
-						   updatedDecay: Float,
-						   forOrder: Order) {
-		if let decayUpdatedExpectation = decayUpdatedExpectation {
-			decayUpdatedExpectation.fulfill()
-		}
-	}
 }
 
 class OrderDecayMonitorDataSourceSpy: OrderDecayMonitorDataSource {
