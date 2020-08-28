@@ -26,7 +26,7 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(order: hotOrder,
+		let route = Route(orderId: hotOrder.id,
 						  timeToPickup: 1,
 						  timeToDropoff: 0)
 		
@@ -49,7 +49,7 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(order: hotOrder,
+		let route = Route(orderId: hotOrder.id,
 						  timeToPickup: 1,
 						  timeToDropoff: 0)
 		
@@ -74,7 +74,7 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(order: hotOrder,
+		let route = Route(orderId: hotOrder.id,
 						  timeToPickup: 1,
 						  timeToDropoff: 0)
 		
@@ -87,8 +87,8 @@ class CourierRouterTests: XCTestCase {
 		wait(for: [commencePickupExpectation], timeout: 7.0)
 
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
-		XCTAssertTrue(spy.testingRoute?.order.id == hotOrder.id)
-		XCTAssertTrue(spy.testingOrder?.id == hotOrder.id)
+		XCTAssertTrue(spy.testingRoute?.orderId == hotOrder.id)
+		XCTAssertTrue(spy.testingOrderId == hotOrder.id)
 	}
 	
 	func testCourierRoutingArrivedDropoffDelegate() throws {
@@ -103,7 +103,7 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let route = Route(order: hotOrder,
+		let route = Route(orderId: hotOrder.id,
 						  timeToPickup: 1,
 						  timeToDropoff: 0)
 		
@@ -116,8 +116,8 @@ class CourierRouterTests: XCTestCase {
 		wait(for: [commenceDropoffExpectation], timeout: 7.0)
 
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
-		XCTAssertTrue(spy.testingRoute?.order.id == hotOrder.id)
-		XCTAssertTrue(spy.testingOrder?.id == hotOrder.id)
+		XCTAssertTrue(spy.testingRoute?.orderId == hotOrder.id)
+		XCTAssertTrue(spy.testingOrderId == hotOrder.id)
 	}
 }
 
@@ -125,7 +125,7 @@ extension CourierRouterTests: CourierRoutingDelegate {
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
 						   forRoute: Route,
-						   forOrder: Order) {
+						   forOrderId: String) {
 		
         commencePickupExpectation.fulfill()
 	}
@@ -133,7 +133,7 @@ extension CourierRouterTests: CourierRoutingDelegate {
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtDropoff: Courier,
 						   forRoute: Route,
-						   forOrder: Order) {
+						   forOrderId: String) {
 		
         commenceDropoffExpectation.fulfill()
 	}
@@ -143,18 +143,19 @@ class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 	
 	var testingCourier: Courier?
 	var testingRoute: Route?
-	var testingOrder: Order?
+	var testingOrderId: String?
 	let expectation: XCTestExpectation
 	
 	init(expectation: XCTestExpectation) {
 		self.expectation = expectation
 	}
+
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtPickup: Courier,
 					   forRoute: Route,
-					   forOrder: Order) {
+					   forOrderId: String) {
 		
-		self.testingOrder = forOrder
+		self.testingOrderId = forOrderId
 		self.testingRoute = forRoute
 		self.testingCourier = courierArrivedAtPickup
 		self.expectation.fulfill()
@@ -163,11 +164,12 @@ class CourierRoutingDelegateSpy:CourierRoutingDelegate {
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtDropoff: Courier,
 					   forRoute: Route,
-					   forOrder: Order) {
+					   forOrderId: String) {
 		
-		self.testingOrder = forOrder
+		self.testingOrderId = forOrderId
 		self.testingRoute = forRoute
 		self.testingCourier = courierArrivedAtDropoff
 		self.expectation.fulfill()
 	}
+	
 }

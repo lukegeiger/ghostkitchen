@@ -10,39 +10,19 @@ import Foundation
 
 // MARK: Order
 
-class Order: Decodable {
+struct Order: Decodable {
 
 	let id: String /// Unique ID
 	let name: String /// Name of the order
 	let temp: ShelfTemperature /// Preferred shelf storage temperature
 	let shelfLife: Int /// Shelf wait max duration (seconds)
 	let decayRate: Float /// Value deterioration modifier
-	
-	var decay: Float? /// Represents how much this order has left to live. > 0 is good  <= 0 is bad.
-	
-	init(id: String,
-		 name: String,
-		 temp: ShelfTemperature,
-		 shelfLife: Int,
-		 decayRate: Float,
-		 decay: Float? = nil) {
-		
-		self.id = id
-		self.name = name
-		self.temp = temp
-		self.shelfLife = shelfLife
-		self.decayRate = decayRate
-		self.decay = decay
-	}
 }
 
 // MARK: Equatable
 
 extension Order: Equatable {
-	
-    static func == (lhs: Order, rhs: Order) -> Bool {
-        return lhs.id == rhs.id
-    }
+    static func == (lhs: Order, rhs: Order) -> Bool { return lhs.id == rhs.id}
 }
 
 // MARK: CustomStringConvertible
@@ -63,6 +43,13 @@ extension Order: Equatable {
 extension Order: CustomStringConvertible {
 	
 	var description: String {
-		return "\("Order")(id: \(id) name: \(name), temp: \(temp), shelfLife: \(shelfLife), decayRate: \(decayRate) , decay: \(String(describing: decay))"
-	}	
+		return "\("Order")(id: \(id) name: \(name), temp: \(temp), shelfLife: \(shelfLife), decayRate: \(decayRate)"
+	}
+	
+	func printWithDecay(decay : Float?) {
+		if let decay = decay {
+			print(self.description + ", decay: \(decay):")
+		}
+		print(self.description)
+	}
 }

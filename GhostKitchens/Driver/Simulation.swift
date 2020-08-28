@@ -45,7 +45,7 @@ extension Simulation {
      - Parameters:
         - addToRunLoop: Used for testing. Default is YES.
      */
-	func begin(addToRunLoop:Bool = true) {
+	func begin(addToRunLoop: Bool = true) {
 	
 		self.simulationTimer = Timer.scheduledTimer(timeInterval: 1,
 											 target: self,
@@ -78,11 +78,13 @@ extension Simulation {
 	
 	@objc private func dispatchNextBatchOfOrders() {
 
-		if self.remainingOrdersInSimulation.count > 0 {
-			self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
-			self.remainingOrdersInSimulation = Array(remainingOrdersInSimulation.dropFirst(self.ingestionRate))
-		} else {
-			self.end()
+		DispatchQueue.global(qos: .default).async { [unowned self] in
+			if self.remainingOrdersInSimulation.count > 0 {
+				self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
+				self.remainingOrdersInSimulation = Array(self.remainingOrdersInSimulation.dropFirst(self.ingestionRate))
+			} else {
+				self.end()
+			}
 		}
 	}
 }

@@ -28,7 +28,7 @@ class CourierTests: XCTestCase {
 		
 		let firstRoute = courier.schedule.routes.first
 		XCTAssertNotNil(firstRoute)
-		XCTAssertTrue(firstRoute?.order.id == "2")
+		XCTAssertTrue(firstRoute?.orderId == "2")
     }
 	
 	func testPickupRouteIsRandomBetween2and6Seconds() throws {

@@ -16,6 +16,7 @@ protocol OrderDecayMonitoring: class {
 		Begins monitoring for order decay
      */
 	func beginMonitoring()
+	var orderDecayDictionary: [String : Float] {get set}
 	var orderDecayMonitorDataSource: OrderDecayMonitorDataSource? { get set }
 	var orderDecayMonitorDelegate: OrderDecayMonitorDelegate? { get set }
 }
@@ -63,7 +64,9 @@ final class OrderDecayMonitor: OrderDecayMonitoring {
 	
 	weak var orderDecayMonitorDataSource: OrderDecayMonitorDataSource?
 	weak var orderDecayMonitorDelegate: OrderDecayMonitorDelegate?
-	private var orderAgeDictionary: [String:Float] = [:]
+	
+	var orderDecayDictionary: [String : Float] = [:]
+	private var orderAgeDictionary: [String : Float] = [:]
 }
 
 // MARK: OrderDecayMonitoring Implementation
@@ -97,11 +100,14 @@ extension OrderDecayMonitor {
 					let decay = self.decayOf(order: order,
 											 ageOfOrder: currentAgeOfOrder + 1)
 					
+					orderDecayDictionary[order.id] = decay
+
 					self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																	  updatedDecay: decay,
 																	  forOrder: order)
 					if decay <= 0 {
 						orderAgeDictionary[order.id] = nil
+						orderDecayDictionary[order.id] = nil
 						self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																		  detectedDecayedOrder: order)
 					}
@@ -111,7 +117,9 @@ extension OrderDecayMonitor {
 			})
 		}
 	}
+}
 
+extension OrderDecayMonitor {
     /**
 	 Calculates the decay of the order
 

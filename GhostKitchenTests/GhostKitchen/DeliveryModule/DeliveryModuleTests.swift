@@ -63,7 +63,6 @@ class DeliveryModuleTests: XCTestCase {
 		
 		module.deliveryModuleDelegate = spy
 
-		
 		let hotOrder = Order(id: "1",
 							 name: "Hot Burger",
 							 temp: .hot,
@@ -75,7 +74,7 @@ class DeliveryModuleTests: XCTestCase {
 		XCTAssertTrue(spy.testingCourier?.schedule.routes.count == 1)
 		
 		if let firstRoute = spy.testingCourier?.schedule.routes.first {
-			XCTAssertTrue(firstRoute.order.id == "1")
+			XCTAssertTrue(firstRoute.orderId == "1")
 		}
 		
 		wait(for: [routedExpectation], timeout: 7.0)
@@ -107,7 +106,7 @@ class DeliveryModuleTests: XCTestCase {
 		
 		wait(for: [arrivedExpectation], timeout: 7.0)
 		
-		XCTAssertTrue(spy.testingOrder?.id == "2")
+		XCTAssertTrue(spy.testingOrderId == "2")
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
 	}
 	
@@ -137,14 +136,14 @@ class DeliveryModuleTests: XCTestCase {
 		
 		wait(for: [deliveredExpectation], timeout: 7.0)
 		
-		XCTAssertTrue(spy.testingOrder?.id == "2")
+		XCTAssertTrue(spy.testingOrderId == "2")
 		XCTAssertTrue(spy.testingCourier?.id == courier.id)
 	}
 }
 
 class DeliveryModuleDelegateSpy:DeliveryModuleDelegate {
 	
-	var testingOrder: Order?
+	var testingOrderId: String?
 	var testingCourier: Courier?
 	
 	var routedExpectation: XCTestExpectation?
@@ -161,9 +160,9 @@ class DeliveryModuleDelegateSpy:DeliveryModuleDelegate {
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
-						arrivedForOrder: Order,
-						onRoute: Route) {
-		self.testingOrder = arrivedForOrder
+						arrivedForOrderId: String,
+						onRoute: String) {
+		self.testingOrderId = arrivedForOrderId
 		self.testingCourier = courier
 		if let arrivedExpectation = self.arrivedExpectation {
 			arrivedExpectation.fulfill()
@@ -178,10 +177,11 @@ class DeliveryModuleDelegateSpy:DeliveryModuleDelegate {
 			routedExpectation.fulfill()
 		}
 	}
+	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
-						deliveredOrder: Order) {
-		self.testingOrder = deliveredOrder
+						deliveredOrderId: String) {
+		self.testingOrderId = deliveredOrderId
 		self.testingCourier = courier
 
 		if let deliveredExpectation = self.deliveredExpectation {

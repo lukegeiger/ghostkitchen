@@ -11,7 +11,7 @@ import Foundation
 /**
  ShelveOrderDistributorRemovalReason are reasons why an order would be removed from a shelf.
 */
-enum ShelveOrderDistributorRemovalReason {
+enum ShelveOrderDistributorRemovalReason: String {
 	
 	case courierPickup // for when a courier picked up an order
 	case overflow // forced overflow
@@ -39,12 +39,12 @@ protocol ShelveOrderDistributorDelegate: class {
 
      - Parameters:
         - shelveOrderDistributor: An instance of the shelveOrderDistributor that performed the shelve
-        - removed: The removed order
+        - removedOrderId: The removed order id
         - fromShelf: The shelf the order was removed from
         - reason: Why the order was removed.
      */
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
-								removed: Order,
+								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason)
 }
@@ -65,19 +65,19 @@ protocol ShelveOrderDistributing: class {
 		Will remove orders from the shelves they are on.
 
      - Parameters:
-        - orders: Orders to be removed
+        - orderIds: IDs of Orders to be removed
         - reason: Why the orders are removed
      */
-	func remove(orders: [Order],
+	func remove(orderIds: [String],
 				reason: ShelveOrderDistributorRemovalReason)
 	
     /**
      Will give you the shelf the order is on if there is one.
 
      - Parameters:
-        - forOrder: Given this order, will give you its shelf.
+        - forOrderId: Given this order id, will give you its shelf.
      */
-	func shelf(forOrder: Order) -> Shelf?
+	func shelf(forOrderId: String) -> Shelf?
 		
     /**
 		Prints the contents of the shelf.
@@ -149,7 +149,7 @@ extension ShelveOrderDistributor {
 					
 					// 3rd and forced choice
 					if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
-						self.remove(orders: [firstOrderOnOverflow],
+						self.remove(orderIds: [firstOrderOnOverflow.id],
 									reason: .overflow)
 					}
 
@@ -163,36 +163,35 @@ extension ShelveOrderDistributor {
 		}
 	}
 	
-	func remove(orders: [Order],
+	func remove(orderIds: [String],
 				reason:ShelveOrderDistributorRemovalReason) {
 		
 		let removeQueue = DispatchQueue(label: "com.gk.removing")
 		
 		// critical section
 		removeQueue.sync {
-			orders.forEach { [unowned self] (order) in
-				if let shelfForOrder = self.shelf(forOrder: order) {
-					if shelfForOrder.currentOrders.contains(order) {
-						shelfForOrder.currentOrders.removeAll(where: {$0.id	== order.id})
-						self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
-																					removed: order,
-																					fromShelf: shelfForOrder,
-																					reason: reason)
-					}
+			orderIds.forEach { [unowned self] (orderId) in
+				if let shelfForOrder = self.shelf(forOrderId: orderId) {
+					shelfForOrder.currentOrders.removeAll(where: {$0.id	== orderId})
+					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
+																				removedOrderId: orderId,
+																				fromShelf: shelfForOrder,
+																				reason: reason)
 				}
 			}
 		}
 	}
 	
-	func shelf(forOrder: Order) -> Shelf? {
-		
-		return self.shelves.first(where: {$0.currentOrders.contains(forOrder)})
+	// of all the shelves, find the one where its current orders as an orderId equal to forOrderId
+	
+	func shelf(forOrderId: String) -> Shelf? {
+		return self.shelves.first(where: {$0.currentOrders.contains(where: {$0.id == forOrderId})})
 	}
 	
 	func printShelfContents() {
 		print("")
 		self.shelves.forEach { (shelf) in
-			shelf.printShelf()
+			shelf.printShelf(orderDecayInfo: self.orderDecayMonitor.orderDecayDictionary)
 			print("________________________________")
 		}
 		print("")
@@ -205,12 +204,13 @@ extension ShelveOrderDistributor: OrderDecayMonitorDelegate {
 						   updatedDecay: Float,
 						   forOrder: Order) {
 		
-		forOrder.decay = updatedDecay
+//		forOrder.decay = updatedDecay
 	}
 	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order) {
-		self.remove(orders: [detectedDecayedOrder],
+		
+		self.remove(orderIds: [detectedDecayedOrder.id],
 					reason: .decay)
 	}
 }

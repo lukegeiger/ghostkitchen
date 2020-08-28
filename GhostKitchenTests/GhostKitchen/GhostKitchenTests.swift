@@ -93,10 +93,10 @@ class GhostKitchenTests: XCTestCase {
 		ghostKitchen.deliveryModule.courierRouter.commencePickupRoute(courier: courier3)
 		ghostKitchen.deliveryModule.courierRouter.commencePickupRoute(courier: courier4)
 
-		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orders: [hotOrder], reason: .courierPickup)
-		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orders: [hotOrder2], reason: .courierPickup)
-		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orders: [hotOrder3], reason: .courierPickup)
-		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orders: [coldOrder], reason: .courierPickup)
+		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orderIds: [hotOrder.id], reason: .courierPickup)
+		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orderIds: [hotOrder2.id], reason: .courierPickup)
+		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orderIds: [hotOrder3.id], reason: .courierPickup)
+		ghostKitchen.kitchenModule.shelveOrderDistributor.remove(orderIds: [coldOrder.id], reason: .courierPickup)
 
 		ghostKitchen.deliveryModule.courierRouter.commenceDropoffRoute(courier: courier1)
 		ghostKitchen.deliveryModule.courierRouter.commenceDropoffRoute(courier: courier2)

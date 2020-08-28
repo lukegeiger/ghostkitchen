@@ -50,15 +50,15 @@ class ShelveOrderDistributorTests: XCTestCase {
 		let shelfOrderDistributor = ShelveOrderDistributor(shelves: [hotShelf,coldShelf,frozenShelf], decayMonitor: decayer)
 		shelfOrderDistributor.shelve(orders: [hotOrder,coldOrder,frozenOrder])
 		
-		let assignedShelf1 = shelfOrderDistributor.shelf(forOrder: hotOrder)
+		let assignedShelf1 = shelfOrderDistributor.shelf(forOrderId: hotOrder.id)
 		XCTAssertTrue(assignedShelf1?.currentOrders.count == 1)
 		XCTAssertTrue(assignedShelf1?.name == "Hot Shelf")
 		
-		let assignedShelf2 = shelfOrderDistributor.shelf(forOrder: coldOrder)
+		let assignedShelf2 = shelfOrderDistributor.shelf(forOrderId: coldOrder.id)
 		XCTAssertTrue(assignedShelf2?.currentOrders.count == 1)
 		XCTAssertTrue(assignedShelf2?.name == "Cold Shelf")
 		
-		let assignedShelf3 = shelfOrderDistributor.shelf(forOrder: frozenOrder)
+		let assignedShelf3 = shelfOrderDistributor.shelf(forOrderId: frozenOrder.id)
 		XCTAssertTrue(assignedShelf3?.currentOrders.count == 1)
 		XCTAssertTrue(assignedShelf3?.name == "Frozen Shelf")
 	}
@@ -90,14 +90,14 @@ class ShelveOrderDistributorTests: XCTestCase {
 		let shelfOrderDistributor = ShelveOrderDistributor(shelves: [hotShelf,overflowShelf],decayMonitor: decayer)
 		shelfOrderDistributor.shelve(orders: [hotOrder1,hotOrder2])
 		
-		let updatedHotShelf = shelfOrderDistributor.shelf(forOrder: hotOrder1)
+		let updatedHotShelf = shelfOrderDistributor.shelf(forOrderId: hotOrder1.id)
 		XCTAssertTrue(updatedHotShelf?.currentOrders.count == 1)
 		XCTAssertTrue(updatedHotShelf?.name == "Hot Shelf")
 		
 		let nemoBurgerOrder = updatedHotShelf?.currentOrders.first
 		XCTAssertTrue(nemoBurgerOrder?.id == "1")
 		
-		let updatedOverflowShelf = shelfOrderDistributor.shelf(forOrder: hotOrder2)
+		let updatedOverflowShelf = shelfOrderDistributor.shelf(forOrderId: hotOrder2.id)
 		XCTAssertTrue(updatedOverflowShelf?.currentOrders.count == 1)
 		XCTAssertTrue(updatedOverflowShelf?.name == "Overflow Shelf")
 		
@@ -128,7 +128,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 		let shelfOrderDistributor = ShelveOrderDistributor(shelves: [hotShelf],decayMonitor: decayer)
 		shelfOrderDistributor.shelve(orders: [hotOrder1,hotOrder2])
 		
-		let updatedHotShelf = shelfOrderDistributor.shelf(forOrder: hotOrder1)
+		let updatedHotShelf = shelfOrderDistributor.shelf(forOrderId: hotOrder1.id)
 		XCTAssertTrue(updatedHotShelf?.currentOrders.count == 1)
 		XCTAssertTrue(updatedHotShelf?.name == "Hot Shelf")
 		
@@ -164,7 +164,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 		let shelfOrderDistributor = ShelveOrderDistributor(shelves: [hotShelf],decayMonitor: decayer)
 		shelfOrderDistributor.shelve(orders: [hotOrder,hotOrder2,hotOrder3])
 		XCTAssertTrue(hotShelf.currentOrders.count == 3)
-		shelfOrderDistributor.remove(orders: [hotOrder,hotOrder2], reason: .courierPickup)
+		shelfOrderDistributor.remove(orderIds: [hotOrder.id,hotOrder2.id], reason: .courierPickup)
 		XCTAssertTrue(hotShelf.currentOrders.count == 1)
 	}
 	
@@ -284,7 +284,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 		
 		shelf.shelveOrderDistributorDelegate = spy
 		shelf.shelve(orders: [hotOrder])
-		shelf.remove(orders: [hotOrder], reason: .courierPickup)
+		shelf.remove(orderIds: [hotOrder.id], reason: .courierPickup)
 		
 		XCTAssertTrue(spy.testingShelf?.name == "Hot Shelf")
 		XCTAssertTrue(spy.testingOrder?.id == "1")
@@ -314,6 +314,8 @@ class ShelveOrderDistributorTests: XCTestCase {
 }
 
 class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
+
+	
 
 	var testingOrder: Order?
 	var testingShelf: Shelf?
@@ -350,11 +352,9 @@ class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
 	}
 	
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
-								removed: Order,
+								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
-		
-		self.testingOrder = removed
 		self.testingShelf = fromShelf
 		
 		switch reason {
@@ -376,5 +376,6 @@ class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {
 			break
 		}
 	}
+	
 }
 

@@ -23,8 +23,8 @@ protocol DeliveryModuleDelegate: class {
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
-						arrivedForOrder:Order,
-						onRoute:Route)
+						arrivedForOrderId: String,
+						onRoute: String)
 	
     /**
      A delegate callback that lets a consumer know when an order was delivered
@@ -36,7 +36,7 @@ protocol DeliveryModuleDelegate: class {
      */
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
-						deliveredOrder: Order)
+						deliveredOrderId: String)
 	
     /**
 		A callback that lets a consumer know when a courier got routed to an order
@@ -99,23 +99,23 @@ extension DeliveryModule: CourierRoutingDelegate {
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtPickup: Courier,
 					   forRoute: Route,
-					   forOrder: Order) {
+					   forOrderId: String) {
 		
 		self.courierRouter.commenceDropoffRoute(courier: courierArrivedAtPickup)
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													courier: courierArrivedAtPickup,
-													arrivedForOrder: forOrder,
-													onRoute: forRoute)
+													arrivedForOrderId: forOrderId,
+													onRoute: forRoute.orderId)
 	}
 	
 	func courierRouter(courierRouter: CourierRouting,
 					   courierArrivedAtDropoff: Courier,
 					   forRoute: Route,
-					   forOrder: Order) {
+					   forOrderId: String) {
 		
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													courier: courierArrivedAtDropoff,
-													deliveredOrder: forOrder)
+													deliveredOrderId: forRoute.orderId)
 	}
 }
 

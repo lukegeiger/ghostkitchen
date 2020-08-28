@@ -49,12 +49,12 @@ protocol KitchenModuleDelegate: class {
 
      - Parameters:
         - kitchenModule: The instance of a kitchen modile that received the orders
-        - removed: The order that was removed
+        - removedOrderId: The order id that was removed
         - fromShelf: The shelf the order was removed from
         - reason: The reason why the kitchen removed an order from a shelf
      */
 	func kitchenModule(kitchenModule: KitchenModule,
-								removed: Order,
+								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason)
 }
@@ -124,12 +124,12 @@ extension KitchenModule: ShelveOrderDistributorDelegate {
 	}
 	
 	func shelveOrderDistributor(shelveOrderDistributor: ShelveOrderDistributor,
-								removed: Order,
+								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
 		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
-												  removed: removed,
+												  removedOrderId: removedOrderId,
 												  fromShelf: fromShelf,
 												  reason: reason)
 	}

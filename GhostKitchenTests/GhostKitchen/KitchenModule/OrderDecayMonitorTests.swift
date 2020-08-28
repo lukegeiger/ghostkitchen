@@ -107,11 +107,17 @@ class OrderDecayMonitorTests: XCTestCase {
 	}
 }
 
-struct OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
+class OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
 
 	var decayExpectation:XCTestExpectation?
 	var decayUpdatedExpectation:XCTestExpectation?
 
+	init (decayExpectation: XCTestExpectation?,
+		   decayUpdatedExpectation: XCTestExpectation?) {
+		self.decayExpectation = decayExpectation
+		self.decayUpdatedExpectation = decayUpdatedExpectation
+	}
+	
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order) {
 	

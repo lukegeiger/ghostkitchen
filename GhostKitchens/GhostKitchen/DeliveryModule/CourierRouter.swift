@@ -19,12 +19,12 @@ protocol CourierRoutingDelegate: class {
         - courierRouter: An instance of the router that performed the action
         - courierArrivedAtPickup: The courier who arrived
         - forRoute: The route the courier is on
-        - forOrder: The order the courier is picking up
+        - forOrderId: The id of the order the courier is picking up
      */
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtPickup: Courier,
 						   forRoute: Route,
-						   forOrder: Order)
+						   forOrderId: String)
 	
     /**
      A delegate callback that lets a consumer know when a courier dropped off an order
@@ -33,13 +33,13 @@ protocol CourierRoutingDelegate: class {
         - courierRouter: An instance of the router that performed the action
         - courierArrivedAtDropoff: The courier who arrived at dropoff
         - forRoute: The route the courier took
-        - forOrder: The order dropping off
+        - forOrderId: The id of the order dropping off
      */
 
 	func courierRouter(courierRouter: CourierRouting,
 						   courierArrivedAtDropoff: Courier,
 						   forRoute: Route,
-						   forOrder: Order)
+						   forOrderId: String)
 }
 
 // MARK: CourierRouting
@@ -76,24 +76,30 @@ final class CourierRouter: CourierRouting {
 
 	func commencePickupRoute(courier: Courier) {
 		
-		courier.schedule.routes.forEach {[unowned self] (route) in
+		courier.schedule.routes.forEach {[weak self] (route) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(route.timeToPickup), execute: {
+				guard let self = self else {
+				  return
+				}
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 																   courierArrivedAtPickup: courier,
 																   forRoute:route,
-																   forOrder: route.order)
+																   forOrderId: route.orderId)
 			})
 		}
 	}
 	
 	func commenceDropoffRoute(courier: Courier) {
 		
-		courier.schedule.routes.forEach {[unowned self] (route) in
+		courier.schedule.routes.forEach {[weak self] (route) in
 			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(route.timeToDropoff), execute: {
+				guard let self = self else {
+				  return
+				}
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 														   courierArrivedAtDropoff: courier,
 														   forRoute: route,
-														   forOrder: route.order)
+														   forOrderId: route.orderId)
 			})
 		}
 	}

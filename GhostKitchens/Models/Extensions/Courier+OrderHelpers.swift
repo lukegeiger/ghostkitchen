@@ -22,7 +22,7 @@ extension Courier {
      */
 	static func createCourierForOrder(order: Order) -> Courier {
 		
-		let route = Route(order: order,
+		let route = Route(orderId: order.id,
 						  timeToPickup: Int.random(in: 2...6),
 						  timeToDropoff: 0)
 		

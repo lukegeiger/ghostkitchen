@@ -66,19 +66,18 @@ extension GhostKitchen: KitchenModuleDelegate {
 	}
 	
 	func kitchenModule(kitchenModule: KitchenModule,
-								removed: Order,
+								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
-	
 		switch reason {
 			case .courierPickup:
-				print("Order: " + removed.id + " removed from " + fromShelf.name)
+				print("Order: " + removedOrderId + " removed from " + fromShelf.name)
 				break
 			case .decay:
-				print("Order: " + removed.id + " decayed from " + fromShelf.name)
+				print("Order: " + removedOrderId + " decayed from " + fromShelf.name)
 				break
 			case .overflow:
-				print("Order: " + removed.id + " discarded from " + fromShelf.name)
+				print("Order: " + removedOrderId + " discarded from " + fromShelf.name)
 				break
 			}
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
@@ -90,24 +89,21 @@ extension GhostKitchen: KitchenModuleDelegate {
 extension GhostKitchen: DeliveryModuleDelegate {
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
-						courier: Courier,
-						arrivedForOrder: Order,
-						onRoute: Route) {
-		print("Courier: " + courier.id + " picking up order " + arrivedForOrder.name + " " + arrivedForOrder.id)
-		self.kitchenModule.shelveOrderDistributor.remove(orders: [arrivedForOrder],
-														 reason: .courierPickup)
-	}
-	
-	func deliveryModule(deliveryModule: DeliveryModule,
 						routed: Courier,
 						forOrder: Order) {
-		print("Courier: " + routed.id + " routed for order " + forOrder.name + " " + forOrder.id)
+		print("Courier: " + routed.id + " routed for order " + forOrder.id)
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
-						deliveredOrder: Order) {
-		print("Courier: " + courier.id + " dropped off order " + deliveredOrder.name + " " + deliveredOrder.id)
+						deliveredOrderId: String) {
+		print("Courier: " + courier.id + " dropped off order " + deliveredOrderId)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
+	}
+	
+	func deliveryModule(deliveryModule: DeliveryModule, courier: Courier, arrivedForOrderId: String, onRoute: String) {
+		print("Courier: " + courier.id + " picking up order " + arrivedForOrderId)
+		self.kitchenModule.shelveOrderDistributor.remove(orderIds: [arrivedForOrderId],
+														 reason: .courierPickup)
 	}
 }

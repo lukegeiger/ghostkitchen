@@ -12,7 +12,7 @@ import Foundation
 
 struct Route {
 	
-	let order: Order
+	let orderId: String
 	let timeToPickup: Int
 	let timeToDropoff: Int
 }
