@@ -58,7 +58,7 @@ class OrderDecayMonitorTests: XCTestCase {
 							shelfLife: 10,
 							decayRate: 0.0)
 		
-		let decay = orderDecay.decayOf(order: hotOrder, ageOfOrder: 0)
+		let decay = orderDecay.decayOf(order: hotOrder, availableShelves: [], ageOfOrder: 0)
 		
 		XCTAssertTrue(decay == 0.0)
 	}
@@ -84,6 +84,7 @@ class OrderDecayMonitorTests: XCTestCase {
 		shelf.orderDecayMonitor = orderDecay
 		
 		let decay = orderDecay.decayOf(order: hotOrder,
+									   availableShelves: [hotShelf],
 									   ageOfOrder: 3)
 		
 		XCTAssertTrue(decay == 0.49)

@@ -52,8 +52,8 @@ final class OrderDecayMonitor: OrderDecayMonitoring {
 	
 	weak var orderDecayMonitorDataSource: OrderDecayMonitorDataSource?
 	weak var orderDecayMonitorDelegate: OrderDecayMonitorDelegate?
-	
 	var orderDecayDictionary: [String : Float] = [:]
+	let decayQueue = DispatchQueue(label: "com.gk.decayQueue")
 	private var orderAgeDictionary: [String : Float] = [:]
 }
 
@@ -78,30 +78,37 @@ extension OrderDecayMonitor {
 	
 	@objc private func updateOrdersAges() {
 		
-		if let dataSource = self.orderDecayMonitorDataSource {
-			let monitoringOrders = Shelf.orders(fromShelves: dataSource.monitoringShelves())
-	
-			monitoringOrders.forEach({[unowned self] (order) in
-				
-				if let currentAgeOfOrder = orderAgeDictionary[order.id] {
-					orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0
-					let decay = self.decayOf(order: order,
-											 ageOfOrder: currentAgeOfOrder + 1)
-					
-					orderDecayDictionary[order.id] = decay
+		self.decayQueue.sync {
+				if let dataSource = self.orderDecayMonitorDataSource {
+					let shelves = dataSource.monitoringShelves()
 
-					if decay <= 0 {
-						orderAgeDictionary[order.id] = nil
-						orderDecayDictionary[order.id] = nil
-						self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
-																		  detectedDecayedOrder: order)
-					}
-				} else {
-					orderAgeDictionary[order.id] = 1.0
-					orderDecayDictionary[order.id] = 1.0
+					let monitoringOrders = Shelf.orders(fromShelves: shelves)
+			
+					monitoringOrders.forEach({[unowned self] (order) in
+						
+						if let currentAgeOfOrder = orderAgeDictionary[order.id] {
+							orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0
+							
+							let decay = self.decayOf(order: order,
+													 availableShelves: shelves,
+													 ageOfOrder: currentAgeOfOrder + 1)
+							
+							orderDecayDictionary[order.id] = decay
+
+							if decay <= 0 {
+								orderAgeDictionary[order.id] = nil
+								orderDecayDictionary[order.id] = nil
+								self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
+																				  detectedDecayedOrder: order)
+							}
+						} else {
+							orderAgeDictionary[order.id] = 1.0
+							orderDecayDictionary[order.id] = 1.0
+						}
+					})
 				}
-			})
 		}
+
 	}
 }
 
@@ -114,9 +121,10 @@ extension OrderDecayMonitor {
         - ageOfOrder: The tracked age of the order
      */
 	func decayOf(order: Order,
+				 availableShelves: [Shelf],
 				  ageOfOrder: Float) -> Float {
 		
-		if let shelf = self.orderDecayMonitorDataSource?.monitoringShelves().first(where: {$0.currentOrders.contains(order)}) {
+		if let shelf = availableShelves.first(where: {$0.currentOrders.contains(order)}) {
 			return Float.calculateOrderDecay(shelfLife: Float(order.shelfLife),
 											 orderAge: ageOfOrder,
 											 decayRate: order.decayRate,
