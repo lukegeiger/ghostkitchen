@@ -140,4 +140,33 @@ class ShelfTests: XCTestCase {
 		XCTAssertTrue(shelf3.shelfDecayModifier == 1)
 		XCTAssertTrue(shelf4.shelfDecayModifier == 1)
 	}
+	
+	func testShelfDescription() throws {
+		let order4 = Order(id: "24342342",
+						  name: "Supino Pizza",
+						  temp: .hot,
+						  shelfLife: 10,
+						  decayRate: 20)
+		
+		let order5 = Order(id: "423423423324234",
+						  name: "Supino Pizza",
+						  temp: .hot,
+						  shelfLife: 10,
+						  decayRate: 20)
+		
+		let order6 = Order(id: "234232343223423",
+						  name: "Supino Pizza",
+						  temp: .hot,
+						  shelfLife: 10,
+						  decayRate: 20)
+		
+		let shelf2 = Shelf(name: "Hot Shelf",
+						  allowedTemperature: .hot,
+						  capacity: 1,
+						  currentOrders: [order4,order5,order6])
+		
+		let string = shelf2.shelfDescription(orderDecayInfo: [:])
+		
+		XCTAssertTrue(string == "\nHot Shelf\nCapacity: 1\nOrder Count: 3\nShelf Decay Modifier: 1\nOrders:Order(id: \"24342342\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0Order(id: \"423423423324234\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0Order(id: \"234232343223423\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0")
+	}
 }

@@ -26,6 +26,9 @@ class CourierTests: XCTestCase {
 		
 		XCTAssertTrue(courier.schedule.tasks.count == 2)
 		
+		XCTAssertTrue(courier.schedule.tasks[0].orderId == "2")
+		XCTAssertTrue(courier.schedule.tasks[1].orderId == "2")
+
 		let firstRoute = courier.schedule.tasks.first
 		XCTAssertNotNil(firstRoute)
 		XCTAssertTrue(firstRoute?.orderId == "2")

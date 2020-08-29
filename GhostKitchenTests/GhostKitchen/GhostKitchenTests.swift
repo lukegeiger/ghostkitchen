@@ -152,5 +152,4 @@ class GhostKitchenTests: XCTestCase {
 		XCTAssertNotNil(ghostKitchen.kitchenModule.kitchenModuleDelegate)
 		XCTAssertNotNil(ghostKitchen.deliveryModule.deliveryModuleDelegate)
 	}
-	
 }

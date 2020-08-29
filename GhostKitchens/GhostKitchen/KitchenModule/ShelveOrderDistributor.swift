@@ -82,7 +82,7 @@ protocol ShelveOrderDistributing: class {
     /**
 		Prints the contents of the shelf.
      */
-	func printShelfContents()
+	@discardableResult func printShelfContents() -> String
 	
     /**
      Initializes a new ShelveOrderDistributor that will be responsible for shelving and monitoring order health.
@@ -119,20 +119,6 @@ final class ShelveOrderDistributor: ShelveOrderDistributing {
 }
 
 // MARK: ShelveOrderDistributing Implementation
-
-extension Array {
-    mutating func modifyForEach(_ body: (_ index: Index, _ element: inout Element) -> ()) {
-        for index in indices {
-            modifyElement(atIndex: index) { body(index, &$0) }
-        }
-    }
-
-    mutating func modifyElement(atIndex index: Index, _ modifyElement: (_ element: inout Element) -> ()) {
-        var element = self[index]
-        modifyElement(&element)
-        self[index] = element
-    }
-}
 
 extension ShelveOrderDistributor {
 		
@@ -203,13 +189,15 @@ extension ShelveOrderDistributor {
 		return self.shelves.first(where: {$0.currentOrders.contains(where: {$0.id == forOrderId})})
 	}
 	
-	func printShelfContents() {
-		print("")
-		self.shelves.forEach { (shelf) in
-			shelf.printShelf(orderDecayInfo: self.orderDecayMonitor.orderDecayDictionary)
-			print("________________________________")
+	@discardableResult func printShelfContents() -> String {
+		var shelfContentsString = ""
+		self.shelves.forEach { [unowned self] (shelf) in
+			shelfContentsString	+= shelf.shelfDescription(orderDecayInfo: self.orderDecayMonitor.orderDecayDictionary)
+			shelfContentsString += "\n"
+			shelfContentsString += "________________________________________________________________"
 		}
-		print("")
+		print(shelfContentsString)
+		return shelfContentsString
 	}
 }
 

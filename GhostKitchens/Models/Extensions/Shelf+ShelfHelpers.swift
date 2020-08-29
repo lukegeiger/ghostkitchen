@@ -25,16 +25,20 @@ extension Shelf {
     /**
 		Prints the shelf contents
      */
-	func printShelf(orderDecayInfo:[String : Float]) {
+	func shelfDescription(orderDecayInfo:[String : Float]) -> String  {
 
-		print(name)
-		print("Capacity: " + String(capacity))
-		print("Order Count: " + String(currentOrders.count))
-		print("Shelf Decay Modifier: " + String(self.shelfDecayModifier))
-		print("Orders:")
+		var printedShelf = ""
+		printedShelf += "\n" + name
+		printedShelf += "\n" + "Capacity: " + String(capacity)
+		printedShelf += "\n" + "Order Count: " + String(currentOrders.count)
+		printedShelf += "\n" + "Shelf Decay Modifier: " + String(self.shelfDecayModifier)
+		printedShelf += "\n" + "Orders:"
+
 		currentOrders.forEach { (order) in
-			order.printWithDecay(decay: orderDecayInfo[order.id])
+			printedShelf += order.description(withDecay: orderDecayInfo[order.id])
 		}
+		
+		return printedShelf
 	}
 }
 

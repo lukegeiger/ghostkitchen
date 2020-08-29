@@ -79,6 +79,32 @@ class OrderTests: XCTestCase {
 		
 		XCTAssertNil(sampleOrders)
 	}
+	
+	func testPrinting() throws {
+		
+		
+		let order1 = Order(id: "1",
+						   name: "Nemo Burger",
+						   temp: .hot,
+						   shelfLife: 1,
+						   decayRate: 0)
+		
+		
+		let order2 = Order(id: "2",
+						   name: "Nemo Burger",
+						   temp: .hot,
+						   shelfLife: 1,
+						   decayRate: 0)
+		
+		let printedOrder1String = order1.description(withDecay: 2.0)
+	
+		let printedOrder2String = order2.description(withDecay: nil)
+		
+		XCTAssertTrue(printedOrder1String == "Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 2.0")
+		XCTAssertTrue(printedOrder2String == "Order(id: \"2\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 1.0")
+
+
+	}
 }
 
 struct TestingResource {

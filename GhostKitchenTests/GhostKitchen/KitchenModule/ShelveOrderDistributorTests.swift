@@ -311,6 +311,27 @@ class ShelveOrderDistributorTests: XCTestCase {
 		
 		XCTAssertTrue(hotShelf.currentOrders.count == 0)
 	}
+	
+	func testPrintShelfContents() throws {
+		
+		let hotOrder = Order(id: "1",
+							 name: "Nemo Burger",
+							 temp: .hot,
+							 shelfLife: 10,
+							 decayRate: 0.0)
+		
+		let hotShelf = Shelf(name: "Hot Shelf",
+							 allowedTemperature: .hot,
+							 capacity: 1,
+							 currentOrders: [hotOrder])
+		
+		let decayer = OrderDecayMonitor()
+		let shelf = ShelveOrderDistributor(shelves: [hotShelf], decayMonitor: decayer)
+		
+		let description = shelf.printShelfContents()
+		
+		XCTAssertTrue(description == "\nHot Shelf\nCapacity: 1\nOrder Count: 1\nShelf Decay Modifier: 1\nOrders:Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 0.0), decay: 1.0\n________________________________________________________________")
+	}
 }
 
 class ShelveOrderDistributorDelegateSpy: ShelveOrderDistributorDelegate {

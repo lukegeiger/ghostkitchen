@@ -72,11 +72,11 @@ extension Simulation {
 	}
 }
 
-// MARK: Private API
+// MARK: Public API
 
 extension Simulation {
 	
-	@objc private func dispatchNextBatchOfOrders() {
+	@objc func dispatchNextBatchOfOrders() {
 
 		DispatchQueue.global(qos: .default).async { [unowned self] in
 			if self.remainingOrdersInSimulation.count > 0 {
