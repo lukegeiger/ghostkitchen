@@ -79,28 +79,6 @@ class OrderTests: XCTestCase {
 		
 		XCTAssertNil(sampleOrders)
 	}
-	
-	func testDescription() throws {
-		let order1 = Order(id: "1",
-						   name: "Nemo Burger",
-						   temp: .hot,
-						   shelfLife: 1,
-						   decayRate: 0)
-		
-		let order1Description = order1.description
-		XCTAssertTrue(order1Description == "Order(id: 1 name: Nemo Burger, temp: hot, shelfLife: 1, decayRate: 0.0 , decay: Optional(0.6)")
-
-		
-		let order2 = Order(id: "1",
-						   name: "Nemo Burger",
-						   temp: .hot,
-						   shelfLife: 1,
-						   decayRate: 0)
-		
-		let order2Description = order2.description
-		XCTAssertTrue(order2Description == "Order(id: 1 name: Nemo Burger, temp: hot, shelfLife: 1, decayRate: 0.0 , decay: nil")
-	}
-	
 }
 
 struct TestingResource {

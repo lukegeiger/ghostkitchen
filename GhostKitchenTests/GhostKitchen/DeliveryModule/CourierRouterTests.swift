@@ -102,10 +102,16 @@ class CourierRouterTests: XCTestCase {
 							 shelfLife: 10,
 							 decayRate: 0.0)
 		
-		let pickupTask = Task(type: .pickup, duration: 0, orderId: "1")
+		let pickupTask = Task(type: .pickup,
+							  duration: 0,
+							  orderId: "1")
+		
+		let dropoffTask = Task(type: .dropoff,
+							   duration: 0,
+							   orderId: "1")
 
 		let schedule = Schedule(scheduleId: UUID().uuidString,
-								tasks: [pickupTask])
+								tasks: [pickupTask,dropoffTask])
 
 		let courier = Courier(id: UUID().uuidString, schedule: schedule)
 		

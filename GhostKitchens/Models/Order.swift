@@ -29,14 +29,10 @@ extension Order: Equatable {
 
 extension Order {
 	
-    var description: String {
-		return "\(type(of: self))"
-    }
-
 	func printWithDecay(decay : Float?) {
-		if let decay = decay {
-			print(self.description + ", decay: \(decay):")
-		}
-		print(self.description + ", decay: 1")
+//		if let decay = decay {
+//			print(self.description + ", decay: \(decay):")
+//		}
+//		print(self.description + ", decay: 1")
 	}
 }

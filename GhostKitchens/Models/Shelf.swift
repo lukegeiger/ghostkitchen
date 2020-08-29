@@ -20,7 +20,7 @@ enum ShelfTemperature: String,Decodable {
 
 // MARK: Shelf
 
-struct Shelf {
+class Shelf {
 	
 	let name: String
 	let allowedTemperature: ShelfTemperature

@@ -35,10 +35,8 @@ class OrderDecayMonitorTests: XCTestCase {
 		
 		let orderDecay = OrderDecayMonitor()
 		let decayExpectation = XCTestExpectation(description: "decayExpectation")
-		let decayUpdatedExpectation = XCTestExpectation(description: "decayUpdatedExpectation")
 		
-		let delegateSpy = OrderDecayMonitorDelegateSpy(decayExpectation: decayExpectation,
-													   decayUpdatedExpectation:decayUpdatedExpectation)
+		let delegateSpy = OrderDecayMonitorDelegateSpy(decayExpectation: decayExpectation)
 		
 		let datasourceSpy = OrderDecayMonitorDataSourceSpy()
 		
@@ -47,7 +45,7 @@ class OrderDecayMonitorTests: XCTestCase {
 		
 		orderDecay.beginMonitoring()
 				
-		wait(for: [decayUpdatedExpectation,decayExpectation], timeout: 5.0,enforceOrder: true)
+		wait(for: [decayExpectation], timeout: 5.0,enforceOrder: true)
 	}
 
 	func testDecayOfOrder0() throws {
@@ -111,8 +109,7 @@ class OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
 
 	var decayExpectation:XCTestExpectation?
 
-	init (decayExpectation: XCTestExpectation?,
-		   decayUpdatedExpectation: XCTestExpectation?) {
+	init (decayExpectation: XCTestExpectation?) {
 		self.decayExpectation = decayExpectation
 	}
 	
