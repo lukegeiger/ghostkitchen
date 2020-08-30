@@ -91,17 +91,20 @@ extension GhostKitchen: DeliveryModuleDelegate {
 	func deliveryModule(deliveryModule: DeliveryModule,
 						routed: Courier,
 						forOrder: Order) {
+		
 		print("Courier: " + routed.id + " routed for order " + forOrder.id)
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
 						courier: Courier,
 						deliveredOrderId: String) {
+		
 		print("Courier: " + courier.id + " dropped off order " + deliveredOrderId)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule, courier: Courier, arrivedForOrderId: String, onRoute: String) {
+		
 		print("Courier: " + courier.id + " picking up order " + arrivedForOrderId)
 		self.kitchenModule.shelveOrderDistributor.remove(orderIds: [arrivedForOrderId],
 														 reason: .courierPickup)
