@@ -44,13 +44,13 @@ extension GhostKitchen: KitchenModuleDelegate {
 	func kitchenModule(kitchenModule: KitchenModule,
 				 receivedOrders: [Order]) {
 		
-		receivedOrders.forEach { [unowned self] (order) in
+		receivedOrders.forEach { [weak self] (order) in
 			print("Order: " + order.name + " " + order.id + " received and started to cook")
-			self.kitchenModule.shelveOrderDistributor.printShelfContents()
+			self?.kitchenModule.shelveOrderDistributor.printShelfContents()
 		}
 		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
-			self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
+		DispatchQueue.global(qos: .background).async { [weak self] in
+			self?.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
 		}
 	}
 	
