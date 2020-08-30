@@ -2,7 +2,7 @@
 #GhostKitchens Patch Notes
 
 
-###1. Retain Cycles: There were two themes I missed throughout the application. Not setting weak delegates, and capturing self in closures. 
+### 1. Retain Cycles: There were two themes I missed throughout the application. Not setting weak delegates, and capturing self in closures. 
 
 *Ex 1: Weak Delegates*
 
@@ -45,7 +45,7 @@ receivedOrders.forEach { [unowned self] (order) in
 }
 ```
 
-###2. Data Model Updates: 
+### 2. Data Model Updates: 
 
 - I abstracted the decay property out from Order.swift which allowed me to turn it into a Struct from a class. Order decay is now tracked via a hash map on the OrderDecayMonitor. This also eliminated a possible concurrency issue updating decay in a non thread safe way.
 
@@ -112,7 +112,7 @@ let courier = Courier(id: UUID().uuidString,
 					  schedule: schedule)
 ```
 
-###3. Concurrency Updates:
+### 3. Concurrency Updates:
 
 - I abstracted out the Run Loop Start from the Simulation class onto main.m
 
@@ -177,7 +177,7 @@ DispatchQueue.global(qos: .background).async { [unowned self] in
 }
 ```
 
-###4. Additional Updates:
+### 4. Additional Updates:
 
 - Test coverage increased to 90.1%
 
