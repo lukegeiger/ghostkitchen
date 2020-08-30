@@ -56,7 +56,7 @@ receivedOrders.forEach { [unowned self] (order) in
 
 *Ex 3: Route vs Task*
 
-Before
+#### Before
 ```
 struct Route {
 	
@@ -66,7 +66,7 @@ struct Route {
 }
 ```
 
-After
+#### After
 ```
 enum TaskType {
 	
