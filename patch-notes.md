@@ -1,5 +1,5 @@
 
-#GhostKitchens Patch Notes
+# GhostKitchens Patch Notes
 
 
 ### 1. Retain Cycles: There were two themes I missed throughout the application. Not setting weak delegates, and capturing self in closures. 
