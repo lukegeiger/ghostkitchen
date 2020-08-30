@@ -66,7 +66,7 @@ final class KitchenModule {
 	var orderCooker: OrderCooking
 	var shelveOrderDistributor: ShelveOrderDistributing
 	weak var kitchenModuleDelegate: KitchenModuleDelegate?
-
+	
     /**
      Initializes a new KitchenModule that will be responsible for cooking, and manging the health of an order.
 
@@ -95,7 +95,7 @@ extension KitchenModule {
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												 receivedOrders: orders)
 		
-			self.orderCooker.cook(orders: orders)
+		self.orderCooker.cook(orders: orders)
 	}
 }
 
@@ -108,8 +108,7 @@ extension KitchenModule: OrderCookingDelegate {
 		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												  cooked: cookedOrders)
-		
-			self.shelveOrderDistributor.shelve(orders: cookedOrders)
+		self.shelveOrderDistributor.shelve(orders: cookedOrders)
 	}
 }
 

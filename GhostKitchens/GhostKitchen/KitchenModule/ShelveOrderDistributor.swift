@@ -78,6 +78,11 @@ protocol ShelveOrderDistributing: class {
         - forOrderId: Given this order id, will give you its shelf.
      */
 	func shelf(forOrderId: String) -> Shelf?
+	
+    /**
+     OrderIds currently shelved
+     */
+	func shelvedOrderIds() -> [String]
 		
     /**
 		Prints the contents of the shelf.
@@ -189,6 +194,18 @@ extension ShelveOrderDistributor {
 	func shelf(forOrderId: String) -> Shelf? {
 		
 		return self.shelves.first(where: {$0.currentOrders.contains(where: {$0.id == forOrderId})})
+	}
+	
+	func shelvedOrderIds() -> [String] {
+		var orders:[String] = []
+		
+		for shelf in self.shelves {
+			for order in shelf.currentOrders {
+				orders.append(order.id)
+			}
+		}
+		
+		return orders
 	}
 	
 	@discardableResult func printShelfContents() -> String {

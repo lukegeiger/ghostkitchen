@@ -86,11 +86,7 @@ extension DeliveryModule: CourierDispatchDelegate {
 	func courierDispatcher(courierDispatcher: CourierDispatching,
 						   routedCourier: Courier,
 						   forOrder: Order) {
-		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
-			self.courierRouter.commencePickupRoute(courier: routedCourier)
-		}
-		
+				
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													routed: routedCourier,
 													forOrder: forOrder)
@@ -105,14 +101,7 @@ extension DeliveryModule: CourierRoutingDelegate {
 					   courierArrivedAtPickup: Courier,
 					   forTask: Task,
 					   forOrderId: String) {
-		
-		DispatchQueue.global(qos: .background).async { [weak self] in
-			guard let self = self else {
-			  return
-			}
-			self.courierRouter.commenceDropoffRoute(courier: courierArrivedAtPickup)
-		}
-	
+			
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													courier: courierArrivedAtPickup,
 													arrivedForOrderId: forOrderId,

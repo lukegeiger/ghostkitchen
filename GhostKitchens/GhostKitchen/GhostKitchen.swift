@@ -16,6 +16,8 @@ final class GhostKitchen {
 	/// deliveryModule is responsible for all things related to dispatching a courier to pick up an order, and tracking their status throughout their route.
 	let deliveryModule: DeliveryModule
 
+	private var couriersInLine:[Courier] = []
+	
     /**
      Initializes a new GhostKtichen that can accept and deliver food orders.
 
@@ -43,7 +45,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 				 receivedOrders: [Order]) {
 		
 		receivedOrders.forEach { [unowned self] (order) in
-			print("Order: " + order.name + " " + order.id + " Received")
+			print("Order: " + order.name + " " + order.id + " received and started to cook")
 			self.kitchenModule.shelveOrderDistributor.printShelfContents()
 		}
 		
@@ -54,6 +56,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 	
 	func kitchenModule(kitchenModule: KitchenModule,
 					   cooked: [Order]) {
+		
 		cooked.forEach { (order) in
 			print("Order: " + order.name + " " + order.id + " cooked" )
 		}
@@ -65,6 +68,16 @@ extension GhostKitchen: KitchenModuleDelegate {
 		
 		print("Shelved: " + shelvedOrder.name + " " + shelvedOrder.id + " on " + onShelf.name)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
+		
+		self.couriersInLine.forEach { (courier) in
+			if courier.schedule.tasks.contains(where: {$0.type == .pickup && $0.orderId == shelvedOrder.id}) {
+				print("Courier: " + courier.id + " picking up order " + shelvedOrder.id + " after waiting")
+				self.kitchenModule.shelveOrderDistributor.remove(orderIds: [shelvedOrder.id],
+																 reason: .courierPickup)
+				deliveryModule.courierRouter.commenceDropoffRoute(courier: courier)
+				self.couriersInLine.remove(at: self.couriersInLine.firstIndex(of: courier)!)
+			}
+		}
 	}
 		
 	func kitchenModule(kitchenModule: KitchenModule,
@@ -95,7 +108,26 @@ extension GhostKitchen: DeliveryModuleDelegate {
 						routed: Courier,
 						forOrder: Order) {
 		
+		deliveryModule.courierRouter.commencePickupRoute(courier: routed)
 		print("Courier: " + routed.id + " routed for order " + forOrder.id)
+	}
+	
+	func deliveryModule(deliveryModule: DeliveryModule,
+						courier: Courier,
+						arrivedForOrderId: String,
+						onRoute: String) {
+		
+		print("Courier: " + courier.id + " arriving at restaurant..." + arrivedForOrderId)
+		
+		if kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
+			print("Courier: " + courier.id + " picking up order " + arrivedForOrderId)
+			self.kitchenModule.shelveOrderDistributor.remove(orderIds: [arrivedForOrderId],
+															 reason: .courierPickup)
+			deliveryModule.courierRouter.commenceDropoffRoute(courier: courier)
+		} else {
+			print("Courier: " + courier.id + " waiting at restaurant for order " + arrivedForOrderId)
+			self.couriersInLine.append(courier)
+		}
 	}
 	
 	func deliveryModule(deliveryModule: DeliveryModule,
@@ -104,12 +136,5 @@ extension GhostKitchen: DeliveryModuleDelegate {
 		
 		print("Courier: " + courier.id + " dropped off order " + deliveredOrderId)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
-	}
-	
-	func deliveryModule(deliveryModule: DeliveryModule, courier: Courier, arrivedForOrderId: String, onRoute: String) {
-		
-		print("Courier: " + courier.id + " picking up order " + arrivedForOrderId)
-		self.kitchenModule.shelveOrderDistributor.remove(orderIds: [arrivedForOrderId],
-														 reason: .courierPickup)
 	}
 }

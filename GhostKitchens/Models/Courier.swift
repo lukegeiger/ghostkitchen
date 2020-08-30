@@ -15,3 +15,9 @@ struct Courier {
 	let id: String /// Unique ID
 	let schedule: Schedule
 }
+
+// MARK: Equatable
+
+extension Courier: Equatable {
+    static func == (lhs: Courier, rhs: Courier) -> Bool { return lhs.id == rhs.id}
+}
