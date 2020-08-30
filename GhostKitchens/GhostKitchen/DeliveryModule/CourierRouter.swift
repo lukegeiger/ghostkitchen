@@ -79,10 +79,7 @@ final class CourierRouter: CourierRouting {
 		let pickupTask = courier.schedule.tasks.first(where: {($0.type == .pickup)})
 		
 		if let pickupTask = pickupTask {
-			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(pickupTask.duration) , execute: { [weak self] in
-				guard let self = self else {
-				  return
-				}
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(pickupTask.duration) , execute: { [unowned self] in
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 																   courierArrivedAtPickup: courier,
 																   forTask: pickupTask,
@@ -96,10 +93,7 @@ final class CourierRouter: CourierRouting {
 		let dropOffTask = courier.schedule.tasks.first(where: {($0.type == .dropoff)})
 		
 		if let dropOffTask = dropOffTask {
-			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(dropOffTask.duration), execute: { [weak self] in
-				guard let self = self else {
-				  return
-				}
+			DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(dropOffTask.duration), execute: { [unowned self] in
 				self.courierRoutingDelegate?.courierRouter(courierRouter: self,
 																   courierArrivedAtDropoff: courier,
 																   forTask: dropOffTask,

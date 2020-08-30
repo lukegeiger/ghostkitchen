@@ -69,14 +69,11 @@ extension GhostKitchen: KitchenModuleDelegate {
 		print("Shelved: " + shelvedOrder.name + " " + shelvedOrder.id + " on " + onShelf.name)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 		
-		self.couriersInLine.forEach { (courier) in
-			if courier.schedule.tasks.contains(where: {$0.type == .pickup && $0.orderId == shelvedOrder.id}) {
-				print("Courier: " + courier.id + " picking up order " + shelvedOrder.id + " after waiting")
-				self.kitchenModule.shelveOrderDistributor.remove(orderIds: [shelvedOrder.id],
-																 reason: .courierPickup)
-				deliveryModule.courierRouter.commenceDropoffRoute(courier: courier)
-				self.couriersInLine.remove(at: self.couriersInLine.firstIndex(of: courier)!)
-			}
+		// If the orders took longer than expected to cook, there might be a courier waiting for it already
+		if let potentiallyWaitingCourier = self.couriersInLine.first(where: {$0.schedule.tasks.contains(where: {$0.type == .pickup && $0.orderId == shelvedOrder.id})}) {
+			self.pickupOrderAndBeginDropoff(order: shelvedOrder.id,
+											courier: potentiallyWaitingCourier)
+			self.couriersInLine.remove(at: self.couriersInLine.firstIndex(of: potentiallyWaitingCourier)!)
 		}
 	}
 		
@@ -120,10 +117,8 @@ extension GhostKitchen: DeliveryModuleDelegate {
 		print("Courier: " + courier.id + " arriving at restaurant..." + arrivedForOrderId)
 		
 		if kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
-			print("Courier: " + courier.id + " picking up order " + arrivedForOrderId)
-			self.kitchenModule.shelveOrderDistributor.remove(orderIds: [arrivedForOrderId],
-															 reason: .courierPickup)
-			deliveryModule.courierRouter.commenceDropoffRoute(courier: courier)
+			self.pickupOrderAndBeginDropoff(order: arrivedForOrderId,
+											courier: courier)
 		} else {
 			print("Courier: " + courier.id + " waiting at restaurant for order " + arrivedForOrderId)
 			self.couriersInLine.append(courier)
@@ -136,5 +131,18 @@ extension GhostKitchen: DeliveryModuleDelegate {
 		
 		print("Courier: " + courier.id + " dropped off order " + deliveredOrderId)
 		self.kitchenModule.shelveOrderDistributor.printShelfContents()
+	}
+}
+
+// MARK: Private API
+
+extension GhostKitchen {
+	
+	private func pickupOrderAndBeginDropoff(order: String,
+											courier: Courier) {
+		print("Courier: " + courier.id + " picking up order " + order)
+		self.kitchenModule.shelveOrderDistributor.remove(orderIds: [order],
+														 reason: .courierPickup)
+		deliveryModule.courierRouter.commenceDropoffRoute(courier: courier)
 	}
 }
