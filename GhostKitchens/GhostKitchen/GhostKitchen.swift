@@ -117,7 +117,7 @@ extension GhostKitchen: DeliveryModuleDelegate {
 		print("Courier: " + courier.id + " arriving at restaurant..." + arrivedForOrderId)
 		
 		// ensure the order was cooked and shelved before we can distribute to a courier
-		if kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
+		if self.kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
 			self.pickupOrderAndBeginDropoff(order: arrivedForOrderId,
 											courier: courier)
 		} else {
