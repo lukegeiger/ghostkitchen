@@ -93,6 +93,8 @@ struct Task {
 
 - Moved the calls to dispatch couriers to pickup/dropoff, cook orders, route couriers, shelve orders,  to a background thread
 
+- Fixed a bug where if an order took longer to cook than instant, a courier would still pickup and deliver an order before it was able to get cooked. 
+
 Ex 4: New Order Schema
 
 Before
@@ -139,6 +141,6 @@ DispatchQueue.global(qos: .background).async { [unowned self] in
 
 4. Additional Updates:
 
-- Test coverage increased to 94.4%
+- Test coverage increased to 90.1%
 
 
