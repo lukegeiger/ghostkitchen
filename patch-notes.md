@@ -9,7 +9,7 @@
 
 *Ex 1: Weak Delegates*
 
-### Before
+#### Before
 
 ```
 final class OrderCooker: OrderCooking  {
@@ -18,7 +18,7 @@ final class OrderCooker: OrderCooking  {
 }
 ```
 
-### After
+#### After
 
 ```
 final class OrderCooker: OrderCooking  {
@@ -30,7 +30,7 @@ final class OrderCooker: OrderCooking  {
 
 *Ex 2: Capturing self in a closure*
 
-### Before
+#### Before
 
 ```
 
@@ -40,7 +40,7 @@ receivedOrders.forEach { (order) in
 
 ```
 
-### After
+#### After
 
 ```
 receivedOrders.forEach { [unowned self] (order) in
@@ -84,7 +84,7 @@ struct Task {
 
 *Ex 4: Courier Schedule takes two Tasks instead of 1 Route*
 
-### Before
+#### Before
 ```
 let route = Task(order: order,
 					  pickupDuration: Int.random(in: 2...6),
@@ -98,7 +98,7 @@ let courier = Courier(id: UUID().uuidString,
 					  schedule: schedule)
 ```
 
-### After
+#### After
 ```
 let pickupTask = Task(type: .pickup,
 					  duration: Int.random(in: 2...6),
@@ -139,7 +139,7 @@ Based on the directions this should never happen, however I think this check sho
 
 *Ex 5: New Order Schema*
 
-### Before
+#### Before
 ```
 class Order: Decodable {
 
@@ -152,7 +152,7 @@ class Order: Decodable {
 }
 ```
 
-### After
+#### After
 
 ```
 struct Order: Decodable {
@@ -167,12 +167,12 @@ struct Order: Decodable {
 
 *Ex 6: Dispatching on background*
 
-### Before
+#### Before
 ```
 self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
 ```
 
-### After
+#### After
 
 ```
 DispatchQueue.global(qos: .background).async { [unowned self] in
@@ -182,6 +182,6 @@ DispatchQueue.global(qos: .background).async { [unowned self] in
 
 ### 4. Additional Updates:
 
-- Test coverage increased to 90.1%
+- Test coverage increased to *90.1%*
 
 
