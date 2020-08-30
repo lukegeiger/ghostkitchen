@@ -94,7 +94,6 @@ extension KitchenModule {
 		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												 receivedOrders: orders)
-		
 		self.orderCooker.cook(orders: orders)
 	}
 }
@@ -108,6 +107,7 @@ extension KitchenModule: OrderCookingDelegate {
 		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												  cooked: cookedOrders)
+		
 		self.shelveOrderDistributor.shelve(orders: cookedOrders)
 	}
 }

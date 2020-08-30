@@ -71,9 +71,13 @@ extension GhostKitchen: KitchenModuleDelegate {
 		
 		// If the orders took longer than expected to cook, there might be a courier waiting for it already
 		if let potentiallyWaitingCourier = self.couriersInLine.first(where: {$0.schedule.tasks.contains(where: {$0.type == .pickup && $0.orderId == shelvedOrder.id})}) {
-			self.pickupOrderAndBeginDropoff(order: shelvedOrder.id,
-											courier: potentiallyWaitingCourier)
-			self.couriersInLine.remove(at: self.couriersInLine.firstIndex(of: potentiallyWaitingCourier)!)
+			
+			DispatchQueue.global(qos: .background).async { [unowned self] in
+				self.pickupOrderAndBeginDropoff(order: shelvedOrder.id,
+												courier: potentiallyWaitingCourier)
+				self.couriersInLine.remove(at: self.couriersInLine.firstIndex(of: potentiallyWaitingCourier)!)
+			}
+
 		}
 	}
 		
@@ -105,7 +109,9 @@ extension GhostKitchen: DeliveryModuleDelegate {
 						routed: Courier,
 						forOrder: Order) {
 		
-		deliveryModule.courierRouter.commencePickupRoute(courier: routed)
+		DispatchQueue.global(qos: .background).async {
+			deliveryModule.courierRouter.commencePickupRoute(courier: routed)
+		}
 		print("Courier: " + routed.id + " routed for order " + forOrder.id)
 	}
 	
@@ -118,8 +124,11 @@ extension GhostKitchen: DeliveryModuleDelegate {
 		
 		// ensure the order was cooked and shelved before we can distribute to a courier
 		if self.kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
-			self.pickupOrderAndBeginDropoff(order: arrivedForOrderId,
-											courier: courier)
+			DispatchQueue.global(qos: .background).async { [unowned self] in
+				self.pickupOrderAndBeginDropoff(order: arrivedForOrderId,
+											  courier: courier)
+			}
+
 		} else {
 			print("Courier: " + courier.id + " waiting at restaurant for order " + arrivedForOrderId)
 			self.couriersInLine.append(courier)

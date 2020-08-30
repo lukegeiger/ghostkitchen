@@ -182,6 +182,6 @@ DispatchQueue.global(qos: .background).async { [unowned self] in
 
 ### 4. Additional Updates:
 
-- Test coverage increased to *90.6%*
+- Test coverage increased to *89.3%*
 
 

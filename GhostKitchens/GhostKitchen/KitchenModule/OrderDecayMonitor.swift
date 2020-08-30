@@ -67,8 +67,8 @@ extension OrderDecayMonitor {
 		self.decayTimer.activate()
 		self.decayTimer.schedule(deadline: .now(),
 								 repeating: 1.0)
-		self.decayTimer.setEventHandler { [unowned self] in
-			self.updateOrdersAges()
+		self.decayTimer.setEventHandler { [weak self] in
+			self?.updateOrdersAges()
 		}
 	}
 }

@@ -14,6 +14,28 @@ import XCTest
 
 class CourierTests: XCTestCase {
 	
+	
+	func testEquality() throws {
+		
+		let order1 = Order(id: "1",
+						   name: "Nemo Burger",
+						   temp: .hot,
+						   shelfLife: 1,
+						   decayRate: 0)
+		
+		let order2 = Order(id: "2",
+						   name: "Nemo Burger",
+						   temp: .hot,
+						   shelfLife: 1,
+						   decayRate: 0)
+		
+		let courierOne = Courier.createCourierForOrder(order: order1)
+
+		let courierTwo = Courier.createCourierForOrder(order: order2)
+
+		XCTAssertTrue(courierOne != courierTwo)
+    }
+	
 	func testCreateCourierForOrder() throws {
 
 		let hotOrder = Order(id: "2",
