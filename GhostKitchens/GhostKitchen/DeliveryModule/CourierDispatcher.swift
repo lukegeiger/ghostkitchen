@@ -47,6 +47,7 @@ final class CourierDispatcher: CourierDispatching {
 	weak var courierDispatchDelegate: CourierDispatchDelegate?
 	
 	func dispatchCouriers(forOrders: [Order]) {
+
 		forOrders.forEach { [unowned self] (order) in
 			self.courierDispatchDelegate?.courierDispatcher(courierDispatcher: self,
 															routedCourier: Courier.createCourierForOrder(order: order),

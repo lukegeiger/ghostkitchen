@@ -75,7 +75,7 @@ final class CourierRouter: CourierRouting {
 	weak var courierRoutingDelegate: CourierRoutingDelegate?
 
 	func commencePickupRoute(courier: Courier) {
-		
+
 		let pickupTask = courier.schedule.tasks.first(where: {($0.type == .pickup)})
 		
 		if let pickupTask = pickupTask {

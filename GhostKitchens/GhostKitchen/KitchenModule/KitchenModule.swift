@@ -91,9 +91,13 @@ final class KitchenModule {
 extension KitchenModule {
 	
 	func receive(orders: [Order]) {
+		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												 receivedOrders: orders)
-		self.orderCooker.cook(orders: orders)
+		
+		DispatchQueue.global(qos: .background).async { [unowned self] in
+			self.orderCooker.cook(orders: orders)
+		}
 	}
 }
 
@@ -106,7 +110,10 @@ extension KitchenModule: OrderCookingDelegate {
 		
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												  cooked: cookedOrders)
-		self.shelveOrderDistributor.shelve(orders: cookedOrders)
+		
+		DispatchQueue.global(qos: .background).async { [unowned self] in
+			self.shelveOrderDistributor.shelve(orders: cookedOrders)
+		}
 	}
 }
 

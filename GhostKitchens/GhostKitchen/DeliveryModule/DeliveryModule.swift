@@ -87,7 +87,10 @@ extension DeliveryModule: CourierDispatchDelegate {
 						   routedCourier: Courier,
 						   forOrder: Order) {
 		
-		self.courierRouter.commencePickupRoute(courier: routedCourier)
+		DispatchQueue.global(qos: .background).async { [unowned self] in
+			self.courierRouter.commencePickupRoute(courier: routedCourier)
+		}
+		
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													routed: routedCourier,
 													forOrder: forOrder)
@@ -103,7 +106,10 @@ extension DeliveryModule: CourierRoutingDelegate {
 					   forTask: Task,
 					   forOrderId: String) {
 		
-		self.courierRouter.commenceDropoffRoute(courier: courierArrivedAtPickup)
+		DispatchQueue.global(qos: .background).async { [unowned self] in
+			self.courierRouter.commenceDropoffRoute(courier: courierArrivedAtPickup)
+		}
+	
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													courier: courierArrivedAtPickup,
 													arrivedForOrderId: forOrderId,

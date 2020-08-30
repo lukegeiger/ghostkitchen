@@ -40,11 +40,16 @@ final class GhostKitchen {
 extension GhostKitchen: KitchenModuleDelegate {
 
 	func kitchenModule(kitchenModule: KitchenModule,
-					   shelvedOrder: Order,
-					   onShelf: Shelf) {
+				 receivedOrders: [Order]) {
 		
-		print("Shelved: " + shelvedOrder.name + " " + shelvedOrder.id + " on " + onShelf.name)
-		self.kitchenModule.shelveOrderDistributor.printShelfContents()
+		receivedOrders.forEach { [unowned self] (order) in
+			print("Order: " + order.name + " " + order.id + " Received")
+			self.kitchenModule.shelveOrderDistributor.printShelfContents()
+		}
+		
+		DispatchQueue.global(qos: .background).async { [unowned self] in
+			self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
+		}
 	}
 	
 	func kitchenModule(kitchenModule: KitchenModule,
@@ -55,16 +60,13 @@ extension GhostKitchen: KitchenModuleDelegate {
 	}
 	
 	func kitchenModule(kitchenModule: KitchenModule,
-				 receivedOrders: [Order]) {
+					   shelvedOrder: Order,
+					   onShelf: Shelf) {
 		
-		receivedOrders.forEach { [unowned self] (order) in
-			print("Order: " + order.name + " " + order.id + " Received")
-			self.kitchenModule.shelveOrderDistributor.printShelfContents()
-		}
-		
-		self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
+		print("Shelved: " + shelvedOrder.name + " " + shelvedOrder.id + " on " + onShelf.name)
+		self.kitchenModule.shelveOrderDistributor.printShelfContents()
 	}
-	
+		
 	func kitchenModule(kitchenModule: KitchenModule,
 								removedOrderId: String,
 								fromShelf: Shelf,
