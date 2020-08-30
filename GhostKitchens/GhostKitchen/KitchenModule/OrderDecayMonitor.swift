@@ -63,6 +63,7 @@ final class OrderDecayMonitor: OrderDecayMonitoring {
 extension OrderDecayMonitor {
 	
 	func beginMonitoring() {
+		
 		self.decayTimer.activate()
 		self.decayTimer.schedule(deadline: .now(),
 								 repeating: 1.0)
@@ -78,6 +79,7 @@ extension OrderDecayMonitor {
 	
 	@objc private func updateOrdersAges() {
 		
+		// Critical Section
 		self.decayQueue.sync {
 				if let dataSource = self.orderDecayMonitorDataSource {
 					let shelves = dataSource.monitoringShelves()

@@ -113,6 +113,7 @@ final class ShelveOrderDistributor: ShelveOrderDistributing {
 
 	required init(shelves: [Shelf],
 				  decayMonitor: OrderDecayMonitoring) {
+		
 		self.shelves = shelves
 		self.orderDecayMonitor = decayMonitor
 		self.orderDecayMonitor.orderDecayMonitorDelegate = self
@@ -126,7 +127,8 @@ final class ShelveOrderDistributor: ShelveOrderDistributing {
 extension ShelveOrderDistributor {
 		
 	func shelve(orders: [Order]) {
-				// critical section
+		
+		// critical section
 		self.shelveQueue.sync {
 		
 			orders.forEach { [unowned self] (order) in
@@ -185,10 +187,12 @@ extension ShelveOrderDistributor {
 	// of all the shelves, find the one where its current orders as an orderId equal to forOrderId
 	
 	func shelf(forOrderId: String) -> Shelf? {
+		
 		return self.shelves.first(where: {$0.currentOrders.contains(where: {$0.id == forOrderId})})
 	}
 	
 	@discardableResult func printShelfContents() -> String {
+		
 		var shelfContentsString = ""
 		self.shelves.forEach { [unowned self] (shelf) in
 			shelfContentsString	+= shelf.shelfDescription(orderDecayInfo: self.orderDecayMonitor.orderDecayDictionary)
