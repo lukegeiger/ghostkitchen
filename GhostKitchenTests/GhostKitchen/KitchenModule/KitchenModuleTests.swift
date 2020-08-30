@@ -88,14 +88,9 @@ class KitchenModuleTests: XCTestCase {
 		
 		let hotShelf = Shelf(name: "Hot Shelf",
 							 allowedTemperature: .hot,
-							 capacity: 1,
+							 capacity: 3,
 							 currentOrders: [])
-		
-		let coldShelf = Shelf(name: "Cold Shelf",
-							 allowedTemperature: .cold,
-							 capacity: 1,
-							 currentOrders: [])
-		
+	
 		let overflowShelf = Shelf(name: "Overflow Shelf",
 							 allowedTemperature: .any,
 							 capacity: 1,
@@ -103,7 +98,7 @@ class KitchenModuleTests: XCTestCase {
 		
 		let decay = OrderDecayMonitor()
 
-		let shelveDistributor = ShelveOrderDistributor(shelves: [hotShelf, coldShelf,overflowShelf], decayMonitor: decay)
+		let shelveDistributor = ShelveOrderDistributor(shelves: [hotShelf,overflowShelf], decayMonitor: decay)
 		
 		let kitchenModule = KitchenModule(orderCooker: orderCooker,
 										  shelveOrderDistributor: shelveDistributor)
@@ -132,18 +127,16 @@ class KitchenModuleTests: XCTestCase {
 								 shelfLife: 10,
 								 decayRate: 0.0)
 		
-		
 		let coldOrder = Order(id: "3",
 								 name: "Frozen Pizza",
 								 temp: .frozen,
 								 shelfLife: 10,
 								 decayRate: 0.0)
 		
-		
 		kitchenModule.receive(orders: [hotOrder,hotOrder2,hotOrder3,coldOrder])
 		kitchenModule.shelveOrderDistributor.remove(orderIds: [hotOrder.id,hotOrder2.id],reason: .courierPickup)
 		
-		wait(for: [courierPickupRemovalExpectation], timeout: 5.0)
+		wait(for: [courierPickupRemovalExpectation], timeout: 7.0)
 	}
 }
 

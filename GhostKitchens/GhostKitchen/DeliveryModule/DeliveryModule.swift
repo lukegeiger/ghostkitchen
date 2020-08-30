@@ -106,7 +106,10 @@ extension DeliveryModule: CourierRoutingDelegate {
 					   forTask: Task,
 					   forOrderId: String) {
 		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
+		DispatchQueue.global(qos: .background).async { [weak self] in
+			guard let self = self else {
+			  return
+			}
 			self.courierRouter.commenceDropoffRoute(courier: courierArrivedAtPickup)
 		}
 	

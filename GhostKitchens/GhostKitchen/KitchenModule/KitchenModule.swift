@@ -95,9 +95,7 @@ extension KitchenModule {
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												 receivedOrders: orders)
 		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
 			self.orderCooker.cook(orders: orders)
-		}
 	}
 }
 
@@ -111,9 +109,7 @@ extension KitchenModule: OrderCookingDelegate {
 		self.kitchenModuleDelegate?.kitchenModule(kitchenModule: self,
 												  cooked: cookedOrders)
 		
-		DispatchQueue.global(qos: .background).async { [unowned self] in
 			self.shelveOrderDistributor.shelve(orders: cookedOrders)
-		}
 	}
 }
 
