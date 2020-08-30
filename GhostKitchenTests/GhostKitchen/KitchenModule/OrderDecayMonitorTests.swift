@@ -24,11 +24,11 @@ class OrderDecayMonitorTests: XCTestCase {
    }
 	
 	func testDataSourceShelves() throws {
-		
-//		let orderDecay = OrderDecayMonitor()
-//		let datasourceSpy = OrderDecayMonitorDataSourceSpy()
-//		orderDecay.orderDecayMonitorDataSource = datasourceSpy
-//		XCTAssertTrue(datasourceSpy.monitoringShelves().count == self.shelves.count)
+		let orderDecay = OrderDecayMonitor()
+		orderDecay.beginMonitoring()
+		let datasourceSpy = OrderDecayMonitorDataSourceSpy()
+		orderDecay.orderDecayMonitorDataSource = datasourceSpy
+		XCTAssertTrue(datasourceSpy.monitoringShelves().count == self.shelves.count)
 	}
 	
 	func testDecay() throws {
@@ -50,44 +50,44 @@ class OrderDecayMonitorTests: XCTestCase {
 
 	func testDecayOfOrder0() throws {
 		
-//		let orderDecay = OrderDecayMonitor()
-//
-//		let hotOrder = Order(id: "1",
-//							name: "Nemo Burger",
-//							temp: .hot,
-//							shelfLife: 10,
-//							decayRate: 0.0)
-//
-//		let decay = orderDecay.decayOf(order: hotOrder, availableShelves: [], ageOfOrder: 0)
-//
-//		XCTAssertTrue(decay == 0.0)
+		let orderDecay = OrderDecayMonitor()
+		orderDecay.beginMonitoring()
+		let hotOrder = Order(id: "1",
+							name: "Nemo Burger",
+							temp: .hot,
+							shelfLife: 10,
+							decayRate: 0.0)
+
+		let decay = orderDecay.decayOf(order: hotOrder, availableShelves: [], ageOfOrder: 0)
+
+		XCTAssertTrue(decay == 0.0)
 	}
 	
 	func testDecayOfOrderNonZero() throws {
 		
-//		let orderDecay = OrderDecayMonitor()
-//
-//		let hotOrder = Order(id: "1",
-//							name: "Nemo Burger",
-//							temp: .hot,
-//							shelfLife: 10,
-//							decayRate: 0.7)
-//
-//		let hotShelf = Shelf(name: "Hot Shelf",
-//							 allowedTemperature: .hot,
-//							 capacity: 1,
-//							 currentOrders: [hotOrder])
-//
-//		let shelf = ShelveOrderDistributor(shelves: [hotShelf],
-//										   decayMonitor: orderDecay)
-//
-//		shelf.orderDecayMonitor = orderDecay
-//
-//		let decay = orderDecay.decayOf(order: hotOrder,
-//									   availableShelves: [hotShelf],
-//									   ageOfOrder: 3)
-//
-//		XCTAssertTrue(decay == 0.49)
+		let orderDecay = OrderDecayMonitor()
+		orderDecay.beginMonitoring()
+		let hotOrder = Order(id: "1",
+							name: "Nemo Burger",
+							temp: .hot,
+							shelfLife: 10,
+							decayRate: 0.7)
+
+		let hotShelf = Shelf(name: "Hot Shelf",
+							 allowedTemperature: .hot,
+							 capacity: 1,
+							 currentOrders: [hotOrder])
+
+		let shelf = ShelveOrderDistributor(shelves: [hotShelf],
+										   decayMonitor: orderDecay)
+
+		shelf.orderDecayMonitor = orderDecay
+
+		let decay = orderDecay.decayOf(order: hotOrder,
+									   availableShelves: [hotShelf],
+									   ageOfOrder: 3)
+
+		XCTAssertTrue(decay == 0.49)
 	}
 
 	func testingShelves() -> [Shelf] {
