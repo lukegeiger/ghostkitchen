@@ -63,6 +63,49 @@ class ShelveOrderDistributorTests: XCTestCase {
 		XCTAssertTrue(assignedShelf3?.name == "Frozen Shelf")
 	}
 	
+	func testShelveOrderIds() throws {
+		
+		let hotShelf = Shelf(name: "Hot Shelf",
+							 allowedTemperature: .hot,
+							 capacity: 1,
+							 currentOrders: [])
+		
+		let coldShelf = Shelf(name: "Cold Shelf",
+							  allowedTemperature: .cold,
+							  capacity: 1,
+							  currentOrders: [])
+		
+		let frozenShelf = Shelf(name: "Frozen Shelf",
+								allowedTemperature: .frozen,
+								capacity: 1,
+								currentOrders: [])
+		
+		let hotOrder = Order(id: "1",
+							 name: "Hot Burger",
+							 temp: .hot,
+							 shelfLife: 10,
+							 decayRate: 0.0)
+		
+		let coldOrder = Order(id: "2",
+							  name: "Cold Drink",
+							  temp: .cold,
+							  shelfLife: 10,
+							  decayRate: 0.0)
+		
+		let frozenOrder = Order(id: "3",
+								name: "Frozen Pizza",
+								temp: .frozen,
+								shelfLife: 10,
+								decayRate: 0.0)
+		
+		let decayer = OrderDecayMonitor()
+		let shelfOrderDistributor = ShelveOrderDistributor(shelves: [hotShelf,coldShelf,frozenShelf], decayMonitor: decayer)
+		shelfOrderDistributor.shelve(orders: [hotOrder,coldOrder,frozenOrder])
+		
+		let ids = shelfOrderDistributor.shelvedOrderIds()
+		XCTAssertTrue(ids == ["1","2","3"])
+	}
+	
 	func testOverflow() throws {
 		
 		let hotShelf = Shelf(name: "Hot Shelf",
