@@ -127,11 +127,11 @@ extension ShelveOrderDistributor {
 		
 	func shelve(orders: [Order]) {
 				// critical section
-		shelveQueue.sync {
+		self.shelveQueue.sync {
 		
 			orders.forEach { [unowned self] (order) in
 				
-				if var preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
+				if let preferredShelf = self.shelves.first(where: {$0.allowedTemperature == order.temp && $0.isFull() == false}) {
 					
 					// First choice
 					preferredShelf.currentOrders.append(order)
@@ -139,7 +139,7 @@ extension ShelveOrderDistributor {
 																				shelvedOrder: order,
 																				onShelf: preferredShelf)
 					
-				} else if var preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
+				} else if let preferredOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == false}) {
 					
 					// 2nd choice
 					preferredOverflowShelf.currentOrders.append(order)
@@ -147,7 +147,7 @@ extension ShelveOrderDistributor {
 																				shelvedOrder: order,
 																				onShelf: preferredOverflowShelf)
 					
-				} else if var forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
+				} else if let forcedOverflowShelf = self.shelves.first(where: {$0.allowedTemperature == .any && $0.isFull() == true}) {
 					
 					// 3rd and forced choice
 					if let firstOrderOnOverflow = forcedOverflowShelf.currentOrders.first {
@@ -169,9 +169,9 @@ extension ShelveOrderDistributor {
 				reason:ShelveOrderDistributorRemovalReason) {
 				
 		// critical section
-		removeQueue.sync {
+		self.removeQueue.sync {
 			orderIds.forEach { [unowned self] (orderId) in
-				if var shelfForOrder = self.shelf(forOrderId: orderId) {
+				if let shelfForOrder = self.shelf(forOrderId: orderId) {
 					shelfForOrder.currentOrders.removeAll(where: {$0.id	== orderId})
 					self.shelveOrderDistributorDelegate?.shelveOrderDistributor(shelveOrderDistributor: self,
 																				removedOrderId: orderId,

@@ -87,17 +87,17 @@ extension OrderDecayMonitor {
 					monitoringOrders.forEach({[unowned self] (order) in
 						
 						if let currentAgeOfOrder = orderAgeDictionary[order.id] {
-							orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0
+							self.orderAgeDictionary[order.id] = currentAgeOfOrder + 1.0
 							
 							let decay = self.decayOf(order: order,
 													 availableShelves: shelves,
 													 ageOfOrder: currentAgeOfOrder + 1)
 							
-							orderDecayDictionary[order.id] = decay
+							self.orderDecayDictionary[order.id] = decay
 
 							if decay <= 0 {
-								orderAgeDictionary[order.id] = nil
-								orderDecayDictionary[order.id] = nil
+								self.orderAgeDictionary[order.id] = nil
+								self.orderDecayDictionary[order.id] = nil
 								self.orderDecayMonitorDelegate?.orderDecayMonitor(monitor: self,
 																				  detectedDecayedOrder: order)
 							}
