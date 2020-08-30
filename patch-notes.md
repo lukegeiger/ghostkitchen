@@ -2,7 +2,10 @@
 # GhostKitchens Patch Notes
 
 
-### 1. Retain Cycles: There were two themes I missed throughout the application. Not setting weak delegates, and capturing self in closures. 
+### 1. Retain Cycle Updates:
+
+- Changed all delegates to be weak references
+- Ensured self is not captured in closures
 
 *Ex 1: Weak Delegates*
 
