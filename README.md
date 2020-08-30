@@ -130,7 +130,7 @@ An orders decay will be nil until set the order decay gets updated by the callba
 
 ### 7. Testing Suite
 
-Tests can be found under GhostKitchenTests. CMD + U is a shortcut for running tests. Current Coverage is at **87.1%** the remaining things not covered by tests are files like main.swift that just start the program, and things like logging taking place in function callbacks
+Tests can be found under GhostKitchenTests. CMD + U is a shortcut for running tests. Current Coverage is at **94.4%** the remaining things not covered by tests are files like main.swift that just start the program, and things like logging taking place in function callbacks
 
 ### 8. FAQ
 
