@@ -114,7 +114,7 @@ extension GhostKitchen: DeliveryModuleDelegate {
 						arrivedForOrderId: String,
 						onRoute: String) {
 		
-		print("Courier: " + courier.id + " arriving at restaurant..." + arrivedForOrderId)
+		print("Courier: " + courier.id + " arriving at restaurant for order " + arrivedForOrderId)
 		
 		// ensure the order was cooked and shelved before we can distribute to a courier
 		if self.kitchenModule.shelveOrderDistributor.shelvedOrderIds().contains(arrivedForOrderId) {
