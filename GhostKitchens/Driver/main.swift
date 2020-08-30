@@ -10,7 +10,7 @@ import Foundation
 
 let simulation = Simulation(orders: Simulation.parseOrdersToSimulate(),
 							ghostKitchen: GhostKitchen.sampleKitchen(),
-							ingestionRate: 5)
+							ingestionRate: 2)
 
 simulation.simulationTimer.activate()
 

@@ -126,7 +126,7 @@
 		DF593AC624EB15C5009F3A7C /* CourierRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierRouter.swift; sourceTree = "<group>"; };
 		DF593ACA24EB19F6009F3A7C /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		DF593ACC24EB1F57009F3A7C /* ShelveOrderDistributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelveOrderDistributor.swift; sourceTree = "<group>"; };
-		DF5AB4BE24FBF53800EED9C3 /* patch-notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "patch-notes.md"; sourceTree = "<group>"; };
+		DF5AB4BF24FC4AA700EED9C3 /* patch-notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "patch-notes.md"; sourceTree = SOURCE_ROOT; };
 		DF6DE21724E86FDD00EDBF74 /* GhostKitchens */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GhostKitchens; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF6DE21A24E86FDD00EDBF74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF6DE24A24E87BCD00EDBF74 /* AppResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,7 +286,7 @@
 		DF6DE21924E86FDD00EDBF74 /* GhostKitchens */ = {
 			isa = PBXGroup;
 			children = (
-				DF5AB4BE24FBF53800EED9C3 /* patch-notes.md */,
+				DF5AB4BF24FC4AA700EED9C3 /* patch-notes.md */,
 				DFA4577724F02092003D23CC /* README.md */,
 				DFE9016624EE25690090011D /* Driver */,
 				DF00447424EC691100512837 /* GhostKitchen */,
