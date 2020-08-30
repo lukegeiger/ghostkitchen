@@ -13,14 +13,27 @@ class SimulationTests: XCTestCase {
 
     func testSimulation() throws {
 		
-		let simulation = Simulation(orders: [],
+		let hotOrder = Order(id: "1",
+							 name: "Hot Burger",
+							 temp: .hot,
+							 shelfLife: 10,
+							 decayRate: 0.0)
+		
+		let coldOrder = Order(id: "2",
+							  name: "Cold Drink",
+							  temp: .cold,
+							  shelfLife: 10,
+							  decayRate: 0.0)
+		
+		let simulation = Simulation(orders: [hotOrder, coldOrder],
 									ghostKitchen: GhostKitchen.sampleKitchen(),
 									ingestionRate: 2)
 		
-		simulation.begin(addToRunLoop: false)
-		XCTAssertTrue(simulation.simulationTimer != nil)
-		simulation.end()
-		XCTAssertTrue(simulation.simulationTimer == nil)
+		simulation.simulationTimer.activate()
+		simulation.dispatchNextBatchOfOrders()
+		XCTAssertTrue(simulation.simulationTimer.isCancelled == false)
+		simulation.dispatchNextBatchOfOrders()
+		XCTAssertTrue(simulation.simulationTimer.isCancelled)
     }
 	
     func testSimulationNoOrder() throws {

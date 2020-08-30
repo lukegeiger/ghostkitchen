@@ -64,8 +64,12 @@ extension OrderDecayMonitor {
 	
 	func beginMonitoring() {
 		self.decayTimer.activate()
-		self.decayTimer.schedule(deadline: .now(), repeating: 1.0)
-		self.decayTimer.setEventHandler { [unowned self] in
+		self.decayTimer.schedule(deadline: .now(),
+								 repeating: 1.0)
+		self.decayTimer.setEventHandler { [weak self] in
+			guard let self = self else {
+				return
+			}
 			self.updateOrdersAges()
 		}
 	}

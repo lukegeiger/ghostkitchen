@@ -35,30 +35,8 @@ final class Simulation {
 		self.ghostKitchen = ghostKitchen
 		self.simulationTimer.schedule(deadline: .now(), repeating: 1.0)
 		self.simulationTimer.setEventHandler { [unowned self] in
-			print("running")
 			self.dispatchNextBatchOfOrders()
 		}
-	}
-}
-
-// MARK: Public API
-extension Simulation {
-	
-	/**
-	Begins the simulation with the specified parameters taken in the init
-	
-	- Parameters:
-	- addToRunLoop: Used for testing. Default is YES.
-	*/
-	func begin(addToRunLoop: Bool = true) {
-		self.simulationTimer.activate()
-	}
-	
-	/**
-	Stops the timer from firing
-	*/
-	func end() {
-		self.simulationTimer.cancel()
 	}
 }
 
@@ -72,7 +50,7 @@ extension Simulation {
 			self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
 			self.remainingOrdersInSimulation = Array(self.remainingOrdersInSimulation.dropFirst(self.ingestionRate))
 		} else {
-			self.end()
+			self.simulationTimer.cancel()
 		}
 	}
 }

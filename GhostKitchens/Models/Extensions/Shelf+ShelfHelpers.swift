@@ -34,7 +34,7 @@ extension Shelf {
 		printedShelf += "\n" + "Shelf Decay Modifier: " + String(self.shelfDecayModifier)
 		printedShelf += "\n" + "Orders:"
 
-		currentOrders.forEach { (order) in
+		self.currentOrders.forEach { (order) in
 			printedShelf += order.description(withDecay: orderDecayInfo[order.id])
 		}
 		
