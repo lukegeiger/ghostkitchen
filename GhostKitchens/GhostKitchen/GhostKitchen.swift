@@ -69,6 +69,7 @@ extension GhostKitchen: KitchenModuleDelegate {
 								removedOrderId: String,
 								fromShelf: Shelf,
 								reason: ShelveOrderDistributorRemovalReason) {
+		
 		switch reason {
 			case .courierPickup:
 				print("Order: " + removedOrderId + " removed from " + fromShelf.name)
