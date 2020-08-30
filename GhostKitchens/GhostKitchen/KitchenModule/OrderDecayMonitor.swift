@@ -55,6 +55,7 @@ final class OrderDecayMonitor: OrderDecayMonitoring {
 	var orderDecayDictionary: [String : Float] = [:]
 	let decayQueue = DispatchQueue(label: "com.gk.decayQueue")
 	private var orderAgeDictionary: [String : Float] = [:]
+	private let decayTimer = DispatchSource.makeTimerSource(queue: DispatchQueue(label: "com.gk.decaytimer"))
 }
 
 // MARK: OrderDecayMonitoring Implementation
@@ -62,13 +63,11 @@ final class OrderDecayMonitor: OrderDecayMonitoring {
 extension OrderDecayMonitor {
 	
 	func beginMonitoring() {
-		let timer = Timer.scheduledTimer(timeInterval: 1,
-											 target: self,
-											 selector: #selector(updateOrdersAges),
-											 userInfo: nil,
-											 repeats: true)
-		RunLoop().add(timer,
-					  forMode: .default)
+		self.decayTimer.activate()
+		self.decayTimer.schedule(deadline: .now(), repeating: 1.0)
+		self.decayTimer.setEventHandler { [unowned self] in
+			self.updateOrdersAges()
+		}
 	}
 }
 
@@ -102,13 +101,12 @@ extension OrderDecayMonitor {
 																				  detectedDecayedOrder: order)
 							}
 						} else {
-							orderAgeDictionary[order.id] = 1.0
-							orderDecayDictionary[order.id] = 1.0
+							self.orderAgeDictionary[order.id] = 1.0
+							self.orderDecayDictionary[order.id] = 1.0
 						}
 					})
 				}
 		}
-
 	}
 }
 

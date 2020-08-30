@@ -11,4 +11,8 @@ import Foundation
 let simulation = Simulation(orders: Simulation.parseOrdersToSimulate(),
 							ghostKitchen: GhostKitchen.sampleKitchen(),
 							ingestionRate: 2)
+
 simulation.begin()
+
+
+RunLoop.current.run()

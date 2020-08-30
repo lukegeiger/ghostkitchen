@@ -9,23 +9,23 @@
 import Foundation
 
 /**
- Represents a GhostKitchen Simulation
- */
+Represents a GhostKitchen Simulation
+*/
 final class Simulation {
 	
 	private let ingestionRate: Int
 	private let ghostKitchen: GhostKitchen
 	private var remainingOrdersInSimulation: [Order]
-	var simulationTimer: Timer?
+	let simulationTimer = DispatchSource.makeTimerSource(queue: DispatchQueue(label: "com.gk.simqueue"))
 	
-    /**
-     Initializes a new simulation
-
-     - Parameters:
-        - orders: The orders to be simulated into the kitchen
-        - ghostKitchen: The kitchen to be in the simulation
-		- ingestionRate: how many order per second are ingested into the kitchen
-     */
+	/**
+	Initializes a new simulation
+	
+	- Parameters:
+	- orders: The orders to be simulated into the kitchen
+	- ghostKitchen: The kitchen to be in the simulation
+	- ingestionRate: how many order per second are ingested into the kitchen
+	*/
 	init(orders: [Order],
 		 ghostKitchen: GhostKitchen,
 		 ingestionRate: Int) {
@@ -33,42 +33,32 @@ final class Simulation {
 		self.remainingOrdersInSimulation = orders
 		self.ingestionRate = ingestionRate
 		self.ghostKitchen = ghostKitchen
+		self.simulationTimer.schedule(deadline: .now(), repeating: 1.0)
+		self.simulationTimer.setEventHandler { [unowned self] in
+			print("running")
+			self.dispatchNextBatchOfOrders()
+		}
 	}
 }
 
 // MARK: Public API
 extension Simulation {
 	
-    /**
-     Begins the simulation with the specified parameters taken in the init
-
-     - Parameters:
-        - addToRunLoop: Used for testing. Default is YES.
-     */
-	func begin(addToRunLoop: Bool = true) {
+	/**
+	Begins the simulation with the specified parameters taken in the init
 	
-		self.simulationTimer = Timer.scheduledTimer(timeInterval: 1,
-											 target: self,
-											 selector: #selector(dispatchNextBatchOfOrders),
-											 userInfo: nil,
-											 repeats: true)
-		
-		if let simulationTimer = simulationTimer {
-			if addToRunLoop {
-				RunLoop().add(simulationTimer,
-							  forMode: .default)
-				RunLoop.current.run()
-			}
-		}
+	- Parameters:
+	- addToRunLoop: Used for testing. Default is YES.
+	*/
+	func begin(addToRunLoop: Bool = true) {
+		self.simulationTimer.activate()
 	}
 	
-    /**
-		Stops the timer from firing
-     */
+	/**
+	Stops the timer from firing
+	*/
 	func end() {
-		
-		self.simulationTimer?.invalidate()
-		self.simulationTimer = nil
+		self.simulationTimer.cancel()
 	}
 }
 
@@ -77,14 +67,12 @@ extension Simulation {
 extension Simulation {
 	
 	@objc func dispatchNextBatchOfOrders() {
-
-		DispatchQueue.global(qos: .default).async { [unowned self] in
-			if self.remainingOrdersInSimulation.count > 0 {
-				self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
-				self.remainingOrdersInSimulation = Array(self.remainingOrdersInSimulation.dropFirst(self.ingestionRate))
-			} else {
-				self.end()
-			}
+		
+		if self.remainingOrdersInSimulation.count > 0 {
+			self.ghostKitchen.kitchenModule.receive(orders: Array(self.remainingOrdersInSimulation.prefix(self.ingestionRate)))
+			self.remainingOrdersInSimulation = Array(self.remainingOrdersInSimulation.dropFirst(self.ingestionRate))
+		} else {
+			self.end()
 		}
 	}
 }
