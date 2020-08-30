@@ -5,7 +5,7 @@
 ### 1. Retain Cycle Updates:
 
 - Changed all delegates to be weak references
-- Ensured self is not captured in closures
+- Self is no longer captured in closures
 
 *Ex 1: Weak Delegates*
 
