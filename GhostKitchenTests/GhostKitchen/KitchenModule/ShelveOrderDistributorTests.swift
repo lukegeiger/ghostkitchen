@@ -330,7 +330,7 @@ class ShelveOrderDistributorTests: XCTestCase {
 		
 		let description = shelf.printShelfContents()
 		
-		XCTAssertTrue(description == "\nHot Shelf\nCapacity: 1\nOrder Count: 1\nShelf Decay Modifier: 1\nOrders:Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 0.0), decay: 1.0\n________________________________________________________________")
+		XCTAssertTrue(description == "\nHot Shelf\nCapacity: 1\nOrder Count: 1\nShelf Decay Modifier: 1\nOrders:Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 0.0), decay: 1.0 \n________________________________________________________________")
 	}
 }
 

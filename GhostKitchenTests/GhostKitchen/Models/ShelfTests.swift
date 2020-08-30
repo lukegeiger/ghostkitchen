@@ -167,6 +167,6 @@ class ShelfTests: XCTestCase {
 		
 		let string = shelf2.shelfDescription(orderDecayInfo: [:])
 		
-		XCTAssertTrue(string == "\nHot Shelf\nCapacity: 1\nOrder Count: 3\nShelf Decay Modifier: 1\nOrders:Order(id: \"24342342\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0Order(id: \"423423423324234\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0Order(id: \"234232343223423\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0")
+		XCTAssertTrue(string == "\nHot Shelf\nCapacity: 1\nOrder Count: 3\nShelf Decay Modifier: 1\nOrders:Order(id: \"24342342\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0 Order(id: \"423423423324234\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0 Order(id: \"234232343223423\", name: \"Supino Pizza\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 10, decayRate: 20.0), decay: 1.0 ")
 	}
 }

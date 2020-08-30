@@ -100,8 +100,8 @@ class OrderTests: XCTestCase {
 	
 		let printedOrder2String = order2.description(withDecay: nil)
 		
-		XCTAssertTrue(printedOrder1String == "Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 2.0")
-		XCTAssertTrue(printedOrder2String == "Order(id: \"2\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 1.0")
+		XCTAssertTrue(printedOrder1String == "Order(id: \"1\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 2.0 ")
+		XCTAssertTrue(printedOrder2String == "Order(id: \"2\", name: \"Nemo Burger\", temp: GhostKitchenTests.ShelfTemperature.hot, shelfLife: 1, decayRate: 0.0), decay: 1.0 ")
 
 
 	}

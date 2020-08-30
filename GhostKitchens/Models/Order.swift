@@ -31,8 +31,8 @@ extension Order {
 	
 	func description(withDecay : Float?) -> String {
 		if let decay = withDecay {
-			return "\(String(describing: self))" + ", decay: \(decay)"
+			return "\(String(describing: self))" + ", decay: \(decay) "
 		}
-		return "\(String(describing: self))" + ", decay: 1.0"
+		return "\(String(describing: self))" + ", decay: 1.0 "
 	}
 }
