@@ -4,7 +4,7 @@ GhostKitchens Patch Notes
 
 1. Retain Cycles: There were two themes I missed throughout the application. Not setting weak delegates, and capturing self in closures. 
 
-Ex 1: Weak Delegates
+*Ex 1: Weak Delegates*
 
 Before
 
@@ -25,7 +25,7 @@ final class OrderCooker: OrderCooking  {
 
 ```
 
-Ex 2: Capturing self in a closure
+*Ex 2: Capturing self in a closure*
 
 Before
 
@@ -51,7 +51,7 @@ receivedOrders.forEach { [unowned self] (order) in
 
 - I reworked the concept of a Route into what is now a Task. A Task does not have a pick up and dropoff time like Route did. A task just has a duration, orderId, and a task type. In this case there are two task types, a pickup and a dropoff. An advantage to this is a courier may want to have 3 pickups, 1 dropoff, 2 pickups, then 4 dropoffs in that order for an optimized batched trip. This API makes that reality easier.  This is also a more natural way to bring in new things to instruct the courier to do. Lastly, Route had an Order property on it which I changed to just be an orderId string on the new Task object. I believe this is better so you do not have potentally conflicting instances of an Order.
 
-Ex 3: Route vs Task
+*Ex 3: Route vs Task*
 
 Before
 ```
@@ -79,7 +79,7 @@ struct Task {
 }
 ```
 
-Ex 4: Courier Schedule takes two Tasks instead of 1 Route
+*Ex 4: Courier Schedule takes two Tasks instead of 1 Route*
 
 Before
 ```
@@ -134,7 +134,7 @@ Courier: FAA414BF-0BBD-4420-AB08-D1F5D0E03893 waiting at restaurant for order 58
 
 Based on the directions this should never happen, however I think this check should for sure be in there.
 
-Ex 5: New Order Schema
+*Ex 5: New Order Schema*
 
 Before
 ```
@@ -162,7 +162,7 @@ struct Order: Decodable {
 }
 ```
 
-Ex 6: Dispatching on background
+*Ex 6: Dispatching on background*
 
 Before
 ```
