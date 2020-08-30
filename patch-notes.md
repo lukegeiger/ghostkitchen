@@ -129,7 +129,7 @@ let courier = Courier(id: UUID().uuidString,
 
 - Moved the calls to dispatch couriers to pickup/dropoff, cook orders, route couriers, shelve orders,  to a background thread
 
-- Fixed a bug where if an order took longer to cook than instant, a courier would still pickup and deliver an order before it was able to get cooked & shelved. So now a courier waits indefinitely at a restaurant until a order gets shelved before they can pick it up and deliver it. This is represented as the following log
+- Fixed a bug where if an order took longer to cook than an instant, a courier would still pickup and deliver an order before it was able to get cooked & shelved. So now a courier waits indefinitely at a restaurant until a order gets shelved before they can pick it up and deliver it. This is represented as the following log
 
 ```
 Courier: FAA414BF-0BBD-4420-AB08-D1F5D0E03893 waiting at restaurant for order 58e9b5fe-3fde-4a27-8e98-682e58a4a65d
