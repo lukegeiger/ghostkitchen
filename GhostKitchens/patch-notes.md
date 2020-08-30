@@ -47,11 +47,11 @@ receivedOrders.forEach { [unowned self] (order) in
 
 2. Data Model Updates: 
 
-- I abstracted the "decay" property out from Order.swift which allowed me to turn it into a Struct. Order decay is now tracked via a hash map on the OrderDecayMonitor. This also eliminated a possible concurrency issue.
+- I abstracted the decay property out from Order.swift which allowed me to turn it into a Struct from a class. Order decay is now tracked via a hash map on the OrderDecayMonitor. This also eliminated a possible concurrency issue updating decay in a non thread safe way.
 
-- I reworked the concept of a Route into what is now a Task. A Task does not have a pick up and dropoff time like route did. A task just has a duration, orderId, and a task type. In this case there are two task types, a pickup and a dropoff. An advantage to this is a courier may want to have 3 pickups, 1 dropoff, 2 pickups, then 4 dropoffs in that order for an optimized batched trip. I believe this is also a more natural way to bring in new things to instruct the courier to do. Lastly, Route.swift had a Order property on it which I changed to just  be a orderId string on the new Task object. I believe this is better so you do not have two possible mismatching orders with different information on them floating around
+- I reworked the concept of a Route into what is now a Task. A Task does not have a pick up and dropoff time like route did. A task just has a duration, orderId, and a task type. In this case there are two task types, a pickup and a dropoff. An advantage to this is a courier may want to have 3 pickups, 1 dropoff, 2 pickups, then 4 dropoffs in that order for an optimized batched trip. This API makes that reality easier. I believe this is also a more natural way to bring in new things to instruct the courier to do. Lastly, Route.swift had a Order property on it which I changed to just be an orderId string on the new Task object. I believe this is better so you do not have  potentally mismatching orders with different information floating around
 
-Ex 3: Route vs Shelf
+Ex 3: Route vs Task
 
 Before
 ```
@@ -79,23 +79,56 @@ struct Task {
 }
 ```
 
+Ex 4: Courier Schedule takes two Tasks instead of 1 Route
+
+Before
+```
+let route = Task(order: order,
+					  pickupDuration: Int.random(in: 2...6),
+					  dropoffDuration: 0,
+					  orderId: order.id)
+
+let schedule = Schedule(scheduleId: UUID().uuidString,
+						routes: [route])
+
+let courier = Courier(id: UUID().uuidString,
+					  schedule: schedule)
+```
+
+After
+```
+let pickupTask = Task(type: .pickup,
+					  duration: Int.random(in: 2...6),
+					  orderId: order.id)
+
+let dropoffTask = Task(type: .dropoff,
+					   duration: 0,
+					   orderId: order.id)
+
+let schedule = Schedule(scheduleId: UUID().uuidString,
+						tasks: [pickupTask,dropoffTask])
+
+let courier = Courier(id: UUID().uuidString,
+					  schedule: schedule)
+```
+
 3. Concurrency Updates:
 
 - I abstracted out the Run Loop Start from the Simulation class onto main.m
 
-- I turned Order.swift into a struct from a class, while eliminating the decay property which was being updated in a non thread safe way. 
+- I turned Order.swift into a struct from a class,  eliminating the decay property which was being updated in a non thread safe way. 
 
 - Moved shelving, and removing, to property queues on ShelveOrderDistributor instead of an instance queue on every action they performed.
 
 - Moved order decaying on OderDecayMonitor to a serial queue, as well as fixed a potential bug where decay would be updated based on incorrect oder and shelf information.
 
-- Eliminated all use of NSTimer in favor of DispatchSource timers.
+- Eliminated all uses of NSTimer in favor of DispatchSourceTimers.
 
 - Moved the calls to dispatch couriers to pickup/dropoff, cook orders, route couriers, shelve orders,  to a background thread
 
 - Fixed a bug where if an order took longer to cook than instant, a courier would still pickup and deliver an order before it was able to get cooked. 
 
-Ex 4: New Order Schema
+Ex 5: New Order Schema
 
 Before
 ```
@@ -123,7 +156,7 @@ struct Order: Decodable {
 }
 ```
 
-Ex 5: Dispatching on background
+Ex 6: Dispatching on background
 
 Before
 ```
@@ -137,7 +170,6 @@ DispatchQueue.global(qos: .background).async { [unowned self] in
 	self.deliveryModule.courierDispatcher.dispatchCouriers(forOrders: receivedOrders)
 }
 ```
-
 
 4. Additional Updates:
 
