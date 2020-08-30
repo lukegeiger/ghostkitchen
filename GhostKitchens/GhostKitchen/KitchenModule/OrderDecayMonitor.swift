@@ -93,7 +93,7 @@ extension OrderDecayMonitor {
 							
 							let decay = self.decayOf(order: order,
 													 availableShelves: shelves,
-													 ageOfOrder: currentAgeOfOrder + 1)
+													 ageOfOrder: currentAgeOfOrder + 1.0)
 							
 							self.orderDecayDictionary[order.id] = decay
 

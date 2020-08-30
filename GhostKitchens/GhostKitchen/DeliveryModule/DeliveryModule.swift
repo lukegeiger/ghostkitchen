@@ -71,6 +71,7 @@ final class DeliveryModule {
      */
 	init(courierDispatcher: CourierDispatching,
 		 courierRouter: CourierRouting) {
+		
 		self.courierDispatcher = courierDispatcher
 		self.courierRouter = courierRouter
 		self.courierRouter.courierRoutingDelegate = self
@@ -85,6 +86,7 @@ extension DeliveryModule: CourierDispatchDelegate {
 	func courierDispatcher(courierDispatcher: CourierDispatching,
 						   routedCourier: Courier,
 						   forOrder: Order) {
+		
 		self.courierRouter.commencePickupRoute(courier: routedCourier)
 		self.deliveryModuleDelegate?.deliveryModule(deliveryModule: self,
 													routed: routedCourier,

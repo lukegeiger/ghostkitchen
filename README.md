@@ -72,9 +72,10 @@ Shelve contents are printed when an order is _received_, _shelved_, _removed (fo
 
 ### 3. Models Deep Dive
 
-The program has 5 model objects. **Order**, **Courier**, **Schedule**, **Route**, and **Shelf**. **Order** and **Shelf** were provided in the directions, so I will explain the 3 I created.
+The program has 5 model objects. **Order**, **Courier**, **Schedule**, **Task**, and **Shelf**. **Order** and **Shelf** were provided in the directions, so I will explain the 3 I created.
 
-**Courier**, **Schedule**, and **Route** were created to model the delivery flow. A **Courier** gets dispatch to an **Order**. When a **Courier** gets dispatched, a **Schedule** is created for them. A **Schedule** contains an array of **Routes** and each **Route** has an **Order** attached to it. Each **Route** has a pick up time and drop off time. This modeling structure opens the door for an add on later where couriers can do batched pickups and dropoffs.
+**Courier**, **Schedule**, and **Task** were created to model the delivery flow. A **Courier** gets dispatch to an **Order**. When a **Courier** gets dispatched, a **Schedule** is created for them. A **Schedule** contains an array of **Tasks** and each **Task** has an orderId, taskType (pickup or dropoff) and duration.  This means that for 1 order a schedule will have two tasks associated with it, pick up and dropoff.
+
 
 ### 4. KitchenModule Deep Dive
 
@@ -111,17 +112,6 @@ protocol OrderDecayMonitorDelegate {
 	func orderDecayMonitor(monitor: OrderDecayMonitor,
 						   detectedDecayedOrder: Order)
 	
-    /**
-     A delegate callback that lets the consumer know when the decay for an order has been updated
-
-     - Parameters:
-        - monitor: The monitor that detected the decay
-		- updatedDecay: The decay amount
-        - forOrder: The decaying order
-     */
-	func orderDecayMonitor(monitor: OrderDecayMonitor,
-						   updatedDecay: Float,
-						   forOrder: Order)
 }
 
 // MARK: OrderDecayMonitorDataSource

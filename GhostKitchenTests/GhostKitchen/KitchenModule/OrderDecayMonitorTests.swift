@@ -108,7 +108,7 @@ class OrderDecayMonitorTests: XCTestCase {
 
 class OrderDecayMonitorDelegateSpy: OrderDecayMonitorDelegate {
 
-	var decayExpectation:XCTestExpectation?
+	var decayExpectation: XCTestExpectation?
 
 	init (decayExpectation: XCTestExpectation?) {
 		self.decayExpectation = decayExpectation
